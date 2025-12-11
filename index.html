@@ -3,42 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/style.css">
-    <link rel="icon" type="image/x-icon" href="icon.jpg">
-    <title>Main</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/GoalGarden_logo.png">
+    <title>GoalGarden</title>
 </head>
 
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <button>Home Page</button>
-            <button>About Page</button>
+            <a href="index.html" class="home-page">
+                <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2vw; top:50%">
+                <h1 style="margin:auto">GoalGarden</h1>
+            </a>
+
+            <a href="../pages/about.html" class="about-page">
+                <h1 style="margin:auto">About</h1>
+            </a>
         </section>
 
         <section class="navigation-bar-right">
-            <button>Settings</button>
-            <button>Profile</button>
+            <a href="index.html" class="settings-page">
+                <h1 style="margin:auto">Settings</h1>
+            </a>
+            <a href="index.html" class="profile-page">
+                <h1 style="margin:auto">Profile</h1>
+            </a>
         </section>
     </nav>
 
     <section class="content-section">
         <section class="greeting-section">
             <section class="greeting-logo">
-                <img src="assets\GoalGarden_logo.png" width="100%">
+                <img src="assets\GoalGarden_logo.png" alt="Logo" style="box-sizing: border-box; width: 100%;">
             </section>
 
             <h1 class="greeting-header">Welcome Back, </h1>
             <h1 class="greeting-name">User</h1>
 
             <section class="progress-display">
+                <h1 class="progress-counter" id="progress-counter"></h1>
                 <section class="progress-bar" id="progress-bar">
                 </section>
             </section>
 
-            <button class="greeting-button">Take user down the page</button>
+            <button class="greeting-button" onclick="scrollToSection('goal-card-display')">Go</button>
         </section>
 
-        <section class="goal-card-display"></section>
+        <section class="goal-card-display" id="goal-card-display"></section>
 
         <template id="goal-card-template">
             <section class="goal-card">
@@ -60,5 +71,6 @@
 
     <script src="public/script.js"></script>
     <script src="public/progressbar.js"></script>
+    <script src="public/scrolldown.js"></script>
 </body>
 </html>
