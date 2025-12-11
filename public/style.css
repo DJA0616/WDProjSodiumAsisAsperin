@@ -100,6 +100,14 @@ body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
     font-size: 3em;
+
+    cursor:pointer;
+
+    transition: all 0.1s ease-in-out;
+}
+
+.greeting-button:hover{
+    transform: scale(1.03);
 }
 
 .progress-display{
