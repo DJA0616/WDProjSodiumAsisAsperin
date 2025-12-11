@@ -32,10 +32,17 @@
         }
 
         function renderNotes() {
+            let element;
             taskList.textContent = "";
+
+            const date = new Date();
+            const deadLine = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
+
             for (let i = 0; i < allTasks.length; i++) {
-                element = allTasks[i]
-                singleNoteRender(element, i);
+                element = allTasks[i];
+                if (!(new Date() > deadLine)) {
+                    singleNoteRender(element, i);
+                }
             }
         }
 
