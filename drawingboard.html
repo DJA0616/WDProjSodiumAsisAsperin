@@ -5,24 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .task {
-            width: 20px;
-            height: 20px;
-        }
-        textarea {
-            height: 20px;
-        }
+        
     </style>
 </head>
 <body>
-    <template></template>
-    <div>
-        <input type="checkbox" name="task" value="done" class="task">
-        <textarea ></textarea>
-    </div>
-        
+    <input type = "text" id = "notes" name = "notes" rows = "10" colums = "100" placeholder = "Write your notes..."></input>
+    <button id = 'submit'>+</button>
+    <div id = "noteList"></div>
+
     <script>
-        
+        const textBox = document.getElementById("notes");
+        const submitButton = document.getElementById("submit");
+        const noteList = document.getElementById("noteList");
+
+        let allNotes = JSON.parse(localStorage.getItem("allNotes")) || []; // This array will contain all notes to be saved into the local storage of the computer
+
+        renderNotes();
+
+        submitButton.onclick = function submit() {
+            allNotes.push(textBox.value); // Adds notes to a single array
+            console.log(allNotes);
+            localStorage.setItem("allNotes", JSON.stringify(allNotes)) // Saves array into local storage
+
+            textBox.value = ""; // Clears text box
+            renderNotes();
+        }
+
+        function renderNotes() {
+            noteList.textContent = "";
+            for (let i = 0; i < allNotes.length; i++) {
+                element = allNotes[i]
+                singleNoteRender(element, i);
+            }
+        }
+
+        function singleNoteRender(text, index) {
+            const note = document.createElement('div'); // Creates div element that contains the note submitted
+
+            const check = document.createElement('input');
+            check.type = "checkbox";
+            note.appendChild(check);
+
+            const taskText = document.createElement('button');
+            taskText.textContent = text;
+            note.appendChild(taskText);
+
+            const noteText = document.createElement('dialog');
+            noteText.textContent = text;
+
+            const editButton = document.createElement('button'); // Creates edit button alongside the note submitted
+            editButton.textContent = "Edit";
+            noteText.appendChild(editButton);
+
+            const deleteButton = document.createElement('button'); // Creates delete button alongside the note submitted
+            deleteButton.textContent = "Delete";
+            noteText.appendChild(deleteButton);
+
+            note.appendChild(noteText);
+
+            noteList.appendChild(note);
+
+            taskText.onclick = function editModal() {
+                noteText.showModal();
+            }
+
+            editButton.onclick = function editNote() {
+                editButton.remove(); // Edit button disappears after it is clicked
+                deleteButton.remove(); // Delete button also disappears after edit is clicked
+                textBox.value = note.textContent;
+
+                const saveButton = document.createElement('button'); // Creates save button for the edit
+                saveButton.textContent = "Save";
+                textBox.insertAdjacentElement("afterend", saveButton);
+
+                submitButton.remove(); // Save replaces submit when editing
+
+                saveButton.onclick = function saveEdit() {
+                    note.textContent = textBox.value;
+                    allNotes[index] = textBox.value; // Saves edits into local storage
+                    console.log(allNotes);
+                    localStorage.setItem("allNotes", JSON.stringify(allNotes));
+                    textBox.value = "";
+
+                    saveButton.remove();
+                    textBox.insertAdjacentElement("afterend", submitButton); // Submit button is brought back
+                    
+                    note.appendChild(editButton);
+                    note.appendChild(deleteButton);
+                }
+            }
+
+            deleteButton.onclick = function deleteNote() {
+                allNotes.splice(index, 1);
+                localStorage.setItem("allNotes", JSON.stringify(allNotes));
+                renderNotes(); // All notes rendered again after deleted note is removed from notes array
+            }
+        }
     </script>
 </body>
 </html>
@@ -34,10 +112,10 @@ Roadmap
 - Progress bar
     - To-do list
         - Adding tasks
-            - Blank lets you type on it to add a task
-            - Editing is just clicking on text
-            - Deleting task is erasing the whole thing
-            - Check box only appears when there is content
+            - Similar adding notes to the note taking website
+                - Need to add check marks
+                - Change editing mechanism
+                    - Editing (both text and date) and deleting is done by clicking the modal (description can also be added)
         - To-do list has to be based on days
         - Checked disappear after the day ends
         - Unchecked don't disappear after the day ends (switches to exclamation point)
