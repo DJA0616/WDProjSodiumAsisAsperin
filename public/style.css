@@ -86,9 +86,8 @@ body{
 }
 
 .goal-card{
-    background-color: gray;
-
-    border: 1px solid black;
+    background-image: linear-gradient(rgba(240, 248, 255, 0.5),rgba(0, 255, 0, 0.5));
+    border: 1px solid gray;
     box-sizing: border-box;
     border-radius: 1vw;
     height: 30vw;
@@ -115,9 +114,8 @@ body{
 }
 
 .goal-name-description, .goal-details{
-    background-color: lightgray;
-
-    border: 1px solid black;
+    background-color: white;
+    border: 1px;
     box-sizing: border-box;
     border-radius: 1vw;
     padding: 1vw;
@@ -126,9 +124,8 @@ body{
 }
 
 .goal-card-progress-visualization{
-    background-color: lightgray;
-
-    border: 1px solid black;
+    background-color: white;
+    border: 1px;
     box-sizing: border-box;
     border-radius: 1vw;
     padding: 1vw;
