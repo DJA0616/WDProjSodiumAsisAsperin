@@ -5,7 +5,7 @@ body{
 
 .navigation-bar{
     background-image: linear-gradient(rgba(200, 208, 215, 0.5), rgba(0, 0, 0, 0));
-    margin: none;
+    margin:none;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -15,14 +15,16 @@ body{
     right: 0;
     height: 3vw;
     padding: 5px;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .navigation-bar-right, .navigation-bar-left{
     display: flex;
-    gap: 10px;
+    gap: 5vw;
 }
 
-.navigation-bar-home-page{
+.home-page, .about-page, .settings-page, .profile-page{
     display:flex;
     text-decoration: none;
     margin:auto;
@@ -49,6 +51,8 @@ body{
     background-blend-mode:color-dodge;
 
     background-size: 100% auto;
+
+    box-shadow: 0 0 2vw #cdd8d5;
 }
 
 .greeting-section{
@@ -85,7 +89,16 @@ body{
 }
 
 .greeting-button{
-    margin: 0 auto;
+    margin: auto;
+    border: 2px solid #accc931a;
+    border-radius: 1.5vw;
+    width: 10vw;
+    height: 4vw;
+    background-image: linear-gradient(#51ff77cc, #73ff00cc);
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 3em;
 }
 
 .progress-display{

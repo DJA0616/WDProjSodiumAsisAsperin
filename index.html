@@ -11,16 +11,23 @@
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="index.html" class="navigation-bar-home-page">
+            <a href="index.html" class="home-page">
                 <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2vw; top:50%">
                 <h1 style="margin:auto">GoalGarden</h1>
             </a>
-            <button>About Page</button>
+
+            <a href="index.html" class="about-page">
+                <h1 style="margin:auto">About</h1>
+            </a>
         </section>
 
         <section class="navigation-bar-right">
-            <button>Settings</button>
-            <button>Profile</button>
+            <a href="index.html" class="settings-page">
+                <h1 style="margin:auto">Settings</h1>
+            </a>
+            <a href="index.html" class="profile-page">
+                <h1 style="margin:auto">Profile</h1>
+            </a>
         </section>
     </nav>
 
@@ -38,7 +45,7 @@
                 </section>
             </section>
 
-            <button class="greeting-button" onclick="scrollToSection('goal-card-display')">Take user down the page</button>
+            <button class="greeting-button" onclick="scrollToSection('goal-card-display')">Go</button>
         </section>
 
         <section class="goal-card-display" id="goal-card-display"></section>
