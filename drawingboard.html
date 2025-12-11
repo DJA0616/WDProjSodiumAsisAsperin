@@ -5,58 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .container {
-            width: 50px;
-            height: 300px;
-            background-color: #e0e0e0;
-            border-radius: 25px;
-            overflow: hidden;
-            position: relative;
+        .task {
+            width: 20px;
+            height: 20px;
         }
-        
-        .progress {
-            width: 100%;
-            height: 0;
-            background-color: #76c7c0;
-            position: absolute;
-            bottom: 0;
-            transition: height 0.5s;
+        textarea {
+            height: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="progress" id="progressBar"></div>
+    <template></template>
+    <div>
+        <input type="checkbox" name="task" value="done" class="task">
+        <textarea ></textarea>
     </div>
-
-    <label>Username:
-        <input type="checkbox" name="username">
-    </label>
         
     <script>
-        function setProgress(percentage) {
-        const progressBar = document.getElementById('progressBar');
-        progressBar.style.height = percentage + '%';
-        }
         
-        // Example usage: Set progress to 70%
-        setProgress(70);
     </script>
 </body>
 </html>
 
 <!--
 Roadmap
+- Adding goals
+
 - Progress bar
     - To-do list
         - Adding tasks
-            - Add task button
-            - Delete task button
-            - Edit task button
+            - Blank lets you type on it to add a task
+            - Editing is just clicking on text
+            - Deleting task is erasing the whole thing
+            - Check box only appears when there is content
         - To-do list has to be based on days
         - Checked disappear after the day ends
         - Unchecked don't disappear after the day ends (switches to exclamation point)
     - Progress bar updates based on to-do list
     - Progress bar animation (styling)
+
 - Plant animation (we are not finishing this)
 -->
