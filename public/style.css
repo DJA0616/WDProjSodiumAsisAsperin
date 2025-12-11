@@ -157,6 +157,9 @@ body{
     box-shadow: 0vw 0vw 5vw #00ff15cc;
     float:left;
     height: 5vw;
+    width: 0vw;
+
+    transition: all 2s ease-out;
 }
 
 .goal-card-display{
