@@ -11,7 +11,10 @@
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <button>Home Page</button>
+            <a href="index.html" class="navigation-bar-home-page">
+                <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2vw; top:50%">
+                <h1 style="margin:auto">GoalGarden</h1>
+            </a>
             <button>About Page</button>
         </section>
 
@@ -24,7 +27,7 @@
     <section class="content-section">
         <section class="greeting-section">
             <section class="greeting-logo">
-                <img src="assets\GoalGarden_logo.png" width="100%">
+                <img src="assets\GoalGarden_logo.png" alt="Logo" style="box-sizing: border-box; width: 100%;">
             </section>
 
             <h1 class="greeting-header">Welcome Back, </h1>
@@ -35,10 +38,10 @@
                 </section>
             </section>
 
-            <button class="greeting-button">Take user down the page</button>
+            <button class="greeting-button" onclick="scrollToSection('goal-card-display')">Take user down the page</button>
         </section>
 
-        <section class="goal-card-display"></section>
+        <section class="goal-card-display" id="goal-card-display"></section>
 
         <template id="goal-card-template">
             <section class="goal-card">
@@ -60,5 +63,6 @@
 
     <script src="public/script.js"></script>
     <script src="public/progressbar.js"></script>
+    <script src="public/scrolldown.js"></script>
 </body>
 </html>
