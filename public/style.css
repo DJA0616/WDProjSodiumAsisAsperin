@@ -4,7 +4,7 @@ body{
 }
 
 .navigation-bar{
-    background-color: grey;
+    background-image: linear-gradient(rgba(200, 208, 215, 0.5), rgba(0, 0, 0, 0));
     margin: none;
     display: flex;
     justify-content: space-between;
@@ -19,14 +19,10 @@ body{
 
 .navigation-bar-right, .navigation-bar-left{
     display: flex;
-    border: 1px solid black;
     gap: 10px;
 }
 
 .content-section{
-    background-color: grey;
-
-    border: 1px solid black;
     box-sizing: border-box;
     min-height: 85vh;
     border-radius: 3vw;
@@ -40,19 +36,35 @@ body{
 }
 
 .greeting-section{
-    background-color: lightgray;
-
-    border: 1px solid black;
     box-sizing: border-box;
     border-radius: 2vw;
     padding: 1vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.greeting-logo{
+    box-sizing:border-box;
+
+    width: 20vw;
+    height: 20vw;
 }
 
 .greeting-header{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: xxx-large;
+    font-size: 4rem;
+    margin: 0 auto;
+}
+
+.greeting-name{
+    background-image:linear-gradient(#51b6ff, #5ac700);
+    background-clip:text;
+    color:rgba(0, 0, 0, 0);
+
+    display:inline;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5rem;
     margin: 0 auto;
 }
 
@@ -61,17 +73,28 @@ body{
 }
 
 .progress-display{
-    background-color: ghostwhite;
-
-    border: 1px solid black;
+    background-color: rgb(253, 255, 254);
+    border: 1px solid gray;
+    border-radius: 2.5vw;
     margin: 10px auto;
     box-sizing: border-box;
+
+    width: 30vw;
+    height: 5vw;
+
+    box-shadow: 0vw 0vw 0.5vw lightgray;
+    overflow:hidden;
+}
+
+.progress-bar{
+    background-image: linear-gradient(#51ff77cc, #73ff00cc);
+    background-clip: content-box;
+    box-shadow: 0vw 0vw 1vw lightgray;
+    float:left;
+    height: 5vw;
 }
 
 .goal-card-display{
-    background-color: lightgray;
-
-    border: 1px solid black;
     box-sizing: border-box;
     border-radius: 2vw;
     margin-top: 1vw;
@@ -86,9 +109,8 @@ body{
 }
 
 .goal-card{
-    background-color: gray;
-
-    border: 1px solid black;
+    background-image: linear-gradient(rgba(220, 240, 255, 0.5),rgba(90, 199, 0, 0.5));
+    border: 1px solid gray;
     box-sizing: border-box;
     border-radius: 1vw;
     height: 30vw;
@@ -99,6 +121,8 @@ body{
     display: flex;
     justify-content: space-between;
     gap: 1vw;
+
+    box-shadow: 0vw 0vw 0.5vw lightgray;
 }
 
 .goal-card-left{
@@ -115,23 +139,23 @@ body{
 }
 
 .goal-name-description, .goal-details{
-    background-color: lightgray;
-
-    border: 1px solid black;
+    background-color: white;
+    border: 1px;
     box-sizing: border-box;
     border-radius: 1vw;
     padding: 1vw;
+    box-shadow: 0vw 0vw 0.5vw lightgray;
 
     flex-grow: 1;
 }
 
 .goal-card-progress-visualization{
-    background-color: lightgray;
-
-    border: 1px solid black;
+    background-color: white;
+    border: 1px;
     box-sizing: border-box;
     border-radius: 1vw;
     padding: 1vw;
+    box-shadow: 0vw 0vw 0.5vw lightgray;
 
     flex-grow: 1;
 }
