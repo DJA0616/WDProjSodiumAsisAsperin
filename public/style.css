@@ -32,6 +32,15 @@ body{
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: black;
+
+    border-radius: 5px;
+    background-color: #ffffff00;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.home-page:hover, .about-page:hover, .settings-page:hover, .profile-page:hover{
+    background-color: #cdd8d5aa;
 }
 
 .content-section{
