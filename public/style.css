@@ -75,6 +75,7 @@ body{
 
 .greeting-logo{
     box-sizing:border-box;
+    filter: drop-shadow(0vw 0vw 0.5vw lightgray);
 
     /* keep responsive but cap at Full HD size to avoid huge logos on ultra-wide screens */
     width: clamp(160px, 20vw, 384px);
@@ -89,7 +90,7 @@ body{
 }
 
 .greeting-name, .title{
-    background-image:linear-gradient(#51b6ff, #5ac700);
+    background-image:linear-gradient(#6fe9ff, #5ac700);
     background-clip:text;
     color:rgba(0, 0, 0, 0);
 
@@ -109,6 +110,7 @@ body{
     width: clamp(120px, 10vw, 192px);
     height: clamp(48px, 4vw, 77px);
     background-image: linear-gradient(#51ff77cc, #73ff00cc);
+    box-shadow: 0vw 0vw 0.25vw lightgray;
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
