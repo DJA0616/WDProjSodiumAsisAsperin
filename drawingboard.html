@@ -54,6 +54,7 @@
                 <dialog class="taskEditModal">
                     <span contentEditable="true" class="taskEdit">${text}</span>
                     <button class="deleteButton">Delete</button>
+                    <button class="saveButton">Save</button>
                     <button class="closeButton">Close</button>
                 </dialog>
             `;
@@ -64,15 +65,21 @@
             const taskEditModal = task.querySelector('.taskEditModal');
             const taskEdit = task.querySelector('.taskEdit');
             const deleteButton = task.querySelector('.deleteButton');
+            const saveButton = task.querySelector('.saveButton');
             const closeButton = task.querySelector('.closeButton');
 
             taskText.onclick = () => taskEditModal.showModal();
 
-            closeButton.onclick = () => {
+            saveButton.onclick = () => {
                 taskEditModal.close();
                 allTasks[index] = taskEdit.textContent;
                 localStorage.setItem("allTasks", JSON.stringify(allTasks));
                 renderNotes();
+            };
+
+            closeButton.onclick = () => {
+                taskEditModal.close();
+                taskEdit.textContent = text;
             };
 
             deleteButton.onclick = () => {
@@ -87,20 +94,27 @@
 
 <!--
 Roadmap
-- Adding goals
-
 - Progress bar
-    - To-do list
-        - Adding tasks
-            - Similar adding notes to the note taking website
-                - Need to add check marks
-                - Change editing mechanism
-                    - Editing (both text and date) and deleting is done by clicking the modal (description can also be added)
-        - To-do list has to be based on days
-        - Checked disappear after the day ends
-        - Unchecked don't disappear after the day ends (switches to exclamation point)
-    - Progress bar updates based on to-do list
-    - Progress bar animation (styling)
+- Adding goals
+- Plant animation
+
+To-do list
+    - Adding tasks
+        - Similar adding notes to the note taking website
+    - Need to add check marks
+    - Editing and deleting tasks using modals
+        - Close and save buttons are different
+
+Basing tasks on days
+    - To-do list has to be based on days
+        - Date of task is displayed (date is set to today by default)
+        - Date of task can be edited
+    - Checked disappear after the day ends (no matter the set date)
+    - Unchecked don't disappear after the day ends (switches to exclamation point if past due date)
+
+Progress bar
+- Progress bar updates based on to-do list
+- Progress bar animation (styling)
 
 - Plant animation (we are not finishing this)
 -->
