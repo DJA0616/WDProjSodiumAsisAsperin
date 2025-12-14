@@ -185,7 +185,7 @@ body{
     flex-grow: 1;
 }
 
-.goal-card{
+.goal-card, .new-goal-card{
     background-image: linear-gradient(rgba(220, 240, 255, 0.5),rgba(90, 199, 0, 0.5));
     border: 1px solid gray;
     box-sizing: border-box;
@@ -209,7 +209,7 @@ body{
     transform: scale(1.01);
 }
 
-.goal-card-left{
+.goal-card-left, .new-goal-card-left{
     border: 1px;
     box-sizing: border-box;
     border-radius: 1vw;
@@ -229,6 +229,12 @@ body{
     border-radius: 1vw;
     padding: 1vw;
     box-shadow: 0vw 0vw 0.5vw lightgray;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: xx-large;
+    text-align: center;
+    align-content: center;
+    text-shadow: 0 0 0.2vw lightgray;
 
     flex-grow: 1;
 }
@@ -257,4 +263,87 @@ body{
     width: auto;
     height: auto;
     object-fit: contain;
+}
+
+.new-goal-card{
+    position: relative;
+    background-image: url('/assets/landing.webp');
+    background-color: #cdd8d5;
+    background-blend-mode:color-dodge;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.new-goal-card > *{
+    transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.new-goal-card:hover > *{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.new-goal-card:hover{
+    background-image: linear-gradient(rgba(220, 240, 255, 0.5),rgba(90, 199, 0, 0.5));
+    background-color: white;
+    background-blend-mode:normal;
+}
+
+/* Centered plus sign shown by default, hidden when card is hovered */
+.new-goal-plus{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(32px, 6vw, 64px);
+    color: #ffffff;
+    background: rgba(0,0,0,0.2);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(0, 0, 0, 0.1));
+    width: clamp(56px, 9vw, 96px);
+    height: clamp(56px, 9vw, 96px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0.5vw rgba(0,0,0,0.2);
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.25s ease, transform 0.2s ease;
+    pointer-events: auto;
+}
+
+.new-goal-card:hover .new-goal-plus{
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+    pointer-events: none;
+}
+
+/* Contenteditable placeholder styling for new goal name */
+.goal-name-editable{
+    outline: 2px dashed #ccc;
+    outline-offset: -2px;
+    cursor: text;
+    transition: outline 0.2s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
+    overflow: hidden;
+    min-height: 2em;
+}
+
+.goal-name-editable:focus{
+    outline: 2px solid #5ac700;
+    outline-offset: -2px;
+}
+
+/* Show placeholder text by default */
+.goal-name-editable.show-placeholder::before{
+    content: attr(data-placeholder);
+    color: #999;
+    pointer-events: none;
 }

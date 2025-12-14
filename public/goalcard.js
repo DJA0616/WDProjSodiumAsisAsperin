@@ -1,5 +1,7 @@
 const goalCardDisplay = document.querySelector(".goal-card-display");
+const newGoalCardDisplay = document.querySelector(".new-goal-card-display");
 const template = document.querySelector("#goal-card-template");
+const newTemplate = document.querySelector("#new-goal-card-template");
 
 let goalCounter = 4;
 
@@ -12,3 +14,6 @@ for (let i = 0; i < goalCounter; i++) {
     }
     goalCardDisplay.appendChild(clone);
 }
+
+const newClone = newTemplate.content.cloneNode(true);
+goalCardDisplay.appendChild(newClone);

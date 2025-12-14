@@ -49,7 +49,9 @@
             <button class="greeting-button" onclick="scrollToSection('goal-card-display')">Go</button>
         </section>
 
-        <section class="goal-card-display" id="goal-card-display"></section>
+        <section class="goal-card-display" id="goal-card-display">
+
+        </section>
 
         <template id="goal-card-template">
             <section class="goal-card">
@@ -67,10 +69,28 @@
                 </section>
             </section>
         </template>
+
+        <template id="new-goal-card-template">
+            <section class="new-goal-card">
+                <div class="new-goal-plus">+</div>
+                <section class="new-goal-card-left">
+                    <section id="new-goal-name-description" class="goal-name-description goal-name-editable" contenteditable="true" data-placeholder="Enter Goal Name">
+                    </section>
+                    <section class="goal-details">
+                        
+                    </section>
+                </section>
+
+                <section class="goal-card-progress-visualization">
+                    <img src="assets/plants/plant-1.png" alt="Plant" class="plant-image">
+                </section>
+            </section>
+        </template>
     </section>
 
     <script src="public/goalcard.js"></script>
     <script src="public/progressbar.js"></script>
     <script src="public/scrolldown.js"></script>
+    <script src="public/goalcreation.js"></script>
 </body>
 </html>
