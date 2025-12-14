@@ -349,6 +349,10 @@ body{
     word-break: break-word;
     overflow: hidden;
 
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb transparent;
+
     display: flex;
     justify-content: center;
     align-items: center;
