@@ -75,27 +75,29 @@ body{
 
 .greeting-logo{
     box-sizing:border-box;
+    filter: drop-shadow(0vw 0vw 0.5vw lightgray);
 
-    width: 20vw;
-    height: 20vw;
+    /* keep responsive but cap at Full HD size to avoid huge logos on ultra-wide screens */
+    width: clamp(160px, 20vw, 384px);
+    height: clamp(160px, 20vw, 384px);
 }
 
 .greeting-header, .subtitle{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    /* originally 4rem (64px). On a 1920px-wide screen 1vw = 19.2px, so 64px = 3.333vw */
-    font-size: 3.333vw;
+    /* scale with viewport but don't exceed Full HD size (64px) or get too small */
+    font-size: clamp(28px, 3.333vw, 64px);
     margin: 0 auto;
 }
 
 .greeting-name, .title{
-    background-image:linear-gradient(#51b6ff, #5ac700);
+    background-image:linear-gradient(#6fe9ff, #5ac700);
     background-clip:text;
     color:rgba(0, 0, 0, 0);
 
     display:inline;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    /* originally 5rem (80px). On a 1920px-wide screen 1vw = 19.2px, so 80px = 4.167vw */
-    font-size: 4.167vw;
+    /* scale with viewport but cap at Full HD size (80px) and keep a reasonable minimum */
+    font-size: clamp(32px, 4.167vw, 80px);
     margin: 0 auto;
 }
 
@@ -104,14 +106,16 @@ body{
     padding: none;
     border: 2px solid #accc931a;
     border-radius: 1.5vw;
-    width: 10vw;
-    height: 4vw;
+    /* responsive size but capped so buttons don't become enormous on ultra-wide displays */
+    width: clamp(120px, 10vw, 192px);
+    height: clamp(48px, 4vw, 77px);
     background-image: linear-gradient(#51ff77cc, #73ff00cc);
+    box-shadow: 0vw 0vw 0.25vw lightgray;
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    /* originally 3em (~48px). On a 1920px-wide screen 1vw = 19.2px, so 48px = 2.5vw */
-    font-size: 2.5vw;
+    /* scale text but cap at Full HD size (48px) */
+    font-size: clamp(14px, 2.5vw, 48px);
 
     cursor:pointer;
 
@@ -129,7 +133,8 @@ body{
     margin: 10px auto;
     box-sizing: border-box;
 
-    width: 30vw;
+    /* responsive width but capped at Full HD width (576px) */
+    width: clamp(200px, 30vw, 576px);
     height: 5vw;
 
     position: relative;
@@ -149,8 +154,8 @@ body{
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    /* originally 3em (~48px). On a 1920px-wide screen 1vw = 19.2px, so 48px = 2.5vw */
-    font-size: 2.5vw;
+    /* scale text but cap at Full HD size (48px) */
+    font-size: clamp(14px, 2.5vw, 48px);
 }
 
 .progress-bar{
@@ -185,7 +190,8 @@ body{
     border: 1px solid gray;
     box-sizing: border-box;
     border-radius: 1vw;
-    height: 30vw;
+    /* responsive height but cap at Full HD size (576px) to avoid overly tall cards on very wide screens */
+    height: clamp(300px, 30vw, 576px);
     
     padding: 1vw;
     flex-grow: 1;
@@ -195,6 +201,12 @@ body{
     gap: 1vw;
 
     box-shadow: 0vw 0vw 0.5vw lightgray;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.goal-card:hover{
+    transform: scale(1.01);
 }
 
 .goal-card-left{
