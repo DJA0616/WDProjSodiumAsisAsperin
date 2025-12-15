@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalGoalDetails.textContent = goalDetails;
         modalPlantImage.src = plantSrc;
         modal.style.display = 'block';
+        renderSubtasks();
     }
 
     // Close modal when clicking outside the modal content

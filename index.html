@@ -95,12 +95,8 @@
                     <section class="modal-goal-name"></section>
                     <section class="modal-goal-details"></section>
                 </section>
-                <section class="subtask-visualization">
-                    <h2>Subtasks</h2>
-                    <section class="subtask-list">
+                <section class="subtask-display">
 
-                    </section>
-                    <button class="add-subtask-button">Add Subtask</button>
                 </section>
                 <section class="modal-progress-visualization">
                     <img src="" alt="Plant" class="modal-plant-image">
@@ -108,6 +104,17 @@
             </section>
         </div>
     </section>
+
+    <template id="subtask-template">
+        <section class="subtask-item">
+            <section class="subtask-name"></section>
+            <section class="subtask-date"></section>
+        </section>
+    </template>
+
+    <template id="new-subtask-template">
+        <button class="new-subtask-button">+ Add Subtask</button>
+    </template>
 
     <footer class="footer-bar">
 
@@ -118,6 +125,7 @@
     <script src="public/goalcreation.js"></script>
     <script src="public/progressbar.js"></script>
     <script src="public/scrolldown.js"></script>
+    <script src="public/rendersubtasks.js"></script>
     <script src="public/modal.js"></script>
 </body>
 </html>

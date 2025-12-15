@@ -396,6 +396,8 @@ body{
 .modal-body {
     display: flex;
     gap: 1vw;
+    align-items: stretch;
+    min-height: 500px;
 }
 
 .modal-left {
@@ -460,11 +462,88 @@ body{
     object-fit: contain;
 }
 
-.subtask-visualization {
+.subtask-display {
     display: flex;
     flex-direction: column;
     gap: 1vw;
     overflow: hidden;
     flex-grow: 1;
-    flex: 0 0 calc(30% - 0.5vw);
+    flex: 0 0 calc(40% - 0.5vw);
+}
+
+.new-subtask-button {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    box-sizing: border-box;
+    border-radius: 1vw;
+    padding: 1vw;
+    box-shadow: 0vw 0vw 0.5vw lightgray;
+    
+    outline: 2px dashed #ccc;
+    outline-offset: -2px;
+    cursor: pointer;
+    transition: outline 0.2s ease;
+    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: xx-large;
+    text-align: center;
+    color: #999;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-subtask-button:hover {
+    outline: 2px solid #5ac700;
+    outline-offset: -2px;
+    color: #5ac700;
+}
+
+.subtask-item {
+    background-color: white;
+    border: 1px;
+    box-sizing: border-box;
+    border-radius: 1vw;
+    padding: 1vw;
+    box-shadow: 0vw 0vw 0.5vw lightgray;
+    
+    display: flex;
+    gap: 1vw;
+    
+    transition: all 0.2s ease-in-out;
+}
+
+.subtask-item:hover {
+    transform: scale(1.01);
+}
+
+.subtask-name {
+    background-color: rgba(220, 240, 255, 0.3);
+    border-radius: 0.5vw;
+    padding: 0.5vw 1vw;
+    flex: 1;
+    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: large;
+    text-align: center;
+    align-content: center;
+    
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.subtask-date {
+    background-color: rgba(90, 199, 0, 0.2);
+    border-radius: 0.5vw;
+    padding: 0.5vw 1vw;
+    flex: 0 0 auto;
+    min-width: 120px;
+    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: large;
+    text-align: center;
+    align-content: center;
 }

@@ -3,6 +3,7 @@ const template = document.querySelector("#goal-card-template");
 const newTemplate = document.querySelector("#new-goal-card-template");
 
 var goals = [newGoal("Test", "2024-06-01", "Details for Test Goal"), newGoal("Sample", "2024-07-01", "Details for Sample Goal")]; // This should be replaced with actual data retrieval logic
+goals[0].subtasks.push({name: "Subtask 1", date: "2024-06-05", type: "checkbox", completed: false});
 
 function clearGoalCards() {
     if (goalCardDisplay) {
