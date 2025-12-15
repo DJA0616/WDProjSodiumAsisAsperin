@@ -1,22 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const goalCardDisplay = document.querySelector('.goal-card-display');
-    const newTemplate = document.querySelector('#new-goal-card-template');
-
-    // Convert a new-goal-card element into a regular goal-card
-    function convertNewCard(card, name) {
-        if (!card) return;
-
-        goalCounter++;
-
-        renderGoalCards();
-
-        // Setup the new card that was just created
-        const newCard = document.querySelector('.new-goal-card');
-        if (newCard) setupNewCard(newCard);
-    }
-
-    // Helper to initialize a single new-goal-card
-    function setupNewCard(card) {
+// Helper to initialize a single new-goal-card
+function setupNewCard(card) {
         const editableSection = card.querySelector('.goal-name-editable');
         if (!editableSection) return;
 
@@ -46,8 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-    }
+}
 
+// Convert a new-goal-card element into a regular goal-card
+function convertNewCard(card, name) {
+    if (!card) return;
+
+    goals.push(newGoal(name, "2024-12-31", "Details for " + name));     // Placeholder date and details
+
+    renderGoalCards();
+
+    // Setup the new card that was just created
+    const newCard = document.querySelector('.new-goal-card');
+    if (newCard) setupNewCard(newCard);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     // initialize existing new-goal-card(s)
     const newCards = document.querySelectorAll('.new-goal-card');
     newCards.forEach(card => setupNewCard(card));

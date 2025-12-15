@@ -2,16 +2,21 @@ const goalCardDisplay = document.querySelector(".goal-card-display");
 const template = document.querySelector("#goal-card-template");
 const newTemplate = document.querySelector("#new-goal-card-template");
 
-let goalCounter = 4;
+var goals = [newGoal("Test", "2024-06-01", "Details for Test Goal"), newGoal("Sample", "2024-07-01", "Details for Sample Goal")]; // This should be replaced with actual data retrieval logic
+
+function clearGoalCards() {
+    if (goalCardDisplay) {
+        goalCardDisplay.innerHTML = '';
+    }
+}
 
 function renderGoalCards() {
     if (!goalCardDisplay || !template || !newTemplate) return;
 
-    // clear existing cards
-    goalCardDisplay.innerHTML = '';
+    clearGoalCards();
 
     // create goal cards (clone per iteration)
-    for (let i = 0; i < goalCounter; i++) {
+    for (let i = 0; i < goals.length; i++) {
         const clone = template.content.cloneNode(true);
         const img = clone.querySelector('.plant-image') || clone.querySelector('#plant');
         const goalName = clone.querySelector('.goal-name-description');
@@ -19,12 +24,12 @@ function renderGoalCards() {
 
         if (goalName) {
             //Set the textContent to the actual name of the goal
-            goalName.textContent = `Goal ${i + 1}`;
+            goalName.textContent = i < goals.length ? goals[i].name : `Goal ${i + 1}`;
         }
 
         if (goalDetails) {
             //Set the textContent to the actual details of the goal
-            goalDetails.textContent = `Details for Goal ${i + 1}`;
+            goalDetails.textContent = i < goals.length ? goals[i].details : `Details for Goal ${i + 1}`;
         }
 
         if (img) {
