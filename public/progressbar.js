@@ -76,5 +76,5 @@ function typewriter(element, text, delay = 100, animation) {
     );
 }
 
-progressDisplay.addEventListener("mouseover", onHover);
-progressDisplay.addEventListener("mouseout", onLeave);
+progressDisplay.addEventListener("mouseenter", onHover);
+progressDisplay.addEventListener("mouseleave", onLeave);
