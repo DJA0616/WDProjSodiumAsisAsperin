@@ -406,14 +406,22 @@ body{
     margin: none;
 }
 
+/* Common white box styling for modal sections */
 .modal-goal-name,
-.modal-goal-details {
+.modal-goal-details,
+.modal-progress-visualization,
+.subtask-visualization {
     background-color: white;
     border: 1px;
     box-sizing: border-box;
     border-radius: 1vw;
     padding: 1vw;
     box-shadow: 0vw 0vw 0.5vw lightgray;
+}
+
+/* Common text styling for goal name and details */
+.modal-goal-name,
+.modal-goal-details {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
     text-shadow: 0 0 0.2vw lightgray;
@@ -438,12 +446,6 @@ body{
 }
 
 .modal-progress-visualization {
-    background-color: white;
-    border: 1px;
-    box-sizing: border-box;
-    border-radius: 1vw;
-    padding: 1vw;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
     display: flex;
     flex-grow: 1;
     align-items: center;
@@ -459,12 +461,6 @@ body{
 }
 
 .subtask-visualization {
-    background-color: white;
-    border: 1px;
-    box-sizing: border-box;
-    border-radius: 1vw;
-    padding: 1vw;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
     display: flex;
     flex-direction: column;
     gap: 1vw;
