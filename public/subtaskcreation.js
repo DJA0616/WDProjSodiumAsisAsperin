@@ -17,6 +17,8 @@ function createNewSubtask(newSubtaskButton, goal){
     if (window.renderSubtasks) {
         window.renderSubtasks();
     }
+
+    updateProgressDisplay(document.querySelector('.goal-card'), goal.getProgress());
 }
 
 // Make createNewSubtask globally accessible

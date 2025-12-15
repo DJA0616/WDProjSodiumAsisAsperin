@@ -67,6 +67,8 @@ function renderSubtasks() {
                             subtaskItem.classList.remove('completed');
                         }
                     }
+
+                    updateProgressDisplay(document.querySelector('.goal-card'), currentGoal.getProgress());
                 });
             }
             subtaskDisplay.appendChild(clone);

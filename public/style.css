@@ -265,6 +265,7 @@ body{
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
 
     /* subtract half the gap so two columns + gap don't overflow */
     flex: 0 0 calc(50% - 0.5vw);
@@ -277,7 +278,24 @@ body{
     width: auto;
     height: auto;
     object-fit: contain;
+    position: relative;
+    z-index: 1;
 }
+
+.goal-card-progress-visualization::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--progress, 0%);
+    background: linear-gradient(to top, rgba(90, 199, 0, 0.4), rgba(69, 227, 255, 0.4));
+    z-index: 0;
+    border-radius: 1vw;
+    transition: height 0.5s ease-in-out;
+}
+
+
 
 .new-goal-card{
     position: relative;
@@ -524,6 +542,7 @@ body{
     box-shadow: 0vw 0vw 0.5vw lightgray;
     
     display: flex;
+    flex-shrink: 0;
     gap: 1vw;
     
     position: relative;

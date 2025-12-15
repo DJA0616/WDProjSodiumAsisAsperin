@@ -21,6 +21,12 @@ function newGoal(name, date, details){
             if (index > -1) {
                 this.subtasks.splice(index, 1);
             }
+        },
+
+        getProgress(){
+            if(this.subtasks.length === 0) return 0;
+            const completedCount = this.subtasks.filter(st => st.completed).length;
+            return Math.round((completedCount / this.subtasks.length) * 100);
         }
     };
     return goal;

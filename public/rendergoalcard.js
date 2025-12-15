@@ -10,6 +10,13 @@ function clearGoalCards() {
     }
 }
 
+function updateProgressDisplay(goalCard, progress) {
+    const progressViz = goalCard.querySelector('.goal-card-progress-visualization');
+    if (progressViz) {
+        progressViz.style.setProperty('--progress', `${progress}%`);
+    }
+}
+
 function renderGoalCards() {
     if (!goalCardDisplay || !template || !newTemplate) return;
 
@@ -22,6 +29,7 @@ function renderGoalCards() {
         const goalName = clone.querySelector('.goal-name-description');
         const goalDetails = clone.querySelector('.goal-details');
         const goalCard = clone.querySelector('.goal-card');
+        const progressViz = clone.querySelector('.goal-card-progress-visualization');
 
         if (goalName) {
             //Set the textContent to the actual name of the goal
@@ -36,6 +44,12 @@ function renderGoalCards() {
         if (img) {
             img.src = `assets/plants/stage-1.svg`;
             img.dataset.plantStage = '1';
+        }
+
+        // Set progress visualization
+        if (progressViz && goals[i]) {
+            const progress = goals[i].getProgress();
+            progressViz.style.setProperty('--progress', `${progress}%`);
         }
 
         // Add click event to open modal
