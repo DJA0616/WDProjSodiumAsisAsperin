@@ -5,40 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Convert a new-goal-card element into a regular goal-card
     function convertNewCard(card, name) {
         if (!card) return;
-        card.classList.remove('new-goal-card');
-        card.classList.add('goal-card');
 
-        // remove the centered plus
-        const plus = card.querySelector('.new-goal-plus');
-        if (plus) plus.remove();
+        goalCounter++;
 
-        // populate name into the left section
-        const nameSection = card.querySelector('.goal-name-description');
-        if (nameSection) {
-            nameSection.contentEditable = 'false';
-            nameSection.classList.remove('goal-name-editable');
-            nameSection.classList.remove('show-placeholder');
-            nameSection.innerHTML = '';
-            const h1 = document.createElement('h1');
-            h1.textContent = name;
-            const p = document.createElement('p');
-            p.textContent = '';
-            nameSection.appendChild(h1);
-            nameSection.appendChild(p);
-        }
+        renderGoalCards();
 
-        // Append a fresh new-goal-card at the end and initialize it
-        if (goalCardDisplay && newTemplate) {
-            const frag = newTemplate.content.cloneNode(true);
-            goalCardDisplay.appendChild(frag);
-            const appended = goalCardDisplay.lastElementChild;
-            if (appended) {
-                // remove duplicated id inside cloned node if present
-                const inner = appended.querySelector('#new-goal-name-description');
-                if (inner) inner.removeAttribute('id');
-                setupNewCard(appended);
-            }
-        }
+        // Setup the new card that was just created
+        const newCard = document.querySelector('.new-goal-card');
+        if (newCard) setupNewCard(newCard);
     }
 
     // Helper to initialize a single new-goal-card
