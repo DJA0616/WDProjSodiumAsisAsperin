@@ -21,6 +21,7 @@ function renderGoalCards() {
         const img = clone.querySelector('.plant-image') || clone.querySelector('#plant');
         const goalName = clone.querySelector('.goal-name-description');
         const goalDetails = clone.querySelector('.goal-details');
+        const goalCard = clone.querySelector('.goal-card');
 
         if (goalName) {
             //Set the textContent to the actual name of the goal
@@ -35,6 +36,22 @@ function renderGoalCards() {
         if (img) {
             img.src = `assets/plants/stage-1.svg`;
             img.dataset.plantStage = '1';
+        }
+
+        // Add click event to open modal
+        if (goalCard) {
+            const goalNameText = goalName ? goalName.textContent : 'Goal';
+            const goalDetailsText = goalDetails ? goalDetails.textContent : 'No details';
+            const plantSrc = img ? img.src : 'assets/plants/stage-1.svg';
+            
+            goalCard.addEventListener('click', () => {
+                if (window.openModal) {
+                    window.openModal(goalNameText, goalDetailsText, plantSrc);
+                }
+            });
+            
+            // Add cursor pointer to indicate clickability
+            goalCard.style.cursor = 'pointer';
         }
 
         goalCardDisplay.appendChild(clone);
