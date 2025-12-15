@@ -19,11 +19,18 @@
         const taskList = document.getElementById("taskList");
 
         let allTasks = JSON.parse(localStorage.getItem("allTasks")) || []; // This array will contain all notes to be saved into the local storage of the computer
-
+        console.log(allTasks);
+        
         renderNotes();
 
+        function Task(text, date) {
+            this.text = text;
+            this.date = date;
+        }
+
         submitButton.onclick = function submit() {
-            allTasks.push(textBox.value); // Adds notes to a single array
+            const newTask = new Task(textBox.value, new Date())
+            allTasks.push(newTask); // Adds notes to a single array
             console.log(allTasks);
             localStorage.setItem("allTasks", JSON.stringify(allTasks)) // Saves array into local storage
 
@@ -32,23 +39,19 @@
         }
 
         function renderNotes() {
-            let element;
             taskList.textContent = "";
 
-            const date = new Date();
-            const deadLine = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
-
             for (let i = 0; i < allTasks.length; i++) {
-                element = allTasks[i];
-                singleNoteRender(element, i);
+                singleNoteRender(allTasks[i].text, allTasks[i].date, i);
             }
         }
 
-        function singleNoteRender(text, index) {
+        function singleNoteRender(text, date, index) {
             const task = document.createElement('div');
             task.innerHTML = `
                 <input type="checkbox">
                 <button class="taskText">${text}</button>
+                <span>${date}<span>
                 <dialog class="taskEditModal">
                     <span contentEditable="true" class="taskEdit">${text}</span>
                     <button class="deleteButton">Delete</button>
@@ -70,7 +73,7 @@
 
             saveButton.onclick = () => {
                 taskEditModal.close();
-                allTasks[index] = taskEdit.textContent;
+                allTasks[index].text = taskEdit.textContent;
                 localStorage.setItem("allTasks", JSON.stringify(allTasks));
                 renderNotes();
             };
