@@ -81,6 +81,7 @@ body{
     /* keep responsive but cap at Full HD size to avoid huge logos on ultra-wide screens */
     width: clamp(160px, 20vw, 250px);
     height: clamp(160px, 20vw, 250px);
+    margin-bottom: clamp(1vw, 1.5vw, 3vw);
 }
 
 .greeting-header, .subtitle{
@@ -100,6 +101,7 @@ body{
     /* scale with viewport but cap at Full HD size (80px) and keep a reasonable minimum */
     font-size: clamp(28px, 5vw, 92px);
     margin: 0 auto;
+    margin-bottom: clamp(1vw, 1.5vw, 3vw);
 }
 
 
