@@ -33,7 +33,22 @@ function renderSubtasks() {
         }
     }
     
-    // Always append the new subtask button
+    // Append a single new subtask button at the end
     const newSubtaskClone = newsubtaskTemplate.content.cloneNode(true);
+    const newButton = newSubtaskClone.querySelector('.new-subtask-button');
+    
+    // Add click event to create new subtask
+    if (newButton && window.createNewSubtask) {
+        newButton.addEventListener('click', () => {
+            window.createNewSubtask(newButton, currentGoal);
+        });
+        
+        // Add cursor pointer to indicate clickability
+        newButton.style.cursor = 'pointer';
+    }
+    
     subtaskDisplay.appendChild(newSubtaskClone);
 }
+
+// Make renderSubtasks globally accessible
+window.renderSubtasks = renderSubtasks;

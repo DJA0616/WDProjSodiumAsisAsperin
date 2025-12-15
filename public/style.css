@@ -397,7 +397,7 @@ body{
     display: flex;
     gap: 1vw;
     align-items: stretch;
-    min-height: 500px;
+    height: 60vh;
 }
 
 .modal-left {
@@ -467,8 +467,10 @@ body{
     flex-direction: column;
     gap: 1vw;
     overflow: hidden;
+    overflow-y: scroll;
     flex-grow: 1;
     flex: 0 0 calc(40% - 0.5vw);
+    max-height: 100%;
 }
 
 .new-subtask-button {

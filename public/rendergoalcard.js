@@ -41,13 +41,12 @@ function renderGoalCards() {
 
         // Add click event to open modal
         if (goalCard) {
-            const goalNameText = goalName ? goalName.textContent : 'Goal';
-            const goalDetailsText = goalDetails ? goalDetails.textContent : 'No details';
             const plantSrc = img ? img.src : 'assets/plants/stage-1.svg';
+            const goalIndex = i; // Capture the index
             
             goalCard.addEventListener('click', () => {
-                if (window.openModal) {
-                    window.openModal(goalNameText, goalDetailsText, plantSrc);
+                if (window.openModal && goals[goalIndex]) {
+                    window.openModal(goals[goalIndex], plantSrc);
                 }
             });
             
