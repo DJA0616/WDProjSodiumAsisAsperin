@@ -295,7 +295,9 @@ body{
     transition: height 0.5s ease-in-out;
 }
 
-
+.plant-image{
+    background-color: transparent;
+}
 
 .new-goal-card{
     position: relative;

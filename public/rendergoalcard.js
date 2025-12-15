@@ -41,20 +41,27 @@ function renderGoalCards() {
             goalDetails.textContent = i < goals.length ? goals[i].details : `Details for Goal ${i + 1}`;
         }
 
+        // Set progress visualization and plant stage
+        let progress = 0;
+        if (goals[i]) {
+            progress = goals[i].getProgress();
+        }
+
         if (img) {
-            img.src = `assets/plants/stage-1.svg`;
-            img.dataset.plantStage = '1';
+            // Calculate plant stage (1-4) based on progress
+            const stage = Math.min(4, Math.max(1, Math.ceil(progress / 25)));
+            img.src = `assets/plants/stage-${stage}.png`;
+            img.dataset.plantStage = stage;
         }
 
         // Set progress visualization
-        if (progressViz && goals[i]) {
-            const progress = goals[i].getProgress();
+        if (progressViz) {
             progressViz.style.setProperty('--progress', `${progress}%`);
         }
 
         // Add click event to open modal
         if (goalCard) {
-            const plantSrc = img ? img.src : 'assets/plants/stage-1.svg';
+            const plantSrc = img ? img.src : 'assets/plants/stage-1.png';
             const goalIndex = i; // Capture the index
             
             goalCard.addEventListener('click', () => {
