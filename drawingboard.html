@@ -11,60 +11,112 @@
 <body>
     <input type = "text" id = "tasks" name = "tasks" placeholder = "Write your tasks..."></input>
     <button id = "addTask">+</button>
+    <button id = 'viewAllTasks'>All Tasks</button>
     <div id = "taskList"></div>
+    <dialog id = "allTasksDialog"></dialog>
 
     <script>
         const textBox = document.getElementById("tasks");
         const submitButton = document.getElementById("addTask");
+        const viewAllTasksButton = document.getElementById("viewAllTasks");
         const taskList = document.getElementById("taskList");
+        const allTasksDialog = document.getElementById("allTasksDialog");
 
         let allTasks = JSON.parse(localStorage.getItem("allTasks")) || []; // This array will contain all notes to be saved into the local storage of the computer
         console.log(allTasks);
         
-        renderNotes();
+        renderNotes(taskList, true);
 
-        function Task(text, date) {
+        function Task(text, date, checked) {
             this.text = text;
             this.date = date;
+            this.completed = checked || false;
         }
 
         submitButton.onclick = function submit() {
-            const newTask = new Task(textBox.value, new Date())
+            const dateObject = new Date()
+            const newTask = new Task(textBox.value, dateObject.toLocaleDateString('en-CA'), false); // Creates a new note object with text and date
             allTasks.push(newTask); // Adds notes to a single array
             console.log(allTasks);
             localStorage.setItem("allTasks", JSON.stringify(allTasks)) // Saves array into local storage
 
             textBox.value = ""; // Clears text box
-            renderNotes();
+            renderNotes(taskList, true);
         }
 
-        function renderNotes() {
-            taskList.textContent = "";
+        // Create and reuse the close button for the dialog
+        function getCloseButton() {
+            let btn = document.getElementById("closeAllTasksModal");
+            if (!btn) {
+                btn = document.createElement("button");
+                btn.id = "closeAllTasksModal";
+                btn.textContent = "Close";
+                btn.onclick = function () {
+                    allTasksDialog.close();
+                    renderNotes(taskList, true);
+                };
+            }
+            return btn;
+        }
 
+        viewAllTasksButton.onclick = function () {
+            renderNotes(allTasksDialog, false);
+            allTasksDialog.appendChild(getCloseButton());
+            allTasksDialog.showModal();
+        };
+
+        function renderNotes(renderList, filterDate) {
+            renderList.innerHTML = "";
             for (let i = 0; i < allTasks.length; i++) {
-                singleNoteRender(allTasks[i].text, allTasks[i].date, i);
+                if (allTasks[i].date < new Date().toLocaleDateString('en-CA') && allTasks[i].completed === "completed" && filterDate) {
+                    continue;
+                }
+                singleNoteRender(allTasks[i].text, allTasks[i].date, i, renderList, filterDate);
+            }
+            // Only add close button if rendering dialog
+            if (renderList === allTasksDialog) {
+                renderList.appendChild(getCloseButton());
             }
         }
 
-        function singleNoteRender(text, date, index) {
+        // Use event delegation for checkboxes
+        [taskList, allTasksDialog].forEach(list => {
+            list.addEventListener('change', function (e) {
+                if (e.target.classList.contains('taskCheckbox')) {
+                    const index = parseInt(e.target.dataset.index);
+                    allTasks[index].completed = e.target.checked ? "completed" : false;
+                    localStorage.setItem("allTasks", JSON.stringify(allTasks));
+                    renderNotes(list, list === taskList);
+                }
+            });
+        });
+
+        function singleNoteRender(text, date, index, renderList, filterDate) {
             const task = document.createElement('div');
-            task.innerHTML = `
-                <input type="checkbox">
+            if (allTasks[index].completed === "completed") {
+                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-index="' + index + '" checked>';
+            }
+            else {
+                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-index="' + index + '">';
+            }
+            task.innerHTML += `
                 <button class="taskText">${text}</button>
                 <span>${date}<span>
                 <dialog class="taskEditModal">
                     <span contentEditable="true" class="taskEdit">${text}</span>
+                    <input type="date" class="dateEdit" value="${date}">
                     <button class="deleteButton">Delete</button>
                     <button class="saveButton">Save</button>
                     <button class="closeButton">Close</button>
                 </dialog>
             `;
 
-            taskList.appendChild(task);
+            renderList.appendChild(task);
 
             const taskText = task.querySelector('.taskText');
             const taskEditModal = task.querySelector('.taskEditModal');
             const taskEdit = task.querySelector('.taskEdit');
+            const taskDate = task.querySelector('.dateEdit');
             const deleteButton = task.querySelector('.deleteButton');
             const saveButton = task.querySelector('.saveButton');
             const closeButton = task.querySelector('.closeButton');
@@ -74,8 +126,9 @@
             saveButton.onclick = () => {
                 taskEditModal.close();
                 allTasks[index].text = taskEdit.textContent;
+                allTasks[index].date = taskDate.value;
                 localStorage.setItem("allTasks", JSON.stringify(allTasks));
-                renderNotes();
+                renderNotes(renderList, filterDate);
             };
 
             closeButton.onclick = () => {
@@ -86,7 +139,7 @@
             deleteButton.onclick = () => {
                 allTasks.splice(index, 1);
                 localStorage.setItem("allTasks", JSON.stringify(allTasks));
-                renderNotes();
+                renderNotes(renderList, filterDate);
             };
         }
     </script>
