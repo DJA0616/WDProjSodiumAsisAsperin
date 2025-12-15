@@ -19,11 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
             nameSection.classList.remove('goal-name-editable');
             nameSection.classList.remove('show-placeholder');
             nameSection.innerHTML = '';
-            const h2 = document.createElement('h2');
-            h2.textContent = name;
+            const h1 = document.createElement('h1');
+            h1.textContent = name;
             const p = document.createElement('p');
             p.textContent = '';
-            nameSection.appendChild(h2);
+            nameSection.appendChild(h1);
             nameSection.appendChild(p);
         }
 
@@ -39,17 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 setupNewCard(appended);
             }
         }
-    }
-
-    // Helper to set caret at start
-    function setCaretToStart(el) {
-        el.focus();
-        const range = document.createRange();
-        const sel = window.getSelection();
-        range.selectNodeContents(el);
-        range.collapse(true);
-        sel.removeAllRanges();
-        sel.addRange(range);
     }
 
     // Helper to initialize a single new-goal-card
@@ -83,14 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        editableSection.addEventListener('input', updateVerticalAlign);
-        editableSection.addEventListener('focus', updateVerticalAlign);
-        editableSection.addEventListener('blur', updateVerticalAlign);
-        editableSection.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' || e.key === 'Delete') {
-                requestAnimationFrame(updateVerticalAlign);
-            }
-        });
     }
 
     // initialize existing new-goal-card(s)
