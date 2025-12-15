@@ -40,9 +40,7 @@
 
             for (let i = 0; i < allTasks.length; i++) {
                 element = allTasks[i];
-                if (!(new Date() > deadLine)) {
-                    singleNoteRender(element, i);
-                }
+                singleNoteRender(element, i);
             }
         }
 
