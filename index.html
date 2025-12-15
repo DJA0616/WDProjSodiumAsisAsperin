@@ -51,6 +51,7 @@
 
         </section>
 
+        <!-- Goal Card Display -->
         <template id="goal-card-template">
             <section class="goal-card">
                 <section class="goal-card-left">
@@ -67,6 +68,7 @@
             </section>
         </template>
 
+        <!-- New Goal Card Button -->
         <template id="new-goal-card-template">
             <section class="new-goal-card">
                 <div class="new-goal-plus">+</div>
@@ -85,13 +87,47 @@
         </template>
     </section>
 
+    <!-- Goal Card Modal -->
+    <section id="goal-modal" class="modal">
+        <div class="modal-content">
+            <section class="modal-body">
+                <section class="modal-left">
+                    <section class="modal-goal-name"></section>
+                    <section class="modal-goal-details"></section>
+                </section>
+                <section class="subtask-display">
+
+                </section>
+                <section class="modal-progress-visualization">
+                    <img src="" alt="Plant" class="modal-plant-image">
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <template id="subtask-template">
+        <section class="subtask-item">
+            <section class="subtask-name"></section>
+            <section class="subtask-date"></section>
+            <input type="checkbox" class="subtask-checkbox">
+        </section>
+    </template>
+
+    <template id="new-subtask-template">
+        <button class="new-subtask-button">+ Add Subtask</button>
+    </template>
+
     <footer class="footer-bar">
 
     </footer>
 
-    <script src="public/goalcard.js"></script>
+    <script src="public/goal.js"></script>
+    <script src="public/rendergoalcard.js"></script>
+    <script src="public/goalcreation.js"></script>
     <script src="public/progressbar.js"></script>
     <script src="public/scrolldown.js"></script>
-    <script src="public/goalcreation.js"></script>
+    <script src="public/rendersubtasks.js"></script>
+    <script src="public/subtaskcreation.js"></script>
+    <script src="public/modal.js"></script>
 </body>
 </html>
