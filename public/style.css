@@ -562,3 +562,11 @@ body{
     text-align: center;
     align-content: center;
 }
+
+.subtask-checkbox {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #5ac700;
+    flex-shrink: 0;
+}

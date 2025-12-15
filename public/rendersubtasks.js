@@ -20,6 +20,8 @@ function renderSubtasks() {
             const subtaskName = clone.querySelector('.subtask-name');
             const subtaskDate = clone.querySelector('.subtask-date');
             const subtaskType = clone.querySelector('.subtask-type');
+            const subtaskCheckbox = clone.querySelector('.subtask-checkbox');
+            
             if (subtaskName) {
                 subtaskName.textContent = currentGoal.subtasks[i].name;
             }
@@ -28,6 +30,13 @@ function renderSubtasks() {
             }
             if (subtaskType) {
                 subtaskType.textContent = currentGoal.subtasks[i].type;
+            }
+            if (subtaskCheckbox) {
+                subtaskCheckbox.checked = currentGoal.subtasks[i].completed || false;
+                const subtaskIndex = i;
+                subtaskCheckbox.addEventListener('change', function() {
+                    currentGoal.subtasks[subtaskIndex].completed = this.checked;
+                });
             }
             subtaskDisplay.appendChild(clone);
         }
