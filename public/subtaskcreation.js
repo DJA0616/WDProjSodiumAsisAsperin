@@ -2,9 +2,10 @@ function createNewSubtask(newSubtaskButton, goal){
     if (!goal) return;
 
     // Create a new subtask object with default values
+    const today = new Date().toISOString().split('T')[0];
     const newSubtask = {
         name: 'New Subtask',
-        date: '2024-12-31', // Placeholder date
+        date: today, // Placeholder date
         type: 'text', // Default type
         completed: false
     };

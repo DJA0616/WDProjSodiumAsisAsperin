@@ -24,6 +24,21 @@ function renderSubtasks() {
             
             if (subtaskName) {
                 subtaskName.textContent = currentGoal.subtasks[i].name;
+                subtaskName.contentEditable = true;
+                const subtaskIndex = i;
+                
+                // Save on blur (when user clicks away)
+                subtaskName.addEventListener('blur', function() {
+                    currentGoal.subtasks[subtaskIndex].name = this.textContent.trim();
+                });
+                
+                // Save on Enter key
+                subtaskName.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        this.blur();
+                    }
+                });
             }
             if (subtaskDate) {
                 subtaskDate.textContent = currentGoal.subtasks[i].date;

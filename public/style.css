@@ -477,7 +477,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 1vw;
-    overflow: hidden;
+    overflow-x: visible;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: #bbb transparent;
@@ -530,7 +530,7 @@ body{
 }
 
 .subtask-item:hover {
-    transform: scale(1.01);
+    box-shadow: 0vw 0vw 1vw rgb(255, 255, 255);
 }
 
 .subtask-name {
@@ -548,6 +548,15 @@ body{
     overflow-wrap: break-word;
     white-space: normal;
     word-break: break-word;
+    
+    cursor: text;
+    transition: background-color 0.2s ease;
+}
+
+.subtask-name:focus {
+    outline: 2px solid #5ac700;
+    outline-offset: -2px;
+    background-color: rgba(220, 240, 255, 0.5);
 }
 
 .subtask-date {
