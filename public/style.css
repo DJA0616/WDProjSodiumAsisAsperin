@@ -526,7 +526,32 @@ body{
     display: flex;
     gap: 1vw;
     
+    position: relative;
+    overflow: hidden;
+    
     transition: all 0.2s ease-in-out;
+}
+
+.subtask-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(#51ff77cc, #73ff00cc);
+    transition: width 0.3s ease-in-out;
+    z-index: 0;
+    border-radius: 1vw;
+}
+
+.subtask-item.completed::before {
+    width: 100%;
+}
+
+.subtask-item > * {
+    position: relative;
+    z-index: 1;
 }
 
 .subtask-item:hover {
@@ -560,7 +585,7 @@ body{
 }
 
 .subtask-date {
-    background-color: rgba(90, 199, 0, 0.2);
+    background-color: rgba(220, 240, 255, 0.3);
     border-radius: 0.5vw;
     padding: 0.5vw 1vw;
     flex: 0 0 auto;

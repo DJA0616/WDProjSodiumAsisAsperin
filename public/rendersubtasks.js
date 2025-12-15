@@ -17,6 +17,7 @@ function renderSubtasks() {
     if (currentGoal && currentGoal.subtasks && subtaskTemplate) {
         for (let i = 0; i < currentGoal.subtasks.length; i++) {
             const clone = subtaskTemplate.content.cloneNode(true);
+            const subtaskItem = clone.querySelector('.subtask-item');
             const subtaskName = clone.querySelector('.subtask-name');
             const subtaskDate = clone.querySelector('.subtask-date');
             const subtaskType = clone.querySelector('.subtask-type');
@@ -49,8 +50,23 @@ function renderSubtasks() {
             if (subtaskCheckbox) {
                 subtaskCheckbox.checked = currentGoal.subtasks[i].completed || false;
                 const subtaskIndex = i;
+                
+                // Add completed class if already checked
+                if (subtaskCheckbox.checked && subtaskItem) {
+                    subtaskItem.classList.add('completed');
+                }
+                
                 subtaskCheckbox.addEventListener('change', function() {
                     currentGoal.subtasks[subtaskIndex].completed = this.checked;
+                    
+                    // Toggle completed class for the green bar effect
+                    if (subtaskItem) {
+                        if (this.checked) {
+                            subtaskItem.classList.add('completed');
+                        } else {
+                            subtaskItem.classList.remove('completed');
+                        }
+                    }
                 });
             }
             subtaskDisplay.appendChild(clone);
