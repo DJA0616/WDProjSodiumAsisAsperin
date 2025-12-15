@@ -40,13 +40,11 @@
             <h1 class="greeting-header">Welcome Back, </h1>
             <h1 class="greeting-name">User</h1>
 
-            <section class="progress-display">
+            <section class="progress-display" id="progress-display" onclick="scrollToSection('goal-card-display')">
                 <h1 class="progress-counter" id="progress-counter"></h1>
                 <section class="progress-bar" id="progress-bar">
                 </section>
             </section>
-
-            <button class="greeting-button" onclick="scrollToSection('goal-card-display')">Go</button>
         </section>
 
         <section class="goal-card-display" id="goal-card-display">
@@ -86,6 +84,10 @@
             </section>    
         </template>
     </section>
+
+    <footer class="footer-bar">
+
+    </footer>
 
     <script src="public/goalcard.js"></script>
     <script src="public/progressbar.js"></script>
