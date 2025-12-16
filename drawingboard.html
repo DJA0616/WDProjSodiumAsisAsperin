@@ -9,42 +9,34 @@
     </style>
 </head>
 <body>
-    <input type = "text" id = "tasks" name = "tasks" placeholder = "Write your tasks..."></input>
-    <button id = "addTask">+</button>
     <button id = 'viewAllTasks'>All Tasks</button>
     <div id = "taskList"></div>
     <dialog id = "allTasksDialog"></dialog>
 
+    <button id="clearTasks">clear array</button>
+
     <script>
-        class Goal {
-            
-        }
-        const textBox = document.getElementById("tasks");
-        const submitButton = document.getElementById("addTask");
         const viewAllTasksButton = document.getElementById("viewAllTasks");
         const taskList = document.getElementById("taskList");
         const allTasksDialog = document.getElementById("allTasksDialog");
+        const clearTasksButton = document.getElementById("clearTasks");
 
         let allTasks = JSON.parse(localStorage.getItem("allTasks")) || []; // This array will contain all notes to be saved into the local storage of the computer
         console.log(allTasks);
+
+        clearTasksButton.onclick = function() {
+            allTasks = [];
+            localStorage.setItem("allTasks", JSON.stringify(allTasks));
+            renderNotes(taskList, true);
+        }
         
         renderNotes(taskList, true);
 
         function Task(text, date, checked) {
+            this.id = Date.now().toString() + Math.random().toString(36).slice(2); // unique id
             this.text = text;
             this.date = date;
             this.completed = checked || false;
-        }
-
-        submitButton.onclick = function submit() {
-            const dateObject = new Date()
-            const newTask = new Task(textBox.value, dateObject.toLocaleDateString('en-CA'), false); // Creates a new note object with text and date
-            allTasks.push(newTask); // Adds notes to a single array
-            console.log(allTasks);
-            localStorage.setItem("allTasks", JSON.stringify(allTasks)) // Saves array into local storage
-
-            textBox.value = ""; // Clears text box
-            renderNotes(taskList, true);
         }
 
         // Create and reuse the close button for the dialog
@@ -76,9 +68,22 @@
                 }
                 singleNoteRender(allTasks[i].text, allTasks[i].date, i, renderList, filterDate);
             }
+            renderList.innerHTML += `<button class = "newTaskButton">Add new task</button>`; // Spacer to prevent last note from being hidden behind the add button
             // Only add close button if rendering dialog
             if (renderList === allTasksDialog) {
                 renderList.appendChild(getCloseButton());
+            }
+
+            const newTaskButton = renderList.querySelector('.newTaskButton');
+
+            newTaskButton.onclick = function newTask() {
+                const dateObject = new Date()
+                const newTask = new Task("New Task", dateObject.toLocaleDateString('en-CA'), false); // Creates a new note object with text and date
+                allTasks.push(newTask); // Adds notes to a single array
+                console.log(allTasks);
+                localStorage.setItem("allTasks", JSON.stringify(allTasks)) // Saves array into local storage
+
+                renderNotes(renderList, filterDate);
             }
         }
 
@@ -91,59 +96,39 @@
                     localStorage.setItem("allTasks", JSON.stringify(allTasks));
                     renderNotes(list, list === taskList);
                 }
+                if (e.target.classList.contains('dateDisplay')) {
+                    const index = Array.from(list.querySelectorAll('.dateDisplay')).indexOf(e.target);
+                    allTasks[index].date = e.target.value;
+                    localStorage.setItem("allTasks", JSON.stringify(allTasks));
+                    renderNotes(list, list === taskList);
+                }
+
+            });
+            list.addEventListener('input', function (e) {
+                let el = e.target;
+                if (el.nodeType === 3) el = el.parentElement;
+                if (el.classList && el.classList.contains('taskText')) {
+                    const index = Array.from(list.querySelectorAll('.taskText')).indexOf(el);
+                    allTasks[index].text = el.textContent;
+                    localStorage.setItem("allTasks", JSON.stringify(allTasks));
+                }
             });
         });
 
         function singleNoteRender(text, date, index, renderList, filterDate) {
             const task = document.createElement('div');
             if (allTasks[index].completed === "completed") {
-                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-index="' + index + '" checked>';
+                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-id="${allTasks[index].id}">';
             }
             else {
-                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-index="' + index + '">';
+                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-id="${allTasks[index].id}">';
             }
             task.innerHTML += `
-                <button class="taskText">${text}</button>
-                <span>${date}<span>
-                <dialog class="taskEditModal">
-                    <span contentEditable="true" class="taskEdit">${text}</span>
-                    <input type="date" class="dateEdit" value="${date}">
-                    <button class="deleteButton">Delete</button>
-                    <button class="saveButton">Save</button>
-                    <button class="closeButton">Close</button>
-                </dialog>
+                <span class="taskText" contentEditable="true" data-id="${allTasks[index].id}">${text}</span>
+                <input type="date" class="dateDisplay" value="${date}" data-id="${allTasks[index].id}">
             `;
 
             renderList.appendChild(task);
-
-            const taskText = task.querySelector('.taskText');
-            const taskEditModal = task.querySelector('.taskEditModal');
-            const taskEdit = task.querySelector('.taskEdit');
-            const taskDate = task.querySelector('.dateEdit');
-            const deleteButton = task.querySelector('.deleteButton');
-            const saveButton = task.querySelector('.saveButton');
-            const closeButton = task.querySelector('.closeButton');
-
-            taskText.onclick = () => taskEditModal.showModal();
-
-            saveButton.onclick = () => {
-                taskEditModal.close();
-                allTasks[index].text = taskEdit.textContent;
-                allTasks[index].date = taskDate.value;
-                localStorage.setItem("allTasks", JSON.stringify(allTasks));
-                renderNotes(renderList, filterDate);
-            };
-
-            closeButton.onclick = () => {
-                taskEditModal.close();
-                taskEdit.textContent = text;
-            };
-
-            deleteButton.onclick = () => {
-                allTasks.splice(index, 1);
-                localStorage.setItem("allTasks", JSON.stringify(allTasks));
-                renderNotes(renderList, filterDate);
-            };
         }
     </script>
 </body>
