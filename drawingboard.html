@@ -13,22 +13,13 @@
     <div id = "taskList"></div>
     <dialog id = "allTasksDialog"></dialog>
 
-    <button id="clearTasks">clear array</button>
-
     <script>
         const viewAllTasksButton = document.getElementById("viewAllTasks");
         const taskList = document.getElementById("taskList");
         const allTasksDialog = document.getElementById("allTasksDialog");
-        const clearTasksButton = document.getElementById("clearTasks");
 
         let allTasks = JSON.parse(localStorage.getItem("allTasks")) || []; // This array will contain all notes to be saved into the local storage of the computer
         console.log(allTasks);
-
-        clearTasksButton.onclick = function() {
-            allTasks = [];
-            localStorage.setItem("allTasks", JSON.stringify(allTasks));
-            renderNotes(taskList, true);
-        }
         
         renderNotes(taskList, true);
 
@@ -40,6 +31,13 @@
         }
 
         // Create and reuse the close button for the dialog
+
+        viewAllTasksButton.onclick = function () {
+            renderNotes(allTasksDialog, false);
+            allTasksDialog.appendChild(getCloseButton());
+            allTasksDialog.showModal();
+        };
+
         function getCloseButton() {
             let btn = document.getElementById("closeAllTasksModal");
             if (!btn) {
@@ -53,12 +51,6 @@
             }
             return btn;
         }
-
-        viewAllTasksButton.onclick = function () {
-            renderNotes(allTasksDialog, false);
-            allTasksDialog.appendChild(getCloseButton());
-            allTasksDialog.showModal();
-        };
 
         function renderNotes(renderList, filterDate) {
             renderList.innerHTML = "";
@@ -87,49 +79,71 @@
             }
         }
 
+        function singleNoteRender(text, date, index, renderList, filterDate) {
+            const task = document.createElement('div');
+            const taskId = allTasks[index].id;
+            if (allTasks[index].completed === "completed") {
+                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-id="' + taskId + '" checked>';
+            }
+            else {
+                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-id="' + taskId + '">';
+            }
+            task.innerHTML += `<span class="taskText" contentEditable="true" data-id="${taskId}">${text}</span>`;
+
+            if(renderList === allTasksDialog) {
+                task.innerHTML += `
+                    <input type="date" class="dateDisplay" value="${date}" data-id="${taskId}">
+                    <button class="deleteButton" data-id="${taskId}">Delete</button>
+                `;
+            }
+
+            renderList.appendChild(task);
+        }
+
         // Use event delegation for checkboxes
         [taskList, allTasksDialog].forEach(list => {
             list.addEventListener('change', function (e) {
                 if (e.target.classList.contains('taskCheckbox')) {
-                    const index = parseInt(e.target.dataset.index);
-                    allTasks[index].completed = e.target.checked ? "completed" : false;
-                    localStorage.setItem("allTasks", JSON.stringify(allTasks));
-                    renderNotes(list, list === taskList);
+                    const id = e.target.dataset.id;
+                    const task = allTasks.find(t => t.id === id);
+                    if (task) {
+                        task.completed = e.target.checked ? "completed" : false;
+                        localStorage.setItem("allTasks", JSON.stringify(allTasks));
+                        renderNotes(list, list === taskList);
+                    }
                 }
                 if (e.target.classList.contains('dateDisplay')) {
-                    const index = Array.from(list.querySelectorAll('.dateDisplay')).indexOf(e.target);
-                    allTasks[index].date = e.target.value;
-                    localStorage.setItem("allTasks", JSON.stringify(allTasks));
-                    renderNotes(list, list === taskList);
+                    const id = e.target.dataset.id;
+                    const task = allTasks.find(t => t.id === id);
+                    if (task) {
+                        task.date = e.target.value;
+                        localStorage.setItem("allTasks", JSON.stringify(allTasks));
+                        renderNotes(list, list === taskList);
+                    }
                 }
-
             });
             list.addEventListener('input', function (e) {
                 let el = e.target;
                 if (el.nodeType === 3) el = el.parentElement;
                 if (el.classList && el.classList.contains('taskText')) {
-                    const index = Array.from(list.querySelectorAll('.taskText')).indexOf(el);
-                    allTasks[index].text = el.textContent;
+                    const id = el.dataset.id;
+                    const task = allTasks.find(t => t.id === id);
+                    if (task) {
+                        task.text = el.textContent;
+                        localStorage.setItem("allTasks", JSON.stringify(allTasks));
+                    }
+                }
+            });
+            // Handle delete button clicks
+            list.addEventListener('click', function (e) {
+                if (e.target.classList.contains('deleteButton')) {
+                    const id = e.target.dataset.id;
+                    allTasks = allTasks.filter(t => t.id !== id);
                     localStorage.setItem("allTasks", JSON.stringify(allTasks));
+                    renderNotes(list, list === taskList);
                 }
             });
         });
-
-        function singleNoteRender(text, date, index, renderList, filterDate) {
-            const task = document.createElement('div');
-            if (allTasks[index].completed === "completed") {
-                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-id="${allTasks[index].id}">';
-            }
-            else {
-                task.innerHTML = '<input type="checkbox" value="completed" class="taskCheckbox" data-id="${allTasks[index].id}">';
-            }
-            task.innerHTML += `
-                <span class="taskText" contentEditable="true" data-id="${allTasks[index].id}">${text}</span>
-                <input type="date" class="dateDisplay" value="${date}" data-id="${allTasks[index].id}">
-            `;
-
-            renderList.appendChild(task);
-        }
     </script>
 </body>
 </html>
