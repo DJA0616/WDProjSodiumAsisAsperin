@@ -210,7 +210,7 @@ body{
     gap: 1vw;
 }
 
-.goal-name-description, .goal-details{
+.goal-name-description, .goal-task-list{
     background-color: white;
     border: 1px;
     box-sizing: border-box;

@@ -58,7 +58,7 @@
                     <section class="goal-name-description">
 
                     </section>
-                    <section class="goal-details">
+                    <section class="goal-task-list">
                         
                     </section>
                 </section>
@@ -76,7 +76,7 @@
                 <section class="new-goal-card-left">
                     <section id="new-goal-name-description" class="goal-name-description goal-name-editable" contenteditable="true">
                     </section>
-                    <section class="goal-details">
+                    <section class="goal-task-list">
                         
                     </section>
                 </section>
@@ -122,13 +122,32 @@
 
     </footer>
 
-    <script src="public/goal.js"></script>
+    <script type="module">
+        import DataManager from "./public/modules/DataManager.js";
+        import DataFilter from "./public/modules/DataFilter.js";
+        import DomManager from "./public/modules/DomManager.js";
+        import HomePageRenderer from "./public/modules/HomePageRenderer.js";
+
+        // DataManager is instantiated (manages state)
+        const dataManager = new DataManager();
+        
+        // HomePageRenderer only needs DataManager
+        const homePageRenderer = new HomePageRenderer(dataManager);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            homePageRenderer.renderGoals();
+            DomManager.updateGreeting();
+            DomManager.updateProgressDisplay(dataManager.getGoals(), dataManager.getTasks());
+        });
+    </script>
+
+    <!-- <script src="public/goal.js"></script>
     <script src="public/rendergoalcard.js"></script>
     <script src="public/goalcreation.js"></script>
     <script src="public/progressbar.js"></script>
     <script src="public/scrolldown.js"></script>
     <script src="public/rendersubtasks.js"></script>
     <script src="public/subtaskcreation.js"></script>
-    <script src="public/modal.js"></script>
+    <script src="public/modal.js"></script> -->
 </body>
 </html>
