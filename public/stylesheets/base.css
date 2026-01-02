@@ -1,4 +1,5 @@
 :root {
+    /* For testing */
     --background-color: #f5f5f5;
     --text-color: #333;
     --border-thickness: 1px;
@@ -6,6 +7,56 @@
     --margin: 1vw;
     --padding: 1vw;
     --gap: 1vw;
+
+    /* Spacing scale */
+    --spacing-0: 0;
+    --spacing-1: 1vw;
+    --spacing-2: 2vw;
+    --spacing-3: 3vw;
+    --spacing-05: 0.5vw;
+    --spacing-5: 5vw;
+    
+    /* Border radius scale */
+    --radius-05: 0.5vw;
+    --radius-1: 1vw;
+    --radius-2: 2vw;
+    --radius-3: 3vw;
+    --radius-full: 50%;
+    
+    /* Shadow scale */
+    --shadow-sm: 0 0 0.5vw lightgray;
+    --shadow-md: 0 0 1vw rgba(255, 255, 255, 0.5);
+    --shadow-lg: 0 0 2vw #cdd8d5;
+    --shadow-glow: 0 0 5vw #00ff15cc;
+    --text-shadow: 0 0 0.2vw lightgray;
+    
+    /* Colors */
+    --color-white: white;
+    --color-black: black;
+    --color-gray: #999;
+    --color-primary: #cdd8d5;
+    --color-accent: #5ac700;
+    --color-light: rgba(220, 240, 255, 0.3);
+    --color-light-hover: rgba(220, 240, 255, 0.5);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(rgba(220, 240, 255, 0.5), rgba(90, 199, 0, 0.5));
+    --gradient-accent: linear-gradient(#51ff77cc, #73ff00cc);
+    --gradient-text: linear-gradient(#45e3ff, #5ac700);
+    
+    /* Typography */
+    --font-sans: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+    /* Transitions */
+    --transition-fast: 0.2s;
+    --transition-normal: 0.3s;
+    --transition-slow: 0.5s;
+    
+    /* Opacity */
+    --opacity-0: 0;
+    --opacity-50: 0.5;
+    --opacity-70: 0.7;
+    --opacity-100: 1;
 }
 
 body {

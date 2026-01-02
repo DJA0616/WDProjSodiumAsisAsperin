@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/public/stylesheets/components/navigation.css">
     <link rel="stylesheet" href="/public/stylesheets/components/greeting.css">
     <link rel="stylesheet" href="/public/stylesheets/components/progressbar.css">
+    <link rel="stylesheet" href="/public/stylesheets/utils.css">
     <!-- <link rel="stylesheet" href="public/stylesheets/navigation.css">
     <link rel="stylesheet" href="public/stylesheets/greeting.css">
     <link rel="stylesheet" href="public/stylesheets/content.css"> -->
@@ -20,20 +21,20 @@
         <section class="navigation-bar-left">
             <a href="/index.html" class="home-page">
                 <img src="/assets/GoalGarden_logo.png" alt="Logo" style="height:2vw; top:50%">
-                <h1 style="margin:auto">GoalGarden</h1>
+                <h1 class="m-auto">GoalGarden</h1>
             </a>
 
             <a href="/pages/about.html" class="about-page">
-                <h1 style="margin:auto">About</h1>
+                <h1 class="m-auto">About</h1>
             </a>
         </section>
 
         <section class="navigation-bar-right">
             <a href="/index.html" class="settings-page">
-                <h1 style="margin:auto">Settings</h1>
+                <h1 class="m-auto">Settings</h1>
             </a>
             <a href="/index.html" class="profile-page">
-                <h1 style="margin:auto">Profile</h1>
+                <h1 class="m-auto">Profile</h1>
             </a>
         </section>
     </nav>
@@ -41,11 +42,11 @@
     <section class="content-section">
         <section class="greeting-section">
             <section class="greeting-logo">
-                <img src="assets/GoalGarden_logo.png" alt="Logo" style="box-sizing: border-box; width: 100%;">
+                <img src="assets/GoalGarden_logo.png" alt="Logo" class="w-full h-full object-contain">
             </section>
 
-            <h1 class="greeting-header">Welcome Back, </h1>
-            <h1 class="greeting-name">User</h1>
+            <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
+            <h1 class="greeting-name font-sans m-0 p-0 mx-auto bg-gradient-text">User</h1>
 
             <section class="progress-display" id="progress-display" onclick="scrollToSection('goal-card-display')">
                 <h1 class="progress-counter typewriter-animation" id="progress-counter"></h1>
@@ -151,9 +152,9 @@
     <!-- <script src="public/goal.js"></script>
     <script src="public/rendergoalcard.js"></script>
     <script src="public/goalcreation.js"></script>
-    <script src="public/progressbar.js"></script>
+    <script src="public/progressbar.js"></script> -->
     <script src="public/scrolldown.js"></script>
-    <script src="public/rendersubtasks.js"></script>
+    <!-- <script src="public/rendersubtasks.js"></script>
     <script src="public/subtaskcreation.js"></script>
     <script src="public/modal.js"></script> -->
 </body>
