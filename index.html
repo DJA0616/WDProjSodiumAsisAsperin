@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/public/style.css"> -->
     <link rel="stylesheet" href="/public/stylesheets/base.css">
     <link rel="stylesheet" href="/public/stylesheets/layout.css">
     <link rel="stylesheet" href="/public/stylesheets/components/navigation.css">
     <link rel="stylesheet" href="/public/stylesheets/components/greeting.css">
     <link rel="stylesheet" href="/public/stylesheets/components/progressbar.css">
+    <link rel="stylesheet" href="/public/stylesheets/components/goalcard.css">
     <link rel="stylesheet" href="/public/stylesheets/utils.css">
     <!-- <link rel="stylesheet" href="public/stylesheets/navigation.css">
     <link rel="stylesheet" href="public/stylesheets/greeting.css">
@@ -48,18 +50,19 @@
             <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
             <h1 class="greeting-name font-sans m-0 p-0 mx-auto bg-gradient-text">User</h1>
 
-            <section class="progress-display" id="progress-display" onclick="scrollToSection('goal-card-display')">
+            <section class="progress-display border m-1 shadow-sm" id="progress-display" onclick="scrollToSection('goal-card-display')">
                 <h1 class="progress-counter typewriter-animation" id="progress-counter"></h1>
                 <section class="progress-bar" id="progress-bar">
                 </section>
             </section>
         </section>
 
-        <section class="goal-card-display" id="goal-card-display">
+        <!-- Goal Card Display -->
+        <section class="goal-card-display my-1 p-1 gap-1" id="goal-card-display">
 
         </section>
 
-        <!-- Goal Card Display -->
+        <!-- Goal Card Template -->
         <template id="goal-card-template">
             <section class="goal-card">
                 <section class="goal-card-left">
@@ -149,13 +152,13 @@
         });
     </script>
 
-    <!-- <script src="public/goal.js"></script>
+    <script src="public/goal.js"></script>
     <script src="public/rendergoalcard.js"></script>
     <script src="public/goalcreation.js"></script>
-    <script src="public/progressbar.js"></script> -->
+    <script src="public/progressbar.js"></script>
     <script src="public/scrolldown.js"></script>
-    <!-- <script src="public/rendersubtasks.js"></script>
+    <script src="public/rendersubtasks.js"></script>
     <script src="public/subtaskcreation.js"></script>
-    <script src="public/modal.js"></script> -->
+    <script src="public/modal.js"></script>
 </body>
 </html>

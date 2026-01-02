@@ -29,13 +29,9 @@
 
 .goal-card-display {
     border-radius: calc(var(--border-radius) * 2);
-    margin-top: var(--margin);
-    bottom: var(--margin);
-    padding: var(--padding);
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--gap);
     grid-row: auto;
     flex-grow: 1;
 }
