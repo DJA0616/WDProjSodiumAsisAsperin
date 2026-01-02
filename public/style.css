@@ -5,7 +5,6 @@ body{
 
 .navigation-bar{
     background-image: linear-gradient(rgba(200, 208, 215, 0.5), rgba(0, 0, 0, 0));
-    margin:none;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
