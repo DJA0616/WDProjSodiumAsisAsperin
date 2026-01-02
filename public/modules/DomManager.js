@@ -9,6 +9,12 @@ class DomManager {
         }
     }
 
+    static editElementContent(element, newContent) {
+        if (element) {
+            element.innerHTML = newContent;
+        }
+    }
+
     static createElement(tag, className, content, attributes = {}) {
         const element = document.createElement(tag);
         if (className) element.className = className;
@@ -65,6 +71,9 @@ class DomManager {
                 'value': task.dueDate,
                 'data-task-id': task.id
             }))
+            item.appendChild(DomManager.createElement('button', 'delete-task-button', 'Delete', {
+                'data-task-id': task.id
+            }));
         }
         
         return item;
@@ -75,7 +84,7 @@ class DomManager {
         newCard.appendChild(DomManager.createElement('div', 'new-goal-plus', '+'));
 
         const left = DomManager.createElement('section', 'new-goal-card-left');
-        left.appendChild(DomManager.createElement('section', 'goal-name-description goal-name-editable', '', { 'contenteditable': 'true' }));
+        left.appendChild(DomManager.createElement('section', 'goal-name-description goal-name-editable show-placeholder', '', { 'contenteditable': 'true' }));
         left.appendChild(DomManager.createElement('section', 'goal-task-list'));
         newCard.appendChild(left);
 
@@ -95,6 +104,31 @@ class DomManager {
             'data-goal-id': goalId
         });
         return button;
+    }
+
+    static showGoalModal(goal) {
+        const goalModal = DomManager.getElement('#goal-modal');
+        const goalModalName = DomManager.getElement('.modal-goal-name');
+        const goalModalDetails = DomManager.getElement('.modal-goal-details');
+        const goalModalPlantImage = DomManager.getElement('.modal-plant-image');
+
+        goalModalName.textContent = goal.name;
+        goalModalDetails.textContent = goal.details;
+        goalModalPlantImage.src = `assets/plants/stage-1.png`; // Placeholder image source
+
+        goalModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    static closeGoalModal() {
+        const goalModal = DomManager.getElement('#goal-modal');
+        goalModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    static isGoalModalOpen() {
+        const goalModal = DomManager.getElement('#goal-modal');
+        return goalModal.style.display === 'block';
     }
 }
 

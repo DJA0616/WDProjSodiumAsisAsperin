@@ -58,11 +58,11 @@ class DataManager {
         const newTask = new Task(name, dueDate, goal, category);
         this.allTasks.push(newTask);
         this.saveToStorage("allTasks");
+        console.log(this.allTasks);
         return newTask;
     }
 
-    deleteElement(elementType, elementId) {
-        const collectionName = this.getPluralCollectionName(elementType);
+    deleteElement(collectionName, elementId) {
         this[collectionName] = this[collectionName].filter(element => element.id !== elementId);
         this.saveToStorage(collectionName);
     }

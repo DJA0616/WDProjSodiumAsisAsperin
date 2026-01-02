@@ -94,7 +94,7 @@
             <section class="modal-body">
                 <section class="modal-left">
                     <section class="modal-goal-name"></section>
-                    <section class="modal-goal-details"></section>
+                    <section class="modal-goal-details" contenteditable="true"></section>
                 </section>
                 <section class="subtask-display">
 
@@ -103,6 +103,7 @@
                     <img src="" alt="Plant" class="modal-plant-image">
                 </section>
             </section>
+            <button id="delete-goal-button" class="delete-goal-button">Delete Goal</button>
         </div>
     </section>
 
@@ -127,6 +128,7 @@
         import DataFilter from "./public/modules/DataFilter.js";
         import DomManager from "./public/modules/DomManager.js";
         import HomePageRenderer from "./public/modules/HomePageRenderer.js";
+        import EventHandler from "./public/modules/EventHandler.js";
 
         // DataManager is instantiated (manages state)
         const dataManager = new DataManager();
@@ -134,10 +136,11 @@
         // HomePageRenderer only needs DataManager
         const homePageRenderer = new HomePageRenderer(dataManager);
 
+        // Event Handler
+        const eventHandler = new EventHandler(dataManager, homePageRenderer);
+
         document.addEventListener("DOMContentLoaded", () => {
             homePageRenderer.renderGoals();
-            DomManager.updateGreeting();
-            DomManager.updateProgressDisplay(dataManager.getGoals(), dataManager.getTasks());
         });
     </script>
 
