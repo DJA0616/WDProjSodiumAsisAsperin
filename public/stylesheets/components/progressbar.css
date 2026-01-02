@@ -1,0 +1,46 @@
+/* ==========================================================================
+   PROGRESS BAR COMPONENTS
+   Using CSS variables for consistency
+   ========================================================================== */
+
+.progress-display {
+    background-color: var(--color-white);
+    border: 1px solid gray;
+    border-radius: calc(var(--radius-1) * 2.5);
+    margin: 10px auto;
+    box-sizing: border-box;
+    width: clamp(200px, 30vw, 576px);
+    height: 3vw;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.progress-counter {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-family: var(--font-sans);
+    font-weight: bold;
+    font-size: clamp(14px, 2.5vw, 48px);
+}
+
+.progress-bar {
+    position: relative;
+    background-image: var(--gradient-accent);
+    background-clip: content-box;
+    border-right: 2px solid #3fff496c;
+    box-shadow: var(--shadow-glow);
+    float: left;
+    height: 3vw;
+    width: 0;
+    transition: all var(--transition-slow) ease-out;
+}
+
+.progress-display:hover .progress-bar {
+    width: 100%;
+}

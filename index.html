@@ -3,30 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/GoalGarden_logo.png">
+    <!-- <link rel="stylesheet" href="/public/style.css"> -->
+    <link rel="stylesheet" href="/public/stylesheets/base.css">
+    <link rel="stylesheet" href="/public/stylesheets/layout.css">
+    <link rel="stylesheet" href="/public/stylesheets/components/navigation.css">
+    <link rel="stylesheet" href="/public/stylesheets/components/greeting.css">
+    <link rel="stylesheet" href="/public/stylesheets/components/progressbar.css">
+    <link rel="stylesheet" href="/public/stylesheets/components/goalcard.css">
+    <link rel="stylesheet" href="/public/stylesheets/utils.css">
+    <!-- <link rel="stylesheet" href="public/stylesheets/navigation.css">
+    <link rel="stylesheet" href="public/stylesheets/greeting.css">
+    <link rel="stylesheet" href="public/stylesheets/content.css"> -->
+    <link rel="icon" type="image/x-icon" href="/assets/GoalGarden_logo.png">
     <title>GoalGarden</title>
 </head>
 
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="index.html" class="home-page">
-                <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2vw; top:50%">
-                <h1 style="margin:auto">GoalGarden</h1>
+            <a href="/index.html" class="home-page">
+                <img src="/assets/GoalGarden_logo.png" alt="Logo" style="height:2vw; top:50%">
+                <h1 class="m-auto">GoalGarden</h1>
             </a>
 
-            <a href="pages/about.html" class="about-page">
-                <h1 style="margin:auto">About</h1>
+            <a href="/pages/about.html" class="about-page">
+                <h1 class="m-auto">About</h1>
             </a>
         </section>
 
         <section class="navigation-bar-right">
-            <a href="index.html" class="settings-page">
-                <h1 style="margin:auto">Settings</h1>
+            <a href="/index.html" class="settings-page">
+                <h1 class="m-auto">Settings</h1>
             </a>
-            <a href="index.html" class="profile-page">
-                <h1 style="margin:auto">Profile</h1>
+            <a href="/index.html" class="profile-page">
+                <h1 class="m-auto">Profile</h1>
             </a>
         </section>
     </nav>
@@ -34,24 +44,25 @@
     <section class="content-section">
         <section class="greeting-section">
             <section class="greeting-logo">
-                <img src="assets/GoalGarden_logo.png" alt="Logo" style="box-sizing: border-box; width: 100%;">
+                <img src="assets/GoalGarden_logo.png" alt="Logo" class="w-full h-full object-contain">
             </section>
 
-            <h1 class="greeting-header">Welcome Back, </h1>
-            <h1 class="greeting-name">User</h1>
+            <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
+            <h1 class="greeting-name font-sans m-0 p-0 mx-auto bg-gradient-text">User</h1>
 
-            <section class="progress-display" id="progress-display" onclick="scrollToSection('goal-card-display')">
+            <section class="progress-display border m-1 shadow-sm" id="progress-display" onclick="scrollToSection('goal-card-display')">
                 <h1 class="progress-counter typewriter-animation" id="progress-counter"></h1>
                 <section class="progress-bar" id="progress-bar">
                 </section>
             </section>
         </section>
 
-        <section class="goal-card-display" id="goal-card-display">
+        <!-- Goal Card Display -->
+        <section class="goal-card-display my-1 p-1 gap-1" id="goal-card-display">
 
         </section>
 
-        <!-- Goal Card Display -->
+        <!-- Goal Card Template -->
         <template id="goal-card-template">
             <section class="goal-card">
                 <section class="goal-card-left">
@@ -144,13 +155,13 @@
         });
     </script>
 
-    <!-- <script src="public/goal.js"></script>
+    <script src="public/goal.js"></script>
     <script src="public/rendergoalcard.js"></script>
     <script src="public/goalcreation.js"></script>
     <script src="public/progressbar.js"></script>
     <script src="public/scrolldown.js"></script>
     <script src="public/rendersubtasks.js"></script>
     <script src="public/subtaskcreation.js"></script>
-    <script src="public/modal.js"></script> -->
+    <script src="public/modal.js"></script>
 </body>
 </html>

@@ -1,0 +1,37 @@
+.content-section {
+    border-radius: calc(var(--border-radius) * 3);
+    margin: calc(var(--margin) * 2);
+    padding: var(--padding);
+    padding-top: calc(var(--padding) * 3);
+
+    display: flex;
+    flex-direction: column;
+
+    background-image: url(/assets/landing.webp);
+    background-color: #cdd8d5;
+    background-blend-mode:color-dodge;
+
+    background-size: 100% auto;
+
+    box-shadow: 0 0 2vw #cdd8d5;
+}
+
+.greeting-section {
+    border-radius: calc(var(--border-radius) * 2);
+    padding: var(--padding);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 5vw;
+}
+
+.goal-card-display {
+    border-radius: calc(var(--border-radius) * 2);
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row: auto;
+    flex-grow: 1;
+}

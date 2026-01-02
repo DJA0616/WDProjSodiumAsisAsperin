@@ -1,0 +1,25 @@
+.greeting-logo {
+    filter: drop-shadow(var(--shadow-sm));
+    width: 20vw;
+    height: 20vw;
+    margin-bottom: var(--spacing-1);
+}
+
+.greeting-header, 
+.subtitle {
+    margin: var(--spacing-0) auto;
+    padding: var(--spacing-0);
+    font-size: 5vw;
+}
+
+.greeting-name, 
+.title {
+    background-image: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 0);
+    
+    margin: var(--spacing-0) auto;
+    padding: var(--spacing-0);
+    margin-bottom: clamp(var(--spacing-1), 1.5vw, var(--spacing-3));
+}
