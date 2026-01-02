@@ -20,8 +20,5 @@ body {
 }
 
 body * {
-    border-width: var(--border-thickness);
-    border-radius: var(--border-radius);
-    padding: var(--padding);
     box-sizing: border-box;
 }
