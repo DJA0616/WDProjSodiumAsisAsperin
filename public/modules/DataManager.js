@@ -38,6 +38,7 @@ class DataManager {
             Object.assign(this[arrayName][elementIndex], updatedProperties);
             this.saveToStorage(arrayName);
         }
+        console.log(this[arrayName]);
     }
 
     addCategory(name, color) {
@@ -65,6 +66,7 @@ class DataManager {
     deleteElement(collectionName, elementId) {
         this[collectionName] = this[collectionName].filter(element => element.id !== elementId);
         this.saveToStorage(collectionName);
+        console.log(this[collectionName]);
     }
 }
 

@@ -113,6 +113,7 @@ class DomManager {
         const goalModalPlantImage = DomManager.getElement('.modal-plant-image');
 
         goalModalName.textContent = goal.name;
+        goalModalName.setAttribute('data-goal-id', goal.id);
         goalModalDetails.textContent = goal.details;
         goalModalPlantImage.src = `assets/plants/stage-1.png`; // Placeholder image source
 
@@ -129,6 +130,10 @@ class DomManager {
     static isGoalModalOpen() {
         const goalModal = DomManager.getElement('#goal-modal');
         return goalModal.style.display === 'block';
+    }
+
+    static filterElementsByClass(element, classList) {
+        return classList.some(e => element.classList.contains(e));
     }
 }
 
