@@ -18,6 +18,15 @@ class DataManager {
         return JSON.parse(localStorage.getItem(arrayName)) || [];
     }
 
+    clearAllData() {
+        this.allCategories = [];
+        this.allGoals = [];
+        this.allTasks = [];
+        this.saveToStorage("allCategories");
+        this.saveToStorage("allGoals");
+        this.saveToStorage("allTasks");
+    }
+
     // Data Manager functions for rendering data
     getCategories() {
         return this.allCategories;
@@ -67,6 +76,12 @@ class DataManager {
         this[collectionName] = this[collectionName].filter(element => element.id !== elementId);
         this.saveToStorage(collectionName);
         console.log(this[collectionName]);
+    }
+
+    calculateGoalProgress(goalId) {
+        const goalTasks = this.allTasks.filter(t => t.goal === goalId);
+        const completedCount = goalTasks.filter(t => t.isCompleted).length;
+        return goalTasks.length > 0 ? Math.round((completedCount / goalTasks.length) * 100) : 0;
     }
 }
 

@@ -1,4 +1,5 @@
 import DomManager from "./domManager.js";
+import DataFilter from "./DataFilter.js";
 
 class EventHandler {
     constructor(dataManager, renderer) {
@@ -15,6 +16,7 @@ class EventHandler {
         this.setupModalListeners();
         this.setupTaskListeners();
         this.setupModalTaskListeners();
+        this.setupProgressBarListeners();
     }
 
     setupAddGoalListeners() {
@@ -55,13 +57,23 @@ class EventHandler {
 
             // Add subtask
             let element = e.target;
-            while (element && !element.classList.contains('add-subtask-button')) {
+            while (element && !element.classList.contains('new-subtask-button')) {
                 element = element.parentElement;
             }
 
-            if (element && element.classList.contains('add-subtask-button')) {
-                this.dataManager.addTask("New Task", new Date().toLocaleDateString('en-CA'), element.getAttribute('data-goal-id'), "Uncategorized");
-                this.renderer.renderTasks(this.dataManager.getGoals().find(g => g.id === element.getAttribute('data-goal-id')), false);
+            if (element && element.classList.contains('new-subtask-button')) {
+                const goalId = element.getAttribute('data-goal-id');
+                this.dataManager.addTask("New Task", new Date().toLocaleDateString('en-CA'), goalId, "Uncategorized");
+                const goal = this.dataManager.getGoals().find(g => g.id === goalId);
+                
+                // Recalculate and update goal progress
+                goal.progress = this.dataManager.calculateGoalProgress(goal.id);
+                this.dataManager.updateElement("allGoals", goal.id, { progress: goal.progress });
+                this.dataManager.saveToStorage("allGoals");
+                DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+                
+                this.renderer.renderTasks(goal, false, null, true);
+                this.renderer.renderProgressVisualization(goal);
                 return;
             }
 
@@ -148,13 +160,23 @@ class EventHandler {
 
             // Add subtask in modal
             let element = e.target;
-            while (element && !element.classList.contains('add-subtask-button')) {
+            while (element && !element.classList.contains('new-subtask-button')) {
                 element = element.parentElement;
             }
 
-            if (element && element.classList.contains('add-subtask-button')) {
-                this.dataManager.addTask("New Task", new Date().toLocaleDateString('en-CA'), element.getAttribute('data-goal-id'), "Uncategorized");
-                this.renderer.renderTasks(this.dataManager.getGoals().find(g => g.id === element.getAttribute('data-goal-id')), true, DomManager.getElement('.subtask-display'));
+            if (element && element.classList.contains('new-subtask-button')) {
+                const goalId = element.getAttribute('data-goal-id');
+                this.dataManager.addTask("New Task", new Date().toLocaleDateString('en-CA'), goalId, "Uncategorized");
+                const goal = this.dataManager.getGoals().find(g => g.id === goalId);
+                
+                // Recalculate and update goal progress
+                goal.progress = this.dataManager.calculateGoalProgress(goal.id);
+                this.dataManager.updateElement("allGoals", goal.id, { progress: goal.progress });
+                this.dataManager.saveToStorage("allGoals");
+                DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+                
+                this.renderer.renderTasks(goal, true, DomManager.getElement('.subtask-display'));
+                this.renderer.renderProgressVisualization(goal);
             }
         });
     }
@@ -164,9 +186,9 @@ class EventHandler {
             let el = e.target;
             if (el.nodeType === 3) el = el.parentElement;
 
-            if (el.classList && el.classList.contains('task-complete-checkbox')) {
-                // Traverse up to find the parent task-item
-                while (el && !el.classList.contains('task-item')) {
+            if (el.classList && el.classList.contains('subtask-checkbox')) {
+                // Traverse up to find the parent subtask-item
+                while (el && !el.classList.contains('subtask-item')) {
                     el = el.parentElement;
                 }
                 
@@ -179,7 +201,18 @@ class EventHandler {
                             isCompleted: e.target.checked
                         });
                         this.dataManager.saveToStorage("allTasks");
-                        this.renderer.renderTasks(this.dataManager.getGoals().find(g => g.id === task.goal), false);
+                        
+                        // Calculate and update goal progress
+                        const goal = this.dataManager.getGoals().find(g => g.id === task.goal);
+                        if (goal) {
+                            goal.progress = this.dataManager.calculateGoalProgress(goal.id);
+                            this.dataManager.updateElement("allGoals", goal.id, { progress: goal.progress });
+                            this.dataManager.saveToStorage("allGoals");
+                            this.renderer.renderProgressVisualization(goal);
+                        }
+                        DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+                        
+                        this.renderer.renderTasks(this.dataManager.getGoals().find(g => g.id === task.goal), false, null, true);
                     }
                 }
             }
@@ -189,9 +222,9 @@ class EventHandler {
             let el = e.target;
             if (el.nodeType === 3) el = el.parentElement;
 
-            if (el.classList && el.classList.contains('task-name')) {
-                // Traverse up to find the parent task-item
-                while (el && !el.classList.contains('task-item')) {
+            if (el.classList && el.classList.contains('subtask-name')) {
+                // Traverse up to find the parent subtask-item
+                while (el && !el.classList.contains('subtask-item')) {
                     el = el.parentElement;
                 }
                 if (el && el.id) {
@@ -209,34 +242,43 @@ class EventHandler {
 
         modal.addEventListener('click', (e) => {
             if (e.target && e.target.classList.contains('delete-task-button')) {
-                const taskItem = e.target.closest('.task-item');
+                const taskItem = e.target.closest('.subtask-item');
                 if (taskItem && taskItem.id) {
                     const taskId = taskItem.id.replace('task-', '');
                     this.dataManager.deleteElement("allTasks", taskId);
                     const goalId = DomManager.getElement('.modal-goal-name').getAttribute('data-goal-id');
                     const goal = this.dataManager.getGoals().find(g => g.id === goalId);
+                    
+                    // Recalculate and update goal progress
+                    goal.progress = this.dataManager.calculateGoalProgress(goal.id);
+                    this.dataManager.updateElement("allGoals", goal.id, { progress: goal.progress });
+                    this.dataManager.saveToStorage("allGoals");
+                    DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+                    
                     this.renderer.renderTasks(goal, true, DomManager.getElement('.subtask-display'));
+                    this.renderer.renderProgressVisualization(goal);
                 }
             }
         });
 
         modal.addEventListener('input', (e) => {
-            if (e.target && e.target.classList.contains('task-due-date')) {
-                const taskItem = e.target.closest('.task-item');
+            if (e.target && e.target.classList.contains('subtask-date')) {
+                const taskItem = e.target.closest('.subtask-item');
                 if (taskItem && taskItem.id) {
                     const taskId = taskItem.id.replace('task-', '');
                     this.dataManager.updateElement("allTasks", taskId, {
                         dueDate: e.target.value
                     });
                 }
+                DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
             }
 
             let el = e.target;
             if (el.nodeType === 3) el = el.parentElement;
 
-            if (el.classList && el.classList.contains('task-name')) {
-                // Traverse up to find the parent task-item
-                while (el && !el.classList.contains('task-item')) {
+            if (el.classList && el.classList.contains('subtask-name')) {
+                // Traverse up to find the parent subtask-item
+                while (el && !el.classList.contains('subtask-item')) {
                     el = el.parentElement;
                 }
                 if (el && el.id) {
@@ -246,6 +288,73 @@ class EventHandler {
                     });
                 }
             }
+        });
+
+        modal.addEventListener('change', (e) => {
+            if (e.target && e.target.classList.contains('subtask-checkbox')) {
+                const taskItem = e.target.closest('.subtask-item');
+                if (taskItem && taskItem.id) {
+                    const taskId = taskItem.id.replace('task-', '');
+                    this.dataManager.updateElement("allTasks", taskId, {
+                        isCompleted: e.target.checked
+                    });
+                    const goalId = DomManager.getElement('.modal-goal-name').getAttribute('data-goal-id');
+                    const goal = this.dataManager.getGoals().find(g => g.id === goalId);
+                    
+                    // Calculate and update goal progress
+                    if (goal) {
+                        goal.progress = this.dataManager.calculateGoalProgress(goal.id);
+                        this.dataManager.updateElement("allGoals", goal.id, { progress: goal.progress });
+                        this.dataManager.saveToStorage("allGoals");
+                        DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+                        // Render progress visualization in modal
+                        const modalProgressViz = DomManager.getElement('.modal-progress-visualization');
+                        this.renderer.renderProgressVisualization(goal, modalProgressViz);
+                    }
+                    
+                    this.renderer.renderTasks(goal, true, DomManager.getElement('.subtask-display'));
+                }
+            }
+        });
+    }
+
+    setupProgressBarListeners() {
+        const progressDisplay = DomManager.getElement("#progress-display");
+        const progressBar = DomManager.getElement("#progress-bar");
+        const progressCounter = DomManager.getElement("#progress-counter");
+
+        let progress = DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+
+        let currentAnimation = null;
+
+        progressDisplay.addEventListener("mouseenter", async () => {
+            progress = DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+            if (currentAnimation !== null) {
+                currentAnimation.cancel();
+            }
+            const animation = { cancelled: false, cancel() { this.cancelled = true; } };
+            currentAnimation = animation;
+            
+            progressBar.style.width = "100%";
+            await DomManager.deleteWriter(progressCounter, 50, animation);
+            if(animation.cancelled) return;
+            await DomManager.typewriter(progressCounter, "Go", 50, animation);
+            if(!animation.cancelled) currentAnimation = null;
+        });
+
+        progressDisplay.addEventListener("mouseleave", async () => {
+            progress = DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+            if (currentAnimation !== null) {
+                currentAnimation.cancel();
+            }
+            const animation = { cancelled: false, cancel() { this.cancelled = true; } };
+            currentAnimation = animation;
+
+            progressBar.style.width = String(30 * progress/100) + "vw";
+            await DomManager.deleteWriter(progressCounter, 50, animation);
+            if(animation.cancelled) return;
+            await DomManager.typewriter(progressCounter, String(progress) + "%", 50, animation);
+            if(!animation.cancelled) currentAnimation = null;
         });
     }
 }

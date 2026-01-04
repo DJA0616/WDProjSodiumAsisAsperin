@@ -5,8 +5,13 @@ class DataFilter {
 
     static filterTaskPastDueCompleted(tasks) {
         return tasks.filter(task => {
-            return !(task.isPastDue() && task.isCompleted());
+            const isPastDue = task.dueDate < new Date().toLocaleDateString('en-CA');
+            return !(isPastDue && task.isCompleted);
         });
+    }
+
+    static filterTaskPastDue(tasks) {
+        return tasks.filter(task => task.dueDate >= new Date().toLocaleDateString('en-CA'));
     }
 }
 
