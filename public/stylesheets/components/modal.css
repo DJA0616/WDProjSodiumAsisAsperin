@@ -1,0 +1,17 @@
+.modal-body{
+    height: 60vh;
+    display: flex;
+}
+
+.modal-left{
+    flex: 0 0 calc(30% - 0.5vw);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-goal-name,
+.modal-goal-details,
+.modal-progress-visualization,
+.subtask-visualization {
+    background-color: white;
+}
