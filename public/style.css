@@ -391,7 +391,7 @@ body{
 
 /* Show placeholder text by default */
 .goal-name-editable.show-placeholder::before{
-    content: "Press Enter To Save";
+    content: 'Press Enter to Save';
     color: #999;
     pointer-events: none;
     align-items: center;

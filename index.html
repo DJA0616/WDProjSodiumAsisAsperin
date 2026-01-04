@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="/public/style.css"> -->
-    <link rel="stylesheet" href="/public/stylesheets/base.css">
+    <link rel="stylesheet" href="/public/style.css">
+    <!-- <link rel="stylesheet" href="/public/stylesheets/base.css">
     <link rel="stylesheet" href="/public/stylesheets/layout.css">
     <link rel="stylesheet" href="/public/stylesheets/components/navigation.css">
     <link rel="stylesheet" href="/public/stylesheets/components/greeting.css">
     <link rel="stylesheet" href="/public/stylesheets/components/progressbar.css">
     <link rel="stylesheet" href="/public/stylesheets/components/goalcard.css">
-    <link rel="stylesheet" href="/public/stylesheets/components/modal.css">
     <link rel="stylesheet" href="/public/stylesheets/utils.css">
     <!-- <link rel="stylesheet" href="public/stylesheets/navigation.css">
     <link rel="stylesheet" href="public/stylesheets/greeting.css">
-    <link rel="stylesheet" href="public/stylesheets/content.css"> -->
+    <link rel="stylesheet" href="public/stylesheets/content.css">
     <link rel="icon" type="image/x-icon" href="/assets/GoalGarden_logo.png">
     <title>GoalGarden</title>
 </head>
@@ -102,11 +101,11 @@
 
     <!-- Goal Card Modal -->
     <section id="goal-modal" class="modal">
-        <div class="modal-content m-2 p-1 border shadow-sm rounded-1">
-            <section class="modal-body gap-1 align-stretch">
-                <section class="modal-left gap-1 m-0">
-                    <section class="modal-goal-name border rounded-1 p-1 shadow-sm"></section>
-                    <section class="modal-goal-details border rounded-1 p-1 shadow-sm"></section>
+        <div class="modal-content">
+            <section class="modal-body">
+                <section class="modal-left">
+                    <section class="modal-goal-name"></section>
+                    <section class="modal-goal-details"></section>
                 </section>
                 <section class="subtask-display border rounded-1 p-1 shadow-sm">
 
@@ -115,6 +114,7 @@
                     <img src="" alt="Plant" class="modal-plant-image">
                 </section>
             </section>
+            <button id="delete-goal-button" class="delete-goal-button">Delete Goal</button>
         </div>
     </section>
 
@@ -139,6 +139,7 @@
         import DataFilter from "./public/modules/DataFilter.js";
         import DomManager from "./public/modules/DomManager.js";
         import HomePageRenderer from "./public/modules/HomePageRenderer.js";
+        import EventHandler from "./public/modules/EventHandler.js";
 
         // DataManager is instantiated (manages state)
         const dataManager = new DataManager();
@@ -146,20 +147,23 @@
         // HomePageRenderer only needs DataManager
         const homePageRenderer = new HomePageRenderer(dataManager);
 
+        // Event Handler
+        const eventHandler = new EventHandler(dataManager, homePageRenderer);
+
         document.addEventListener("DOMContentLoaded", () => {
             homePageRenderer.renderGoals();
-            DomManager.updateGreeting();
-            DomManager.updateProgressDisplay(dataManager.getGoals(), dataManager.getTasks());
         });
     </script>
 
-    <script src="public/goal.js"></script>
+    <script src="public/oldJSfiles/scrolldown.js"></script>
+
+    <!-- <script src="public/goal.js"></script>
     <script src="public/rendergoalcard.js"></script>
     <script src="public/goalcreation.js"></script>
     <script src="public/progressbar.js"></script>
     <script src="public/scrolldown.js"></script>
     <script src="public/rendersubtasks.js"></script>
     <script src="public/subtaskcreation.js"></script>
-    <script src="public/modal.js"></script>
+    <script src="public/modal.js"></script> -->
 </body>
 </html>

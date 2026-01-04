@@ -1,3 +1,5 @@
+import DataFilter from './DataFilter.js';
+
 class DomManager {
     static getElement(selector) {
         return document.querySelector(selector);
@@ -6,6 +8,12 @@ class DomManager {
     static clearElementContent(element) {
         if (element) {
             element.innerHTML = '';
+        }
+    }
+
+    static editElementContent(element, newContent) {
+        if (element) {
+            element.innerHTML = newContent;
         }
     }
 
@@ -40,10 +48,10 @@ class DomManager {
     }
 
     static createTaskItem(task, editable = false) {
-        const item = DomManager.createElement('div', 'task-item');
+        const item = DomManager.createElement('div', 'subtask-item');
         item.id = `task-${task.id}`;
 
-        const checkbox = DomManager.createElement('input', 'task-complete-checkbox', '', { 
+        const checkbox = DomManager.createElement('input', 'subtask-checkbox', '', { 
             'type': 'checkbox', 
             'value': 'completed', 
             'data-task-id': task.id 
@@ -54,17 +62,20 @@ class DomManager {
         }
 
         item.appendChild(checkbox);
-        item.appendChild(DomManager.createElement('span', 'task-name', task.name, {
+        item.appendChild(DomManager.createElement('span', 'subtask-name', task.name, {
             'contentEditable': true,
             'data-task-id': task.id
         }));
 
         if (editable) {
-            item.appendChild(DomManager.createElement('input', 'task-due-date', '', {
+            item.appendChild(DomManager.createElement('input', 'subtask-date', '', {
                 'type': 'date',
                 'value': task.dueDate,
                 'data-task-id': task.id
             }))
+            item.appendChild(DomManager.createElement('button', 'delete-task-button', 'Delete', {
+                'data-task-id': task.id
+            }));
         }
         
         return item;
@@ -75,7 +86,7 @@ class DomManager {
         newCard.appendChild(DomManager.createElement('div', 'new-goal-plus', '+'));
 
         const left = DomManager.createElement('section', 'new-goal-card-left');
-        left.appendChild(DomManager.createElement('section', 'goal-name-description goal-name-editable', '', { 'contenteditable': 'true' }));
+        left.appendChild(DomManager.createElement('section', 'goal-name-description goal-name-editable show-placeholder', '', { 'contenteditable': 'true' }));
         left.appendChild(DomManager.createElement('section', 'goal-task-list'));
         newCard.appendChild(left);
 
@@ -91,10 +102,95 @@ class DomManager {
     }
 
     static createAddSubtaskButton(goalId) {
-        const button = DomManager.createElement('button', 'add-subtask-button', 'Add Subtask', {
+        const button = DomManager.createElement('button', 'new-subtask-button', '+ Add Subtask', {
             'data-goal-id': goalId
         });
         return button;
+    }
+
+    static showGoalModal(goal) {
+        const goalModal = DomManager.getElement('#goal-modal');
+        const goalModalName = DomManager.getElement('.modal-goal-name');
+        const goalModalDetails = DomManager.getElement('.modal-goal-details');
+        const goalModalPlantImage = DomManager.getElement('.modal-plant-image');
+
+        goalModalName.textContent = goal.name;
+        goalModalName.setAttribute('data-goal-id', goal.id);
+        goalModalDetails.textContent = goal.details;
+        goalModalPlantImage.src = `assets/plants/stage-1.png`; // Placeholder image source
+
+        goalModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    static closeGoalModal() {
+        const goalModal = DomManager.getElement('#goal-modal');
+        goalModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    static isGoalModalOpen() {
+        const goalModal = DomManager.getElement('#goal-modal');
+        return goalModal.style.display === 'block';
+    }
+
+    static filterElementsByClass(element, classList) {
+        return classList.some(e => element.classList.contains(e));
+    }
+
+    static deleteWriter(element, delay = 100, animation) {
+        return new Promise((resolve => {
+                let text = element.textContent;
+                let index = text.length - 1;
+                function deleteChar() {
+                    if (animation.cancelled) return;
+
+                    if (index >= 0) {
+                        element.textContent = text.substring(0, index);
+                        index--;
+                        setTimeout(deleteChar, delay);
+                    } else {
+                        resolve();
+                    }
+                }
+                deleteChar();
+            }
+        ));
+    }
+
+    static typewriter(element, text, delay = 100, animation) {
+        return new Promise((resolve => {
+                let index = 0;
+                function type() {
+                    if (animation.cancelled) return;
+
+                    if (index < text.length) {
+                        element.textContent += text.charAt(index);
+                        index++;
+                        setTimeout(type, delay);
+                    } else {
+                        resolve();
+                    }
+                }
+                type();
+            })
+        );
+    }
+
+    static updateProgressBarDisplay(tasks) {
+        let allTasks = tasks
+        allTasks = DataFilter.filterTaskPastDue(allTasks);
+        const completedTasks = allTasks.filter(task => task.isCompleted);
+        const todayProgress = allTasks.length === 0 ? 0 : Math.round((completedTasks.length / allTasks.length) * 100);
+
+        const progressBar = DomManager.getElement("#progress-bar");
+        const progressCounter = DomManager.getElement("#progress-counter");
+        if (progressBar && progressCounter) {
+            progressBar.style.width = String(30 * todayProgress/100) + "vw";
+            progressCounter.textContent = todayProgress + "%";
+        }
+
+        return todayProgress;
     }
 }
 

@@ -8,21 +8,51 @@ class HomePageRenderer {
 
     renderGoals() {
         const goals = this.dataManager.getGoals();
-        const tasks = this.dataManager.getTasks();
         const goalsContainer = DomManager.getElement('#goal-card-display');
         DomManager.clearElementContent(goalsContainer);
 
         goals.forEach(element => {
             const goal = DomManager.createGoalCard(element);
             goalsContainer.appendChild(goal);
-            DataFilter.filterTaskByGoal(tasks, element.id).forEach(task => {
-                const taskList = goal.querySelector(`[data-goal-id='${element.id}-task-list']`);
-                if (taskList) taskList.appendChild(DomManager.createTaskItem(task, true));
-            });
-            goal.appendChild(DomManager.createAddSubtaskButton(element.id));
+            this.renderTasks(element, false, null, true);
+            this.renderProgressVisualization(element);
         });
 
         goalsContainer.appendChild(DomManager.createAddGoalButton());
+    }
+
+    renderTasks(goal, editable = false, container = null, filterTaskPastDueCompleted = false) {
+        let tasks = this.dataManager.getTasks();
+        if (!container) {
+            container = DomManager.getElement(`[data-goal-id='${goal.id}-task-list']`);
+        }
+        DomManager.clearElementContent(container);
+        if (filterTaskPastDueCompleted) {
+            tasks = DataFilter.filterTaskPastDueCompleted(tasks);
+        }
+        DataFilter.filterTaskByGoal(tasks, goal.id).forEach(task => {
+            if (container) {
+                container.appendChild(DomManager.createTaskItem(task, editable));
+            }
+        });
+
+        container.appendChild(DomManager.createAddSubtaskButton(goal.id));
+    }
+
+    renderProgressVisualization(goal, progressViz = null) {
+        if (!progressViz) {
+            progressViz = DomManager.getElement(`#goal-${goal.id} .goal-card-progress-visualization`);
+        }
+        if (progressViz) {
+            const progress = goal.progress;
+            const stage = Math.min(4, Math.max(1, Math.ceil(progress / 25)));
+            const img = progressViz.querySelector('.plant-image');
+            if (img) {
+                img.src = `assets/plants/stage-${stage}.png`;
+                img.dataset.plantStage = stage;
+            }
+            progressViz.style.setProperty('--progress', `${progress}%`);
+        }
     }
 }
 
