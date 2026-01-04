@@ -58,6 +58,7 @@
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: #bbb transparent;
+    flex-direction: column;
     max-height: 50%;
     flex-grow: 1;
 }
