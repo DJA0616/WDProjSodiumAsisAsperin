@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/style.css">
-    <!-- <link rel="stylesheet" href="/public/stylesheets/base.css">
+    <link rel="stylesheet" href="/public/stylesheets/base.css">
     <link rel="stylesheet" href="/public/stylesheets/layout.css">
     <link rel="stylesheet" href="/public/stylesheets/components/navigation.css">
     <link rel="stylesheet" href="/public/stylesheets/components/greeting.css">
     <link rel="stylesheet" href="/public/stylesheets/components/progressbar.css">
     <link rel="stylesheet" href="/public/stylesheets/components/goalcard.css">
+    <link rel="stylesheet" href="/public/stylesheets/components/modal.css">
     <link rel="stylesheet" href="/public/stylesheets/utils.css">
-    <!-- <link rel="stylesheet" href="public/stylesheets/navigation.css">
+    <link rel="stylesheet" href="public/stylesheets/navigation.css">
     <link rel="stylesheet" href="public/stylesheets/greeting.css">
     <link rel="stylesheet" href="public/stylesheets/content.css">
     <link rel="icon" type="image/x-icon" href="/assets/GoalGarden_logo.png">
@@ -101,11 +102,11 @@
 
     <!-- Goal Card Modal -->
     <section id="goal-modal" class="modal">
-        <div class="modal-content">
-            <section class="modal-body">
-                <section class="modal-left">
-                    <section class="modal-goal-name"></section>
-                    <section class="modal-goal-details"></section>
+        <div class="modal-content m-2 p-1 border shadow-sm rounded-1">
+            <section class="modal-body gap-1 align-stretch">
+                <section class="modal-left gap-1 m-0">
+                    <section class="modal-goal-name border rounded-1 p-1 shadow-sm" contenteditable="true" data-goal-id=""></section>
+                    <section class="modal-goal-details border rounded-1 p-1 shadow-sm" contenteditable="true"></section>
                 </section>
                 <section class="subtask-display border rounded-1 p-1 shadow-sm">
 
