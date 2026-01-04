@@ -25,7 +25,7 @@ class EventHandler {
             if (el.nodeType === 3) el = el.parentElement;
 
             if (e.target && e.target.classList.contains('goal-name-editable')) {
-                e.target.classList.add('show-placeholder');
+                if (!e.target.textContent.trim()) e.target.classList.add('show-placeholder');
             }
         });
 
@@ -151,8 +151,17 @@ class EventHandler {
                 const goalId = DomManager.getElement('.modal-goal-name').getAttribute('data-goal-id');
                 const goal = this.dataManager.getGoals().find(g => g.id === goalId);
                 if (goal) {
+                    // Delete all tasks associated with this goal
+                    const tasksToDelete = this.dataManager.getTasks().filter(t => t.goal === goalId);
+                    tasksToDelete.forEach(task => {
+                        this.dataManager.deleteElement("allTasks", task.id);
+                    });
+                    this.dataManager.saveToStorage("allTasks");
+                    
+                    // Delete the goal
                     this.dataManager.deleteElement("allGoals", goal.id);
                     DomManager.closeGoalModal();
+                    DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
                     this.renderer.renderGoals();
                 }
                 return;

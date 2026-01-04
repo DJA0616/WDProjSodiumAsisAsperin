@@ -150,6 +150,8 @@
         // Event Handler
         const eventHandler = new EventHandler(dataManager, homePageRenderer);
 
+        // dataManager.clearAllData(); // For testing purposes only
+
         document.addEventListener("DOMContentLoaded", () => {
             homePageRenderer.renderGoals();
         });
