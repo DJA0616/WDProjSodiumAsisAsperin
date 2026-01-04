@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="/public/stylesheets/components/goalcard.css">
     <link rel="stylesheet" href="/public/stylesheets/components/modal.css">
     <link rel="stylesheet" href="/public/stylesheets/utils.css">
-    <link rel="stylesheet" href="public/stylesheets/navigation.css">
-    <link rel="stylesheet" href="public/stylesheets/greeting.css">
-    <link rel="stylesheet" href="public/stylesheets/content.css">
     <link rel="icon" type="image/x-icon" href="/assets/GoalGarden_logo.png">
     <title>GoalGarden</title>
 </head>
@@ -45,7 +42,7 @@
     <section class="content-section">
         <section class="greeting-section">
             <section class="greeting-logo">
-                <img src="assets/GoalGarden_logo.png" alt="Logo" class="w-full h-full object-contain">
+                <img src="/assets/GoalGarden_logo.png" alt="Logo" class="w-full h-full object-contain">
             </section>
 
             <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
@@ -76,7 +73,7 @@
                 </section>
 
                 <section class="goal-card-progress-visualization">
-                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                    <img src="/assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
                 </section>
             </section>
         </template>
@@ -94,7 +91,7 @@
                 </section>
 
                 <section class="goal-card-progress-visualization">
-                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                    <img src="/assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
                 </section>
             </section>    
         </template>
@@ -136,11 +133,11 @@
     </footer>
 
     <script type="module">
-        import DataManager from "./public/modules/DataManager.js";
-        import DataFilter from "./public/modules/DataFilter.js";
-        import DomManager from "./public/modules/DomManager.js";
+        import DataManager from "/public/modules/DataManager.js";
+        import DataFilter from "/public/modules/DataFilter.js";
+        import DomManager from "/public/modules/DomManager.js";
         import HomePageRenderer from "./public/modules/HomePageRenderer.js";
-        import EventHandler from "./public/modules/EventHandler.js";
+        import EventHandler from "/public/modules/EventHandler.js";
 
         // DataManager is instantiated (manages state)
         const dataManager = new DataManager();
@@ -158,15 +155,15 @@
         });
     </script>
 
-    <script src="public/oldJSfiles/scrolldown.js"></script>
+    <script src="/public/oldJSfiles/scrolldown.js"></script>
 
-    <!-- <script src="public/goal.js"></script>
-    <script src="public/rendergoalcard.js"></script>
-    <script src="public/goalcreation.js"></script>
-    <script src="public/progressbar.js"></script>
-    <script src="public/scrolldown.js"></script>
-    <script src="public/rendersubtasks.js"></script>
-    <script src="public/subtaskcreation.js"></script>
-    <script src="public/modal.js"></script> -->
+    <!-- <script src="/public/goal.js"></script>
+    <script src="/public/rendergoalcard.js"></script>
+    <script src="/public/goalcreation.js"></script>
+    <script src="/public/progressbar.js"></script>
+    <script src="/public/scrolldown.js"></script>
+    <script src="/public/rendersubtasks.js"></script>
+    <script src="/public/subtaskcreation.js"></script>
+    <script src="/public/modal.js"></script> -->
 </body>
 </html>
