@@ -562,7 +562,8 @@ body{
     left: 0;
     width: 0%;
     height: 100%;
-    background: linear-gradient(#51ff77cc, #73ff00cc);
+    background-image: linear-gradient(#51ff77cc, #73ff00cc);
+    background-color: #ffffff00;
     transition: width 0.3s ease-in-out;
     z-index: 0;
     border-radius: 1vw;
@@ -571,6 +572,8 @@ body{
 
 .subtask-item.completed::before {
     width: 100%;
+    background-image: linear-gradient(#51ff77cc, #73ff00cc);
+    background-color: #ffffff00;
 }
 
 .subtask-item > * {
