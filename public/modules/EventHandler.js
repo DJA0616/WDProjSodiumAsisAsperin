@@ -1,4 +1,4 @@
-import DomManager from "./domManager.js";
+import DomManager from "./DomManager.js";
 import DataFilter from "./DataFilter.js";
 
 class EventHandler {
@@ -17,6 +17,7 @@ class EventHandler {
         this.setupTaskListeners();
         this.setupModalTaskListeners();
         this.setupProgressBarListeners();
+        this.setupThemeListeners();
     }
 
     setupAddGoalListeners() {
@@ -365,6 +366,10 @@ class EventHandler {
             await DomManager.typewriter(progressCounter, String(progress) + "%", 50, animation);
             if(!animation.cancelled) currentAnimation = null;
         });
+    }
+
+    setupThemeListeners() {
+        // Theme switching logic can be added here
     }
 }
 
