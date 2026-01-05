@@ -183,10 +183,15 @@ class DomManager {
         const completedTasks = allTasks.filter(task => task.isCompleted);
         const todayProgress = allTasks.length === 0 ? 0 : Math.round((completedTasks.length / allTasks.length) * 100);
 
+        let width = 0;
+        const progressDisplay = DomManager.getElement("#progress-display");
+        if (progressDisplay) {
+            width = progressDisplay.clientWidth;
+        }
         const progressBar = DomManager.getElement("#progress-bar");
         const progressCounter = DomManager.getElement("#progress-counter");
         if (progressBar && progressCounter) {
-            progressBar.style.width = String(30 * todayProgress/100) + "vw";
+            progressBar.style.width = String(width * todayProgress/100) + "px";
             progressCounter.textContent = todayProgress + "%";
         }
 
