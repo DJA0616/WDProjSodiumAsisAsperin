@@ -1,6 +1,15 @@
 # Goal Garden
 > Progress brought to life 
 
+## 3rd Qtr Update
+
+## Final Title
+Goal Garden
+
+
+## Features
+Interactive addition and display of goals, along with sub-tasks. Individual and overall progress calculation and display via progressbars, as well as cute little plants to visualize them. Tasks can be viewed and sorted through several categories, with sorting via time (through a calendar system), subtask categories, and more. 
+
 ## Description
 Goal Garden is a website that supports your growth and your goals. It provides you an interface that allows you to see your personal growth in the form of a growing plant. Complete more tasks and goals, the larger your plant grows.
 Goal Garden also provides a unique way of tracking tasks and goals. It provides an interface that allows you to break down your goals from lifetime goals to yearly goals to smaller and smaller time frames down to single tasks. These smaller tasks are displayed in the calendar feature, allowing you to see the real actions you can take rather than just setting goals.
