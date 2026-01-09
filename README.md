@@ -1,14 +1,7 @@
 # Goal Garden
 > Progress brought to life 
 
-## 3rd Qtr Update
 
-## Final Title
-Goal Garden
-
-
-## Features
-Interactive addition and display of goals, along with sub-tasks. Individual and overall progress calculation and display via progressbars, as well as cute little plants to visualize them. Tasks can be viewed and sorted through several categories, with sorting via time (through a calendar system), subtask categories, and more. 
 
 ## Description
 Goal Garden is a website that supports your growth and your goals. It provides you an interface that allows you to see your personal growth in the form of a growing plant. Complete more tasks and goals, the larger your plant grows.
@@ -37,3 +30,19 @@ There are multiple parts of the page that will require JavaScript. First is the 
 
 ### Wireframe
 [Canva Link](https://www.canva.com/design/DAG3KHiH9LM/R0gjlAUo4Clk18q5jV2GOQ/edit?utm_content=DAG3KHiH9LM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+## 3rd Qtr Update
+
+## Final Title
+Goal Garden
+
+## 2-Sentence Description
+
+## Features
+Interactive addition and display of goals, along with sub-tasks. Individual and overall progress calculation and display via progressbars, as well as cute little plants to visualize them. Tasks can be viewed and sorted through several categories, with sorting via time (through a calendar system), subtask categories, and more. 
+
+## Details
+Theme configuration (we are also considering adding a custom-theme creation tool instead of just relying on theme presets), if possible, having an actual cloud storage system for accounts instead of relying on localstorage or browser cache to store user data. The JavaScript and css has also been refactored to split into multiple files. This allows the development and actual logic to be easier to understand and work with, to lessen bugs and speed up the developmet of features. We are also working on styling / layout solutions for different monitor sizes (using viewport width / height relative values instead of hardcoded pixel sizes).
+
+## Definition of Clone
+Cloning allows the copying and manipulation of existing html elements, to create new versions of that element without affecting the original one. In our project, we use Node.cloneNode to copy goal card templates, which are instances of the goals from user data. It makes working with the document much easier as we only have to make the actual template and configure the logic in its manipulation of its clones, without worrying about tampering with the original template html.
