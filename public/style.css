@@ -300,7 +300,7 @@ body{
 
 .new-goal-card{
     position: relative;
-    background-image: url('/assets/landing.webp');
+    background-image: url('../assets/landing.webp');
     background-color: #cdd8d5;
     background-blend-mode:color-dodge;
     background-size: cover;

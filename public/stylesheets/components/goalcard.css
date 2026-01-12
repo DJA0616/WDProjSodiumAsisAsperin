@@ -113,7 +113,7 @@
 /* New Goal Card specific styles */
 .new-goal-card {
     position: relative;
-    background-image: url('/assets/landing.webp');
+    background-image: url('../../../assets/landing.webp');
     background-color: var(--color-primary);
     background-blend-mode: color-dodge;
     background-size: cover;
