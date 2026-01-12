@@ -73,7 +73,7 @@ class DomManager {
                 'value': task.dueDate,
                 'data-task-id': task.id
             }))
-            item.appendChild(DomManager.createElement('button', 'delete-task-button', 'Delete', {
+            item.appendChild(DomManager.createElement('button', 'delete-task-button rounded-05', 'Delete', {
                 'data-task-id': task.id
             }));
         }

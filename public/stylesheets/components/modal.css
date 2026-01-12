@@ -30,3 +30,14 @@
 .delete-goal-button:hover {
     background-color: #e60000;
 }
+
+.delete-task-button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.delete-task-button:hover {
+    background-color: #e60000;
+}
