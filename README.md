@@ -1,7 +1,35 @@
 # Goal Garden
 > Progress brought to life 
 
+## 3rd Qtr Update
 
+## Final Title
+Goal Garden
+
+## 2-Sentence Description
+Goal Garden is a website that lets you track your goals through visualizations using plants. The website also provides a platform for setting and organizing goals in a manner that makes them more achievable or tangible.
+
+## Features
+- Goal Centric Display: Interactive addition and display of goals, along with their respective sub-tasks.
+- Calendar View of Tasks: Tasks can be viewed under the calendar view. New tasks with no specific goal can be set within the calendar view. The calendar view also allows for a more dynamic way of arranging and planning tasks.
+- Profile View: The profile view provides statistics about the user and also provides a folder-style view of categories, goals, and tasks. Categories have goals which have tasks under them.
+- Sorting and Arranging Goals, Tasks, and Categories: Goals, tasks, and categoriies can be sorted out into many different arrangements based on their dates and other things.
+- Visualizers: There are are progress bars visualizing the amount of tasks you have finished within the day or withini the goal. Each goal also has its own cute little plants visualizing your progress or your growth.
+
+## Details
+Goal Garden is a website centered on its effective use of visualizers. However, visualizers cannot be used properly if a user is unable to set goals or tasks in the manner that the website was designed to handle.
+The plant visualizers of the website are designed to work like progress bars that take a denominator and calculate progress. However, these visualizers wouldn't be as effective if the denominator constantly changes. Goals could have multiple steps that weren't foreseen.
+Now, this is why each component (category, goal, task) matter. Categories are supposed to represent the larger motive or the ambiguous goal. Things like "getting better at drawing" or "learning more math" are ambiguous goals that don't have a tangible action to accomplish. These can be used to categorize the real goals.
+The goals that have visualizers are now meant to be tangible goals that can be accomplished. Things like "finishing anatomy lessons" or "finishing graphing exercises" are tangible goals or actions that can be taken. These are what the goal elements that have plant visualizers are supposed to be.
+These goals can be split into a finite number of sub-tasks that only change once in a while. This allows the visualization to have a set denominator letting it be more effective.
+
+## Definition of Done
+The website will be finished when all core features for each page are implemented. The about page as a tutorial explaining the proper use for the website, the home page has goal cards that show the amount of subtasks under the goal and the category of the goal, the calendar page has tasks that are movable to arrange their dates, the profile page shows all goals and all tasks under all categories and also shows useful or interesting statistics about the user, and lastly the settings page can change appearance or the arrangements of the essential elements.
+
+## Incorporation of Forms
+Forms can be incorporated into the website through the profile page. When creating a profile, forms will be used to set passwords or usernames.
+
+---
 
 ## Description
 Goal Garden is a website that supports your growth and your goals. It provides you an interface that allows you to see your personal growth in the form of a growing plant. Complete more tasks and goals, the larger your plant grows.
@@ -30,19 +58,3 @@ There are multiple parts of the page that will require JavaScript. First is the 
 
 ### Wireframe
 [Canva Link](https://www.canva.com/design/DAG3KHiH9LM/R0gjlAUo4Clk18q5jV2GOQ/edit?utm_content=DAG3KHiH9LM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
-
-## 3rd Qtr Update
-
-## Final Title
-Goal Garden
-
-## 2-Sentence Description
-
-## Features
-Interactive addition and display of goals, along with sub-tasks. Individual and overall progress calculation and display via progressbars, as well as cute little plants to visualize them. Tasks can be viewed and sorted through several categories, with sorting via time (through a calendar system), subtask categories, and more. 
-
-## Details
-Theme configuration (we are also considering adding a custom-theme creation tool instead of just relying on theme presets), if possible, having an actual cloud storage system for accounts instead of relying on localstorage or browser cache to store user data. The JavaScript and css has also been refactored to split into multiple files. This allows the development and actual logic to be easier to understand and work with, to lessen bugs and speed up the developmet of features. We are also working on styling / layout solutions for different monitor sizes (using viewport width / height relative values instead of hardcoded pixel sizes). The interactive parts (such as inputting of text) has also been improved in terms of styling / usability, as we are using contenteditable divs/sections and controlling them with eventhandlers, which are all placed neatly inside their own js files for organization.
-
-## Definition of Clone
-Cloning allows the copying and manipulation of existing html elements, to create new versions of that element without affecting the original one. In our project, we use Node.cloneNode to copy goal card templates, which are instances of the goals from user data. It makes working with the document much easier as we only have to make the actual template and configure the logic in its manipulation of its clones, without worrying about tampering with the original template html.
