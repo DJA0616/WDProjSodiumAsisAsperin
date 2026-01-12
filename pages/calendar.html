@@ -3,135 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/style.css">
-    <link rel="stylesheet" href="public/stylesheets/base.css">
-    <link rel="stylesheet" href="public/stylesheets/layout.css">
-    <link rel="stylesheet" href="public/stylesheets/components/navigation.css">
-    <link rel="stylesheet" href="public/stylesheets/components/greeting.css">
-    <link rel="stylesheet" href="public/stylesheets/components/progressbar.css">
-    <link rel="stylesheet" href="public/stylesheets/components/goalcard.css">
-    <link rel="stylesheet" href="public/stylesheets/components/modal.css">
-    <link rel="stylesheet" href="public/stylesheets/utils.css">
-    <link rel="icon" type="image/x-icon" href="assets/GoalGarden_logo.png">
-    <title>GoalGarden</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../public/stylesheets/base.css">
+    <link rel="stylesheet" href="../public/stylesheets/layout.css">
+    <link rel="stylesheet" href="../public/stylesheets/components/navigation.css">
+    <link rel="stylesheet" href="../public/stylesheets/components/greeting.css">
+    <link rel="stylesheet" href="../public/stylesheets/components/progressbar.css">
+    <link rel="stylesheet" href="../public/stylesheets/components/goalcard.css">
+    <link rel="stylesheet" href="../public/stylesheets/components/modal.css">
+    <link rel="stylesheet" href="../public/stylesheets/components/calendar.css">
+    <link rel="stylesheet" href="../public/stylesheets/utils.css">
+    <link rel="icon" type="image/x-icon" href="../assets/GoalGarden_logo.png">
+    <title>About</title>
 </head>
 
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="index.html" class="home-page">
-                <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
+            <a href="../index.html" class="home-page">
+                <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
                 <h1 class="m-auto">GoalGarden</h1>
             </a>
 
-            <a href="pages/about.html" class="about-page">
+            <a href="../pages/about.html" class="about-page">
                 <h1 class="m-auto">About</h1>
             </a>
         </section>
 
         <section class="navigation-bar-right">
-            <a href="index.html" class="settings-page">
+            <a href="../index.html" class="settings-page">
                 <h1 class="m-auto">Settings</h1>
             </a>
-            <a href="index.html" class="profile-page">
+            <a href="../index.html" class="profile-page">
                 <h1 class="m-auto">Profile</h1>
             </a>
         </section>
     </nav>
 
-    <section class="content-section">
-        <section class="greeting-section">
-            <section class="greeting-logo">
-                <img src="assets/GoalGarden_logo.png" alt="Logo" class="w-full h-full object-contain">
-            </section>
-
-            <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
-            <h1 class="greeting-name font-sans m-0 p-0 mx-auto bg-gradient-text">User</h1>
-
-            <section class="progress-display border m-1 shadow-sm" id="progress-display" onclick="scrollToSection('goal-card-display')">
-                <h1 class="progress-counter typewriter-animation" id="progress-counter"></h1>
-                <section class="progress-bar" id="progress-bar">
-                </section>
-            </section>
-        </section>
-
-        <!-- Goal Card Display -->
-        <section class="goal-card-display my-1 p-1 gap-1" id="goal-card-display">
+    <section class="content-section display-flex p-1 flex-row gap-1">
+        <section class="sidebar-section flex-grow-0 rounded-2" style="width: 20%; background-color: white;">
 
         </section>
+        <section class="calendar-section flex-grow-1 rounded-2" style="background-color: white;">
+            <section class="date-row border">
 
-        <!-- Goal Card Template -->
-        <template id="goal-card-template">
-            <section class="goal-card">
-                <section class="goal-card-left">
-                    <section class="goal-name-description">
-
-                    </section>
-                    <section class="goal-task-list">
-                        
-                    </section>
-                </section>
-
-                <section class="goal-card-progress-visualization">
-                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
-                </section>
             </section>
-        </template>
-
-        <!-- New Goal Card Button -->
-        <template id="new-goal-card-template">
-            <section class="new-goal-card">
-                <div class="new-goal-plus">+</div>
-                <section class="new-goal-card-left">
-                    <section id="new-goal-name-description" class="goal-name-description goal-name-editable" contenteditable="true">
-                    </section>
-                    <section class="goal-task-list">
-                        
-                    </section>
-                </section>
-
-                <section class="goal-card-progress-visualization">
-                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
-                </section>
-            </section>    
-        </template>
+        </section>
     </section>
-
-    <!-- Goal Card Modal -->
-    <section id="goal-modal" class="modal p-3">
-        <div class="modal-content p-1 border shadow-sm rounded-1">
-            <section class="modal-body gap-1 align-stretch">
-                <section class="modal-left gap-1 m-0">
-                    <section class="modal-goal-name border rounded-1 p-1 shadow-sm" contenteditable="true" data-goal-id=""></section>
-                    <section class="modal-goal-details border rounded-1 p-1 shadow-sm" contenteditable="true"></section>
-                    <button id="delete-goal-button" class="delete-goal-button rounded-1 p-1 text-lg font-sans">Delete Goal</button>
-                </section>
-                <section class="subtask-display border rounded-1 p-1 shadow-sm">
-
-                </section>
-                <section class="modal-progress-visualization  border rounded-1 p-1 shadow-sm">
-                    <img src="" alt="Plant" class="modal-plant-image">
-                </section>
-            </section>
-        </div>
-    </section>
-
-    <template id="subtask-template">
-        <section class="subtask-item border rounded-1 p-1 gap-1 shadow-sm">
-            <section class="subtask-name"></section>
-            <section class="subtask-date"></section>
-            <input type="checkbox" class="subtask-checkbox">
-        </section>
-    </template>
-
-    <template id="new-subtask-template">
-        <button class="new-subtask-button">+ Add Subtask</button>
-    </template>
-
-    <footer class="footer-bar gap-1 p-1" style="flex-direction: row; display: inline">
-        <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
-        <h1 class="m-auto">GoalGarden</h1>
-    </footer>
 
     <script type="module">
         import DataManager from "./public/modules/DataManager.js";
@@ -155,16 +73,5 @@
             homePageRenderer.renderGoals();
         });
     </script>
-
-    <script src="public/oldJSfiles/scrolldown.js"></script>
-
-    <!-- <script src="/public/goal.js"></script>
-    <script src="/public/rendergoalcard.js"></script>
-    <script src="/public/goalcreation.js"></script>
-    <script src="/public/progressbar.js"></script>
-    <script src="/public/scrolldown.js"></script>
-    <script src="/public/rendersubtasks.js"></script>
-    <script src="/public/subtaskcreation.js"></script>
-    <script src="/public/modal.js"></script> -->
 </body>
 </html>
