@@ -11,7 +11,7 @@ class DataFilter {
     }
 
     static filterTaskPastDue(tasks) {
-        return tasks.filter(task => task.dueDate >= new Date().toLocaleDateString('en-CA'));
+        return tasks.filter(task => task.dueDate === new Date().toLocaleDateString('en-CA'));
     }
 }
 
