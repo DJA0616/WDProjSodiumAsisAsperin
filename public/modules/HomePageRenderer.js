@@ -1,4 +1,4 @@
-import DomManager from "./domManager.js";
+import DomManager from "./DomManager.js";
 import DataFilter from "./DataFilter.js";
 
 class HomePageRenderer {
