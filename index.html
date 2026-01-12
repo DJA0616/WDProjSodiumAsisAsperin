@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/style.css">
-    <link rel="stylesheet" href="/public/stylesheets/base.css">
-    <link rel="stylesheet" href="/public/stylesheets/layout.css">
-    <link rel="stylesheet" href="/public/stylesheets/components/navigation.css">
-    <link rel="stylesheet" href="/public/stylesheets/components/greeting.css">
-    <link rel="stylesheet" href="/public/stylesheets/components/progressbar.css">
-    <link rel="stylesheet" href="/public/stylesheets/components/goalcard.css">
-    <link rel="stylesheet" href="/public/stylesheets/components/modal.css">
-    <link rel="stylesheet" href="/public/stylesheets/utils.css">
-    <link rel="icon" type="image/x-icon" href="/assets/GoalGarden_logo.png">
+    <link rel="stylesheet" href="public/style.css">
+    <link rel="stylesheet" href="public/stylesheets/base.css">
+    <link rel="stylesheet" href="public/stylesheets/layout.css">
+    <link rel="stylesheet" href="public/stylesheets/components/navigation.css">
+    <link rel="stylesheet" href="public/stylesheets/components/greeting.css">
+    <link rel="stylesheet" href="public/stylesheets/components/progressbar.css">
+    <link rel="stylesheet" href="public/stylesheets/components/goalcard.css">
+    <link rel="stylesheet" href="public/stylesheets/components/modal.css">
+    <link rel="stylesheet" href="public/stylesheets/utils.css">
+    <link rel="icon" type="image/x-icon" href="assets/GoalGarden_logo.png">
     <title>GoalGarden</title>
 </head>
 
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="/index.html" class="home-page">
-                <img src="/assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
+            <a href="index.html" class="home-page">
+                <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
                 <h1 class="m-auto">GoalGarden</h1>
             </a>
 
-            <a href="/pages/about.html" class="about-page">
+            <a href="pages/about.html" class="about-page">
                 <h1 class="m-auto">About</h1>
             </a>
         </section>
 
         <section class="navigation-bar-right">
-            <a href="/index.html" class="settings-page">
+            <a href="index.html" class="settings-page">
                 <h1 class="m-auto">Settings</h1>
             </a>
-            <a href="/index.html" class="profile-page">
+            <a href="index.html" class="profile-page">
                 <h1 class="m-auto">Profile</h1>
             </a>
         </section>
@@ -42,7 +42,7 @@
     <section class="content-section">
         <section class="greeting-section">
             <section class="greeting-logo">
-                <img src="/assets/GoalGarden_logo.png" alt="Logo" class="w-full h-full object-contain">
+                <img src="assets/GoalGarden_logo.png" alt="Logo" class="w-full h-full object-contain">
             </section>
 
             <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
@@ -73,7 +73,7 @@
                 </section>
 
                 <section class="goal-card-progress-visualization">
-                    <img src="/assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
                 </section>
             </section>
         </template>
@@ -91,7 +91,7 @@
                 </section>
 
                 <section class="goal-card-progress-visualization">
-                    <img src="/assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
                 </section>
             </section>    
         </template>
@@ -133,37 +133,10 @@
     </footer>
 
     <script type="module">
-        import DataManager from "/public/modules/DataManager.js";
-        import DataFilter from "/public/modules/DataFilter.js";
-        import DomManager from "/public/modules/DomManager.js";
+        import DataManager from "./public/modules/DataManager.js";
+        import DataFilter from "./public/modules/DataFilter.js";
+        import DomManager from "./public/modules/DomManager.js";
         import HomePageRenderer from "./public/modules/HomePageRenderer.js";
-        import EventHandler from "/public/modules/EventHandler.js";
+        import EventHandler from "./public/modules/EventHandler.js";
 
-        // DataManager is instantiated (manages state)
-        const dataManager = new DataManager();
-        
-        // HomePageRenderer only needs DataManager
-        const homePageRenderer = new HomePageRenderer(dataManager);
-
-        // Event Handler
-        const eventHandler = new EventHandler(dataManager, homePageRenderer);
-
-        // dataManager.clearAllData(); // For testing purposes only
-
-        document.addEventListener("DOMContentLoaded", () => {
-            homePageRenderer.renderGoals();
-        });
-    </script>
-
-    <script src="/public/oldJSfiles/scrolldown.js"></script>
-
-    <!-- <script src="/public/goal.js"></script>
-    <script src="/public/rendergoalcard.js"></script>
-    <script src="/public/goalcreation.js"></script>
-    <script src="/public/progressbar.js"></script>
-    <script src="/public/scrolldown.js"></script>
-    <script src="/public/rendersubtasks.js"></script>
-    <script src="/public/subtaskcreation.js"></script>
-    <script src="/public/modal.js"></script> -->
-</body>
-</html>
+        // DataManager
