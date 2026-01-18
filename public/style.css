@@ -6,6 +6,7 @@
 @import url(stylesheets/components/progressbar.css);
 @import url(stylesheets/components/navigation.css);
 @import url(stylesheets/components/calendar.css);
+@import url(stylesheets/components/login.css);
 @import url(stylesheets/utils.css);
 
 body{

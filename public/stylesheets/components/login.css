@@ -1,0 +1,66 @@
+.login-card-container {
+    border-radius: calc(var(--border-radius));
+    margin: auto;
+    margin-top: calc(var(--margin) * 4);
+    padding: var(--padding);
+    padding-top: calc(var(--padding) * 3);
+
+    width: clamp(10vw, 20vw, 20vw);
+    height: clamp(20vw, 30vw, 30vw);
+
+    background-image: url(../../../assets/landing.webp);
+    background-color: #cdd8d5;
+    background-blend-mode:color-dodge;
+
+    background-size: auto;
+
+    box-shadow: 0 0 2vw #cdd8d5;
+}
+
+.login-card-container h1 {
+    text-align: center;
+    margin-bottom: var(--spacing-2);
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.icon-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: var(--border-thickness) solid var(--border-color);
+    border-radius: calc(var(--border-radius) * 0.5);
+    background-color: white;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.icon-input:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0.5vw var(--shadow-color);
+}
+
+.input-icon {
+    width: 1.2vw;
+    height: 1.2vw;
+    margin-left: calc(var(--spacing-1) * 0.5);
+    object-fit: contain;
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.login-form input {
+    flex: 1;
+    padding: calc(var(--spacing-1) * 0.5);
+    border: none;
+    border-radius: calc(var(--border-radius) * 0.5);
+    font-size: 1vw;
+    background: transparent;
+}
+
+.login-form input:focus {
+    outline: none;
+}
