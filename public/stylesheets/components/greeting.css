@@ -1,8 +1,10 @@
 .greeting-logo {
+    display: block !important;
     filter: drop-shadow(var(--shadow-sm));
-    width: 20vw;
-    height: 20vw;
-    margin-bottom: var(--spacing-1);
+    width: clamp(160px, 20vw, 250px) !important;
+    height: auto !important;
+    margin: 0 auto var(--spacing-1) auto !important;
+    object-fit: contain;
 }
 
 .greeting-header, 

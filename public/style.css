@@ -1,3 +1,13 @@
+@import url(stylesheets/base.css);
+@import url(stylesheets/layout.css);
+@import url(stylesheets/components/goalcard.css);
+@import url(stylesheets/components/greeting.css);
+@import url(stylesheets/components/modal.css);
+@import url(stylesheets/components/progressbar.css);
+@import url(stylesheets/components/navigation.css);
+@import url(stylesheets/components/calendar.css);
+@import url(stylesheets/utils.css);
+
 body{
     margin: 0;
     padding: 0;
@@ -73,38 +83,6 @@ body{
     align-items: center;
 }
 
-.greeting-logo{
-    box-sizing:border-box;
-    filter: drop-shadow(0vw 0vw 0.5vw lightgray);
-
-    /* keep responsive but cap at Full HD size to avoid huge logos on ultra-wide screens */
-    width: clamp(160px, 20vw, 250px);
-    height: clamp(160px, 20vw, 250px);
-    margin-bottom: clamp(1vw, 1.5vw, 3vw);
-}
-
-.greeting-header, .subtitle{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    /* scale with viewport but don't exceed Full HD size (64px) or get too small */
-    font-size: clamp(28px, 5vw, 92px);
-    margin: 0 auto;
-}
-
-.greeting-name, .title{
-    background-image:linear-gradient(#45e3ff, #5ac700);
-    background-clip:text;
-    color:rgba(0, 0, 0, 0);
-
-    display:inline;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    /* scale with viewport but cap at Full HD size (80px) and keep a reasonable minimum */
-    font-size: clamp(28px, 5vw, 92px);
-    margin: 0 auto;
-    margin-bottom: clamp(1vw, 1.5vw, 3vw);
-}
-
-
-
 .greeting-button:hover{
     transform: scale(1.03);
 }
@@ -126,20 +104,6 @@ body{
     overflow:hidden;
 }
 
-.progress-counter{
-    margin: none;
-    padding: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -110%);
-    z-index: 2;
-
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-    /* scale text but cap at Full HD size (48px) */
-    font-size: clamp(14px, 2.5vw, 48px);
-}
 
 .progress-bar{
     position:relative;
@@ -398,45 +362,8 @@ body{
 }
 
 /* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(128, 128, 128, 0.5);
-    backdrop-filter: blur(5px);
-}
 
-.modal-content {
-    background-image: linear-gradient(rgba(220, 240, 255, 0.5), rgba(90, 199, 0, 0.5));
-    margin: 10% auto;
-    align-self: center;
-    padding: 1vw;
-    border: 1px solid gray;
-    border-radius: 1vw;
-    width: 70%;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
-    position: relative;
-    box-sizing: border-box;
-}
 
-.modal-body {
-    display: flex;
-    gap: 1vw;
-    align-items: stretch;
-    height: 60vh;
-}
-
-.modal-left {
-    flex: 0 0 calc(30% - 0.5vw);
-    display: flex;
-    flex-direction: column;
-    gap: 1vw;
-    margin: none;
-}
 
 /* Common white box styling for modal sections */
 .modal-goal-name,
@@ -449,18 +376,6 @@ body{
     border-radius: 1vw;
     padding: 1vw;
     box-shadow: 0vw 0vw 0.5vw lightgray;
-}
-
-/* Common text styling for goal name and details */
-.modal-goal-name,
-.modal-goal-details {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: center;
-    text-shadow: 0 0 0.2vw lightgray;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    word-break: break-word;
 }
 
 .modal-goal-name {
