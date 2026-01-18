@@ -3,10 +3,10 @@
     margin: auto;
     margin-top: calc(var(--margin) * 4);
     padding: var(--padding);
-    padding-top: calc(var(--padding) * 3);
 
     width: clamp(10vw, 20vw, 20vw);
-    height: clamp(20vw, 30vw, 30vw);
+    flex-shrink: 1;
+    flex-direction: column;
 
     background-image: url(../../../assets/landing.webp);
     background-color: #cdd8d5;
@@ -20,6 +20,7 @@
 .login-card-container h1 {
     text-align: center;
     margin-bottom: var(--spacing-2);
+    font-size: 2vw;
 }
 
 .login-form{
@@ -43,6 +44,11 @@
     box-shadow: 0 0 0.5vw var(--shadow-color);
 }
 
+.icon-input.input-error {
+    border-color: red;
+    box-shadow: 0 0 0.5vw var(--shadow-color);
+}
+
 .input-icon {
     width: 1.2vw;
     height: 1.2vw;
@@ -63,4 +69,15 @@
 
 .login-form input:focus {
     outline: none;
+}
+
+.login-form button {
+    padding: calc(var(--spacing-1) * 0.75);
+    border: none;
+    border-radius: calc(var(--border-radius) * 0.5);
+    background-color: var(--primary-color);
+    color: var(--color-white);
+    font-size: 1vw;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }

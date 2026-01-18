@@ -47,4 +47,91 @@
         </form>
     </section>
 </body>
+<!--script for submission, feel free to remove this when you have something substantial-->
+<script>
+    const loginForm = document.querySelector('.login-form');
+    const loginFormInputs = loginForm.querySelectorAll('input');
+
+    function validateInput(input) {
+        var text = input.value;
+        if(input.type === 'password') {
+            let errors = [];
+            
+            if(text.length < 8 || text.length > 20) {
+                errors.push("Must be between 8 and 20 characters long");
+            }
+
+            if(!/[A-Z]/.test(text)) {
+                errors.push("Must contain at least one uppercase letter");
+            }
+
+            if(!/[a-z]/.test(text)) {
+                errors.push("Must contain at least one lowercase letter");
+            }
+
+            if(!/[0-9]/.test(text)) {
+                errors.push("Must contain at least one digit");
+            }
+
+            if(!/[!@#$%^&*(),.?":{}|<>]/.test(text)) {
+                errors.push("Must contain at least one special character");
+            }
+
+            if(errors.length > 0) {
+                input.setCustomValidity("Your password does not meet the following criteria:\n• " + errors.join("\n• "));
+                return false;
+            } else {
+                input.setCustomValidity("");
+                return true;
+            }
+        } else if(input.type === 'text') {
+            if(text.length === 0) {
+                input.setCustomValidity("Username is required");
+                return false;
+            } else {
+                input.setCustomValidity("");
+                return true;
+            }
+        } else {
+            return input.checkValidity();
+        }
+    }
+
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // For demonstration purposes, just log the values
+        console.log('Username:', username);
+        console.log('Password:', password);
+
+        // Here you would typically send the data to the server for authentication
+    });
+
+    loginFormInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const iconInput = input.closest('.icon-input');
+            if(validateInput(input)) {
+                if(input.checkValidity()) {
+                    iconInput.classList.remove('input-error');
+                } else {
+                    iconInput.classList.add('input-error');
+                }
+            } else {
+                iconInput.classList.remove('input-error');
+            }
+        });
+
+        input.addEventListener('blur', function() {
+            const iconInput = input.closest('.icon-input');
+            if(validateInput(input)) {
+                iconInput.classList.remove('input-error');
+            } else {
+                iconInput.classList.add('input-error');
+            }
+        });
+    });
+</script>
 </html>
