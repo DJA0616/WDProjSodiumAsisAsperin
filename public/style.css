@@ -8,6 +8,8 @@
 @import url(stylesheets/components/calendar.css);
 @import url(stylesheets/components/login.css);
 @import url(stylesheets/components/footer.css);
+@import url(stylesheets/components/profilehero.css);
+@import url(stylesheets/components/profiledetails.css);
 @import url(stylesheets/utils.css);
 
 body{
