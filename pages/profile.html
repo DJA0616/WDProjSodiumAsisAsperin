@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/GoalGarden_logo.png">
+    <title>About</title>
+</head>
+
+<body>
+    <nav class="navigation-bar">
+        <section class="navigation-bar-left">
+            <a href="../index.html" class="home-page">
+                <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
+                <h1 class="m-auto">GoalGarden</h1>
+            </a>
+
+            <a href="../pages/about.html" class="about-page">
+                <h1 class="m-auto">About</h1>
+            </a>
+        </section>
+
+        <section class="navigation-bar-right">
+            <a href="../index.html" class="settings-page">
+                <h1 class="m-auto">Settings</h1>
+            </a>
+            <a href="" class="profile-page">
+                <h1 class="m-auto">Profile</h1>
+            </a>
+        </section>
+    </nav>
+
+    <section class="content-section">
+        <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1;">
+            <section class="profile-hero p-1">
+                <img src="../assets/GoalGarden_logo.png" alt="Logo" class="profile-logo" style="box-sizing: border-box; display: block; margin: 0 auto; border: 2px solid var(--color-border); width: 10vw; float:left;">
+                <h1 class="profile-header font-sans m-0 p-0 mx-auto">[DISPLAY NAME]</h1>
+                <h2 class="profile-subheader font-sans m-0 p-0 mx-auto">[USERNAME]</h2>
+            </section>
+            <section class="profile-viewer-buttons p-1">
+                <button class="profile-button" value="Overview">Overview</button>
+                <button class="profile-button" value="Statistics">Statistics</button>
+                <button class="profile-button" value="Archive">Archive</button>
+            </section>
+            <section class="profile-viewer-content p-1">
+            </section>
+        </div>
+    </section>
+
+    <footer class="footer-bar">
+        <a href="index.html" style="display: flex; flex-direction: row; align-self: center; text-decoration: none;">
+            <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; align-self: center; margin-right: 0.5vw;">
+            <h1>GoalGarden</h1>
+        </a>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h1>Contact Us </h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Contact Number: </th>
+                            <th>+63 920 910 0616</th>
+                        </tr>
+                        <tr>
+                            <th>Email Address 1: </th>
+                            <th>b2029djfasis@pshs.edu.ph</th>
+                        </tr>
+                        <tr>
+                            <th>Email Address 2: </th>
+                            <th>b2029jasasperin@pshs.edu.ph</th>
+                        </tr>
+                        <tr>
+                            <th>Github Account: </th>
+                            <th>DJA0616</th>
+                        </tr>
+                        <tr>
+                            <th>Github Account: </th>
+                            <th>Juan-Asperin</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="copyright-notice">
+                <h1>Copyright Notice </h1>
+                <p>© 2026 GoalGarden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Archive Task Template -->
+    <template id="archive-task-template">
+        <section class="archive-task-item border rounded-1 p-1 shadow-sm">
+            <div class="archive-task-header">
+                <span class="archive-task-checkbox">✓</span>
+                <span class="archive-task-name"></span>
+            </div>
+            <div class="archive-task-details">
+                <span class="archive-task-goal"></span>
+                <span class="archive-task-date"></span>
+            </div>
+        </section>
+    </template>
+
+    <script type="module">
+        import DataManager from "../public/modules/DataManager.js";
+
+        const contentViewer = document.querySelector('.profile-viewer-content');
+        const buttons = document.querySelectorAll('.profile-button');
+        const dataManager = new DataManager();
+
+        // Load about me from localStorage
+        function getAboutMe() {
+            return localStorage.getItem('profileAboutMe') || 'Tell us about yourself...';
+        }
+
+        function saveAboutMe(content) {
+            localStorage.setItem('profileAboutMe', content);
+        }
+
+        // Render Overview section
+        function renderOverview() {
+            const aboutMe = getAboutMe();
+            contentViewer.innerHTML = `
+                <h1>Overview</h1>
+                <section class="about-me-section border rounded-1 p-1 shadow-sm">
+                    <h2>About Me</h2>
+                    <div class="about-me-content" contenteditable="true" data-placeholder="Tell us about yourself...">${aboutMe}</div>
+                </section>
+            `;
+
+            // Add event listener for saving about me content
+            const aboutMeContent = contentViewer.querySelector('.about-me-content');
+            aboutMeContent.addEventListener('blur', () => {
+                saveAboutMe(aboutMeContent.textContent);
+            });
+        }
+
+        // Render Statistics section
+        function renderStatistics() {
+            const tasks = dataManager.getTasks();
+            const goals = dataManager.getGoals();
+
+            const totalTasks = tasks.length;
+            const completedTasks = tasks.filter(task => task.isCompleted).length;
+            const remainingTasks = totalTasks - completedTasks;
+
+            const totalGoals = goals.length;
+            const completedGoals = goals.filter(goal => goal.progress === 100).length;
+            const remainingGoals = totalGoals - completedGoals;
+
+            const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+            contentViewer.innerHTML = `
+                <h1>Statistics</h1>
+                <section class="statistics-grid gap-1">
+                    <section class="stat-card border rounded-1 p-1 shadow-sm">
+                        <h2>Tasks</h2>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Tasks:</span>
+                            <span class="stat-value">${totalTasks}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Completed:</span>
+                            <span class="stat-value stat-completed">${completedTasks}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Remaining:</span>
+                            <span class="stat-value stat-remaining">${remainingTasks}</span>
+                        </div>
+                    </section>
+                    <section class="stat-card border rounded-1 p-1 shadow-sm">
+                        <h2>Goals</h2>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Goals:</span>
+                            <span class="stat-value">${totalGoals}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Completed:</span>
+                            <span class="stat-value stat-completed">${completedGoals}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">In Progress:</span>
+                            <span class="stat-value stat-remaining">${remainingGoals}</span>
+                        </div>
+                    </section>
+                    <section class="stat-card border rounded-1 p-1 shadow-sm">
+                        <h2>Completion Rate</h2>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" style="width: ${completionRate}%"></div>
+                        </div>
+                        <div class="stat-percentage">${completionRate}%</div>
+                    </section>
+                </section>
+            `;
+        }
+
+        // Render Archive section
+        function renderArchive() {
+            const tasks = dataManager.getTasks();
+            const goals = dataManager.getGoals();
+            const completedTasks = tasks.filter(task => task.isCompleted);
+
+            let archiveContent = `
+                <h1>Archive</h1>
+                <p class="archive-description">Completed tasks and their details</p>
+                <section class="archive-list gap-1">
+            `;
+
+            if (completedTasks.length === 0) {
+                archiveContent += `
+                    <section class="archive-empty border rounded-1 p-1 shadow-sm">
+                        <p>No completed tasks yet. Start completing tasks to see them here!</p>
+                    </section>
+                `;
+            } else {
+                completedTasks.forEach(task => {
+                    const goal = goals.find(g => g.id === task.goal);
+                    const goalName = goal ? goal.name : 'No Goal';
+                    
+                    archiveContent += `
+                        <section class="archive-task-item border rounded-1 p-1 shadow-sm">
+                            <div class="archive-task-header">
+                                <span class="archive-task-checkbox">✓</span>
+                                <span class="archive-task-name">${task.name}</span>
+                            </div>
+                            <div class="archive-task-details">
+                                <span class="archive-task-goal">Goal: ${goalName}</span>
+                                <span class="archive-task-date">Due: ${task.dueDate}</span>
+                                <span class="archive-task-category">Category: ${task.category || 'Uncategorized'}</span>
+                            </div>
+                        </section>
+                    `;
+                });
+            }
+
+            archiveContent += `</section>`;
+            contentViewer.innerHTML = archiveContent;
+        }
+
+        // Button click handlers
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                buttons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const value = button.value;
+                switch(value) {
+                    case 'Overview':
+                        renderOverview();
+                        break;
+                    case 'Statistics':
+                        renderStatistics();
+                        break;
+                    case 'Archive':
+                        renderArchive();
+                        break;
+                    default:
+                        contentViewer.innerHTML = `<h1>${value}</h1>`;
+                }
+            });
+        });
+
+        // Initialize with Overview
+        document.addEventListener('DOMContentLoaded', () => {
+            buttons[0].classList.add('active');
+            renderOverview();
+        });
+    </script>
+</body>
+</html>
