@@ -1,6 +1,197 @@
-.profile-hero{
-    width: 100%;
-    height: 300px;
-    background-color: #f5f5f5;
-    position: relative;
+/* ==========================================================================
+   PROFILE DETAILS COMPONENTS
+   Using CSS variables for consistency with other pages
+   ========================================================================== */
+
+.profile-viewer-content {
+    flex-grow: 1;
+    padding: var(--spacing-1);
+    font-family: var(--font-sans);
+}
+
+.profile-viewer-content h1 {
+    font-family: var(--font-sans);
+    margin-bottom: var(--spacing-1);
+}
+
+.profile-viewer-buttons {
+    display: flex;
+    gap: var(--spacing-05);
+}
+
+.profile-button {
+    padding: var(--spacing-05) var(--spacing-1);
+    border: 1px solid gray;
+    background-color: var(--color-white);
+    cursor: pointer;
+    transition: all var(--transition-fast) ease-in-out;
+    font-family: var(--font-sans);
+    border-radius: var(--radius-05);
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-button:hover {
+    background-color: var(--color-light-hover);
+    transform: scale(1.02);
+}
+
+.profile-button.active {
+    background-image: var(--gradient-accent);
+    color: var(--color-white);
+    border-color: var(--color-accent);
+}
+
+/* About Me Section */
+.about-me-section {
+    margin-top: var(--spacing-1);
+    background-image: var(--gradient-primary);
+    font-family: var(--font-sans);
+}
+
+.about-me-section h2 {
+    margin-bottom: var(--spacing-05);
+    font-family: var(--font-sans);
+}
+
+.about-me-content {
+    min-height: 100px;
+    padding: var(--spacing-1);
+    border: 1px solid gray;
+    border-radius: var(--radius-1);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-sans);
+}
+
+.about-me-content:focus {
+    outline: 2px solid var(--color-accent);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Statistics Section */
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-top: var(--spacing-1);
+}
+
+.stat-card {
+    background-image: var(--gradient-primary);
+    font-family: var(--font-sans);
+}
+
+.stat-card h2 {
+    margin-bottom: var(--spacing-05);
+    border-bottom: 1px solid gray;
+    padding-bottom: var(--spacing-05);
+    font-family: var(--font-sans);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-05) 0;
+    background-color: var(--color-white);
+    padding: var(--spacing-05);
+    margin-bottom: var(--spacing-05);
+    border-radius: var(--radius-05);
+}
+
+.stat-label {
+    color: var(--color-gray);
+}
+
+.stat-value {
+    font-weight: bold;
+}
+
+.stat-completed {
+    color: var(--color-accent);
+}
+
+.stat-remaining {
+    color: #e67e22;
+}
+
+.stat-progress {
+    height: 20px;
+    background-color: var(--color-white);
+    border-radius: var(--radius-1);
+    overflow: hidden;
+    margin: var(--spacing-1) 0;
+    border: 1px solid gray;
+}
+
+.stat-progress-bar {
+    height: 100%;
+    background-image: var(--gradient-accent);
+    transition: width var(--transition-normal) ease;
+}
+
+.stat-percentage {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-accent);
+}
+
+/* Archive Section */
+.archive-description {
+    color: var(--color-gray);
+    margin-bottom: var(--spacing-1);
+    font-family: var(--font-sans);
+}
+
+.archive-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.archive-task-item {
+    background-image: var(--gradient-primary);
+    font-family: var(--font-sans);
+    transition: all var(--transition-fast) ease-in-out;
+}
+
+.archive-task-item:hover {
+    transform: scale(1.01);
+}
+
+.archive-task-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-05);
+    margin-bottom: var(--spacing-05);
+    background-color: var(--color-white);
+    padding: var(--spacing-05);
+    border-radius: var(--radius-05);
+}
+
+.archive-task-checkbox {
+    color: var(--color-accent);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.archive-task-name {
+    font-weight: bold;
+    text-decoration: line-through;
+    color: var(--color-gray);
+}
+
+.archive-task-details {
+    display: flex;
+    gap: var(--spacing-1);
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    flex-wrap: wrap;
+    background-color: var(--color-white);
+    padding: var(--spacing-05);
+    border-radius: var(--radius-05);
+}
+
+.archive-empty {
+    text-align: center;
+    background-image: var(--gradient-primary);
+    color: var(--color-gray);
+    font-family: var(--font-sans);
 }
