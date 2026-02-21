@@ -1,6 +1,6 @@
-import Category from "./Category.js";
-import Goal from "./Goal.js";
-import Task from "./Task.js";
+import Category from "./dataClasses/Category.js";
+import Goal from "./dataClasses/Goal.js";
+import Task from "./dataClasses/Task.js";
 
 class DataManager {
     // Data Manager basic handles

@@ -1,4 +1,4 @@
-import DataFilter from './DataFilter.js';
+import DataFilter from '../DataFilter.js';
 
 class DomManager {
     static getElement(selector) {
