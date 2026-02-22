@@ -170,7 +170,7 @@
     background-image: var(--gradient-text) !important;
     background-clip: text !important;
     -webkit-background-clip: text !important;
-    color: rgba(0, 0, 0, 0) !important;
+    color: var(--color-transparent) !important;
 }
 
 /* TYPOGRAPHY UTILITIES
@@ -218,7 +218,7 @@
 
 .scrollbar-thin {
     scrollbar-width: thin !important;
-    scrollbar-color: #bbb transparent !important;
+    scrollbar-color: var(--color-scrollbar) var(--color-transparent) !important;
 }
 
 .scrollbar-thin::-webkit-scrollbar {
@@ -227,11 +227,11 @@
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
-    background: transparent !important;
+    background: var(--color-transparent) !important;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: #bbb !important;
+    background: var(--color-scrollbar) !important;
     border-radius: 3px !important;
 }
 
@@ -267,12 +267,12 @@
    ========================================================================== */
 
 .outline-dashed {
-    outline: 2px dashed #ccc !important;
+    outline: 2px dashed var(--color-gray) !important;
     outline-offset: -2px !important;
 }
 
 .outline-solid-focus:focus {
-    outline: 2px solid #5ac700 !important;
+    outline: 2px solid var(--color-accent) !important;
     outline-offset: -2px !important;
 }
 

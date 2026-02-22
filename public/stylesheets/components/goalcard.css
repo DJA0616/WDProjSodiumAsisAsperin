@@ -100,7 +100,7 @@
     left: 0;
     width: 100%;
     height: var(--progress, 0%);
-    background: linear-gradient(to top, rgba(90, 199, 0, 0.4), rgba(69, 227, 255, 0.4));
+    background: var(--gradient-progress);
     z-index: 0;
     border-radius: var(--radius-1);
     transition: height var(--transition-slow) ease-in-out;
@@ -147,15 +147,15 @@
     transform: translate(-50%, -50%);
     font-size: clamp(32px, 6vw, 64px);
     color: var(--color-white);
-    background: rgba(0, 0, 0, 0.2);
-    background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+    background: var(--color-overlay);
+    background-image: var(--gradient-button-overlay);
     width: clamp(56px, 9vw, 96px);
     height: clamp(56px, 9vw, 96px);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    box-shadow: 0 0 var(--spacing-05) rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 var(--spacing-05) var(--shadow-color);
     z-index: 2;
     opacity: 1;
     transition: opacity 0.25s ease, transform var(--transition-fast) ease;
@@ -170,7 +170,7 @@
 
 /* Editable goal name */
 .goal-name-editable {
-    outline: 2px dashed #ccc;
+    outline: 2px dashed var(--color-gray);
     outline-offset: -2px;
     cursor: text;
     transition: outline var(--transition-fast) ease;

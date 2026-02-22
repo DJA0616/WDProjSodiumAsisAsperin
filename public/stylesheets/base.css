@@ -71,6 +71,26 @@
     --gradient-primary: linear-gradient(rgba(220, 240, 255, 0.5), rgba(90, 199, 0, 0.5));
     --gradient-accent: linear-gradient(#51ff77cc, #73ff00cc);
     --gradient-text: linear-gradient(#45e3ff, #5ac700);
+    --gradient-nav: linear-gradient(rgba(200, 208, 215, 0.5), rgba(0, 0, 0, 0));
+    --gradient-progress: linear-gradient(to top, rgba(90, 199, 0, 0.4), rgba(69, 227, 255, 0.4));
+    --gradient-button-overlay: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+    
+    /* Status Colors */
+    --color-danger: #ff4d4d;
+    --color-danger-hover: #e60000;
+    --color-danger-light: #ffebee;
+    --color-danger-border: #e57373;
+    --color-danger-text: #c62828;
+    --color-danger-light-hover: #ffcdd2;
+    --color-warning: #e67e22;
+    --color-success: #5ac700;
+    
+    /* UI Colors */
+    --color-scrollbar: #bbb;
+    --color-overlay: rgba(128, 128, 128, 0.5);
+    --color-transparent: transparent;
+    --color-primary-semi: #cdd8d5aa;
+    --color-accent-border: #3fff496c;
     
     /* Typography */
     --font-sans: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

@@ -109,7 +109,7 @@
 }
 
 .stat-remaining {
-    color: #e67e22;
+    color: var(--color-warning);
 }
 
 .stat-progress {
@@ -341,8 +341,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .reset-btn:hover {
-    background-color: #ffebee;
-    border-color: #e57373;
+    background-color: var(--color-danger-light);
+    border-color: var(--color-danger-border);
 }
 
 /* Preview box */
@@ -457,13 +457,13 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .danger-btn {
-    background-color: #ffebee;
-    border-color: #e57373;
-    color: #c62828;
+    background-color: var(--color-danger-light);
+    border-color: var(--color-danger-border);
+    color: var(--color-danger-text);
 }
 
 .danger-btn:hover {
-    background-color: #ffcdd2;
+    background-color: var(--color-danger-light-hover);
 }
 
 /* Responsive adjustments */

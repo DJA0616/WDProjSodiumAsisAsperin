@@ -19,7 +19,7 @@
     background-image: var(--gradient-text);
     background-clip: text;
     -webkit-background-clip: text;
-    color: rgba(0, 0, 0, 0);
+    color: var(--color-transparent);
     
     margin: var(--spacing-0) auto;
     padding: var(--spacing-0);

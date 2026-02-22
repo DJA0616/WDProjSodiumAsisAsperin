@@ -10,7 +10,7 @@
 }
 
 .navigation-bar{
-    background-image: linear-gradient(rgba(200, 208, 215, 0.5), rgba(0, 0, 0, 0));
+    background-image: var(--gradient-nav);
 
     height: 3vw;
     padding-left: 10%;
@@ -21,19 +21,19 @@
 
 .home-page, .about-page, .settings-page, .profile-page{
     margin:auto;
-    gap: 0.5vw;
+    gap: var(--spacing-05);
 
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: black;
+    font-family: var(--font-sans);
+    color: var(--color-black);
 
-    border-radius: 5px;
-    background-color: #ffffff00;
+    border-radius: var(--radius-05);
+    background-color: var(--color-transparent);
 
     padding: 0;
 
-    transition: all 0.2s ease-in-out;
+    transition: all var(--transition-fast) ease-in-out;
 }
 
 .home-page:hover, .about-page:hover, .settings-page:hover, .profile-page:hover{
-    background-color: #cdd8d5aa;
+    background-color: var(--color-primary-semi);
 }

@@ -18,7 +18,7 @@ body{
 }
 
 .navigation-bar{
-    background-image: linear-gradient(rgba(200, 208, 215, 0.5), rgba(0, 0, 0, 0));
+    background-image: var(--gradient-nav);
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -34,54 +34,54 @@ body{
 
 .navigation-bar-right, .navigation-bar-left{
     display: flex;
-    gap: 5vw;
+    gap: var(--spacing-5);
 }
 
 .home-page, .about-page, .settings-page, .profile-page{
     display:flex;
     text-decoration: none;
     margin:auto;
-    gap: 0.5vw;
+    gap: var(--spacing-05);
 
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: black;
+    font-family: var(--font-sans);
+    color: var(--color-black);
 
-    border-radius: 5px;
-    background-color: #ffffff00;
+    border-radius: var(--radius-05);
+    background-color: var(--color-transparent);
 
-    transition: all 0.2s ease-in-out;
+    transition: all var(--transition-fast) ease-in-out;
 }
 
 .home-page:hover, .about-page:hover, .settings-page:hover, .profile-page:hover{
-    background-color: #cdd8d5aa;
+    background-color: var(--color-primary-semi);
 }
 
 .content-section{
     box-sizing: border-box;
     min-height: 85vh;
-    border-radius: 3vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    margin-top: 2vw;
-    padding: 1vw;
-    padding-top: 3vw;
+    border-radius: var(--radius-3);
+    margin-left: var(--spacing-2);
+    margin-right: var(--spacing-2);
+    margin-top: var(--spacing-2);
+    padding: var(--spacing-1);
+    padding-top: var(--spacing-3);
 
     display: flex;
     flex-direction: column;
 
     background-image: url('../assets/landing.webp');
-    background-color: #cdd8d5;
+    background-color: var(--color-primary);
     background-blend-mode:color-dodge;
 
     background-size: 100% auto;
 
-    box-shadow: 0 0 2vw #cdd8d5;
+    box-shadow: var(--shadow-lg);
 }
 
 .greeting-section{
     box-sizing: border-box;
-    border-radius: 2vw;
-    padding: 1vw;
+    border-radius: var(--radius-2);
+    padding: var(--spacing-1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,9 +92,9 @@ body{
 }
 
 .progress-display, .greeting-button{
-    background-color: rgb(253, 255, 254);
+    background-color: var(--color-white);
     border: 1px solid gray;
-    border-radius: 2.5vw;
+    border-radius: calc(var(--radius-1) * 2.5);
     margin: 10px auto;
     box-sizing: border-box;
 
@@ -104,22 +104,22 @@ body{
 
     position: relative;
 
-    box-shadow: 0vw 0vw 0.5vw lightgray;
+    box-shadow: var(--shadow-sm);
     overflow:hidden;
 }
 
 
 .progress-bar{
     position:relative;
-    background-image: linear-gradient(#51ff77cc, #73ff00cc);
+    background-image: var(--gradient-accent);
     background-clip: content-box;
-    border-right: 2px solid #3fff496c;
-    box-shadow: 0vw 0vw 5vw #00ff15cc;
+    border-right: 2px solid var(--color-accent-border);
+    box-shadow: var(--shadow-glow);
     float:left;
     height: 3vw;
     width: 0vw;
 
-    transition: all 0.5s ease-out;
+    transition: all var(--transition-slow) ease-out;
 }
 
 .progress-display:hover .progress-bar{
@@ -128,36 +128,36 @@ body{
 
 .goal-card-display{
     box-sizing: border-box;
-    border-radius: 2vw;
-    margin-top: 1vw;
-    bottom: 1vw;
-    padding: 1vw;
+    border-radius: var(--radius-2);
+    margin-top: var(--spacing-1);
+    bottom: var(--spacing-1);
+    padding: var(--spacing-1);
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1vw;
+    gap: var(--spacing-1);
     grid-row: auto;
     flex-grow: 1;
 }
 
 .goal-card, .new-goal-card{
-    background-image: linear-gradient(rgba(220, 240, 255, 0.5),rgba(90, 199, 0, 0.5));
+    background-image: var(--gradient-primary);
     border: 1px solid gray;
     box-sizing: border-box;
-    border-radius: 1vw;
+    border-radius: var(--radius-1);
     /* responsive height but cap at Full HD size (576px) to avoid overly tall cards on very wide screens */
     height: clamp(300px, 30vw, 576px);
     
-    padding: 1vw;
+    padding: var(--spacing-1);
     flex-grow: 1;
 
     display: flex;
     justify-content: space-between;
-    gap: 1vw;
+    gap: var(--spacing-1);
 
-    box-shadow: 0vw 0vw 0.5vw lightgray;
+    box-shadow: var(--shadow-sm);
 
-    transition: all 0.2s ease-in-out;
+    transition: all var(--transition-fast) ease-in-out;
 }
 
 .goal-card:hover{
@@ -167,29 +167,29 @@ body{
 .goal-card-left, .new-goal-card-left{
     border: 1px;
     box-sizing: border-box;
-    border-radius: 1vw;
+    border-radius: var(--radius-1);
     /* subtract half the gap so two columns + gap don't overflow */
-    flex: 0 0 calc(50% - 0.5vw);
+    flex: 0 0 calc(50% - var(--spacing-05));
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    gap: 1vw;
+    gap: var(--spacing-1);
 }
 
 .goal-name-description, .goal-task-list{
-    background-color: white;
+    background-color: var(--color-white);
     border: 1px;
     box-sizing: border-box;
-    border-radius: 1vw;
-    padding: 1vw;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
+    border-radius: var(--radius-1);
+    padding: var(--spacing-1);
+    box-shadow: var(--shadow-sm);
 
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: var(--font-sans);
     font-size: xx-large;
     text-align: center;
     align-content: center;
-    text-shadow: 0 0 0.2vw lightgray;
+    text-shadow: var(--text-shadow);
 
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -198,7 +198,7 @@ body{
 
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: #bbb transparent;
+    scrollbar-color: var(--color-scrollbar) var(--color-transparent);
 
     max-height: 50%;
 
@@ -221,12 +221,12 @@ body{
 }
 
 .goal-card-progress-visualization{
-    background-color: white;
+    background-color: var(--color-white);
     border: 1px;
     box-sizing: border-box;
-    border-radius: 1vw;
-    padding: 1vw;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
+    border-radius: var(--radius-1);
+    padding: var(--spacing-1);
+    box-shadow: var(--shadow-sm);
 
     display: flex;
     align-items: center;
@@ -235,7 +235,7 @@ body{
     position: relative;
 
     /* subtract half the gap so two columns + gap don't overflow */
-    flex: 0 0 calc(50% - 0.5vw);
+    flex: 0 0 calc(50% - var(--spacing-05));
 }
 
 .goal-card-progress-visualization img,
@@ -256,20 +256,20 @@ body{
     left: 0;
     width: 100%;
     height: var(--progress, 0%);
-    background: linear-gradient(to top, rgba(90, 199, 0, 0.4), rgba(69, 227, 255, 0.4));
+    background: var(--gradient-progress);
     z-index: 0;
-    border-radius: 1vw;
-    transition: height 0.5s ease-in-out;
+    border-radius: var(--radius-1);
+    transition: height var(--transition-slow) ease-in-out;
 }
 
 .plant-image{
-    background-color: transparent;
+    background-color: var(--color-transparent);
 }
 
 .new-goal-card{
     position: relative;
     background-image: url('../assets/landing.webp');
-    background-color: #cdd8d5;
+    background-color: var(--color-primary);
     background-blend-mode:color-dodge;
     background-size: cover;
     background-position: center;
@@ -289,8 +289,8 @@ body{
 }
 
 .new-goal-card:hover{
-    background-image: linear-gradient(rgba(220, 240, 255, 0.5),rgba(90, 199, 0, 0.5));
-    background-color: white;
+    background-image: var(--gradient-primary);
+    background-color: var(--color-white);
     background-blend-mode:normal;
 }
 
@@ -301,19 +301,19 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: clamp(32px, 6vw, 64px);
-    color: #ffffff;
-    background: rgba(0,0,0,0.2);
-    background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(0, 0, 0, 0.1));
+    color: var(--color-white);
+    background: var(--color-overlay);
+    background-image: var(--gradient-button-overlay);
     width: clamp(56px, 9vw, 96px);
     height: clamp(56px, 9vw, 96px);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    box-shadow: 0 0 0.5vw rgba(0,0,0,0.2);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 var(--spacing-05) var(--shadow-color);
     z-index: 2;
     opacity: 1;
-    transition: opacity 0.25s ease, transform 0.2s ease;
+    transition: opacity 0.25s ease, transform var(--transition-fast) ease;
     pointer-events: auto;
 }
 
@@ -325,10 +325,10 @@ body{
 
 /* Contenteditable placeholder styling for new goal name */
 .goal-name-editable{
-    outline: 2px dashed #ccc;
+    outline: 2px dashed var(--color-gray);
     outline-offset: -2px;
     cursor: text;
-    transition: outline 0.2s ease;
+    transition: outline var(--transition-fast) ease;
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
@@ -337,22 +337,22 @@ body{
 
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: #bbb transparent;
+    scrollbar-color: var(--color-scrollbar) var(--color-transparent);
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: var(--font-sans);
     font-size: xx-large;
     text-align: center;
-    text-shadow: 0 0 0.2vw lightgray;
+    text-shadow: var(--text-shadow);
 
     max-height: 50%;
 }
 
 .goal-name-editable:focus{
-    outline: 2px solid #5ac700;
+    outline: 2px solid var(--color-accent);
     outline-offset: -2px;
     align-items: center;
 }
@@ -360,7 +360,7 @@ body{
 /* Show placeholder text by default */
 .goal-name-editable.show-placeholder::before{
     content: 'Press Enter to Save';
-    color: #999;
+    color: var(--color-gray);
     pointer-events: none;
     align-items: center;
 }
@@ -374,12 +374,12 @@ body{
 .modal-goal-details,
 .modal-progress-visualization,
 .subtask-visualization {
-    background-color: white;
+    background-color: var(--color-white);
     border: 1px;
     box-sizing: border-box;
-    border-radius: 1vw;
-    padding: 1vw;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
+    border-radius: var(--radius-1);
+    padding: var(--spacing-1);
+    box-shadow: var(--shadow-sm);
 }
 
 .modal-goal-name {
@@ -392,7 +392,7 @@ body{
     font-size: 1.8rem;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #bbb transparent;
+    scrollbar-color: var(--color-scrollbar) var(--color-transparent);
     flex-grow: 1;
 }
 
@@ -414,34 +414,34 @@ body{
 .subtask-display {
     display: flex;
     flex-direction: column;
-    gap: 1vw;
+    gap: var(--spacing-1);
     overflow-x: visible;
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: #bbb transparent;
+    scrollbar-color: var(--color-scrollbar) var(--color-transparent);
     flex-grow: 1;
-    flex: 0 0 calc(40% - 0.5vw);
+    flex: 0 0 calc(40% - var(--spacing-05));
     max-height: 100%;
 }
 
 .new-subtask-button {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: var(--color-light);
     border: none;
     box-sizing: border-box;
-    border-radius: 1vw;
+    border-radius: var(--radius-1);
     padding: 1.5vw;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
+    box-shadow: var(--shadow-sm);
     width: 100%;
     
-    outline: 2px dashed #ccc;
+    outline: 2px dashed var(--color-gray);
     outline-offset: -2px;
     cursor: pointer;
-    transition: outline 0.2s ease;
+    transition: outline var(--transition-fast) ease;
     
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: var(--font-sans);
     font-size: xx-large;
     text-align: center;
-    color: #999;
+    color: var(--color-gray);
     
     display: flex;
     justify-content: center;
@@ -449,28 +449,28 @@ body{
 }
 
 .new-subtask-button:hover {
-    outline: 2px solid #5ac700;
+    outline: 2px solid var(--color-accent);
     outline-offset: -2px;
-    color: #5ac700;
+    color: var(--color-accent);
 }
 
 .subtask-item {
-    background-color: white;
+    background-color: var(--color-white);
     border: 1px;
     box-sizing: border-box;
-    border-radius: 1vw;
-    padding: 1vw;
-    box-shadow: 0vw 0vw 0.5vw lightgray;
+    border-radius: var(--radius-1);
+    padding: var(--spacing-1);
+    box-shadow: var(--shadow-sm);
     margin-bottom: var(--spacing-1);
     
     display: flex;
     flex-shrink: 0;
-    gap: 1vw;
+    gap: var(--spacing-1);
     
     position: relative;
     overflow: hidden;
     
-    transition: all 0.2s ease-in-out;
+    transition: all var(--transition-fast) ease-in-out;
 }
 
 .subtask-item::before {
@@ -480,18 +480,18 @@ body{
     left: 0;
     width: 0%;
     height: 100%;
-    background-image: linear-gradient(#51ff77cc, #73ff00cc);
-    background-color: #ffffff00;
-    transition: width 0.3s ease-in-out;
+    background-image: var(--gradient-accent);
+    background-color: var(--color-transparent);
+    transition: width var(--transition-normal) ease-in-out;
     z-index: 0;
-    border-radius: 1vw;
+    border-radius: var(--radius-1);
     margin-bottom: var(--spacing-1);
 }
 
 .subtask-item.completed::before {
     width: 100%;
-    background-image: linear-gradient(#51ff77cc, #73ff00cc);
-    background-color: #ffffff00;
+    background-image: var(--gradient-accent);
+    background-color: var(--color-transparent);
 }
 
 .subtask-item > * {
@@ -500,16 +500,16 @@ body{
 }
 
 .subtask-item:hover {
-    box-shadow: 0vw 0vw 1vw rgb(255, 255, 255);
+    box-shadow: 0vw 0vw var(--spacing-1) var(--color-white);
 }
 
 .subtask-name {
-    background-color: rgba(220, 240, 255, 0.3);
-    border-radius: 0.5vw;
-    padding: 0.5vw 1vw;
+    background-color: var(--color-light);
+    border-radius: var(--radius-05);
+    padding: var(--spacing-05) var(--spacing-1);
     flex: 1;
     
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: var(--font-sans);
     font-size: large;
     text-align: center;
     align-content: center;
@@ -520,23 +520,23 @@ body{
     word-break: break-word;
     
     cursor: text;
-    transition: background-color 0.2s ease;
+    transition: background-color var(--transition-fast) ease;
 }
 
 .subtask-name:focus {
-    outline: 2px solid #5ac700;
+    outline: 2px solid var(--color-accent);
     outline-offset: -2px;
-    background-color: rgba(220, 240, 255, 0.5);
+    background-color: var(--color-light-hover);
 }
 
 .subtask-date {
-    background-color: rgba(220, 240, 255, 0.3);
-    border-radius: 0.5vw;
-    padding: 0.5vw 1vw;
+    background-color: var(--color-light);
+    border-radius: var(--radius-05);
+    padding: var(--spacing-05) var(--spacing-1);
     flex: 0 0 auto;
     min-width: 120px;
     
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: var(--font-sans);
     font-size: large;
     text-align: center;
     align-content: center;
@@ -546,6 +546,6 @@ body{
     width: 24px;
     height: 24px;
     cursor: pointer;
-    accent-color: #5ac700;
+    accent-color: var(--color-accent);
     flex-shrink: 0;
 }

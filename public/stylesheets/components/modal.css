@@ -6,7 +6,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(128, 128, 128, 0.5);
+    background-color: var(--color-overlay);
     backdrop-filter: blur(5px);
 }
 
@@ -27,10 +27,10 @@
 .modal-goal-details,
 .modal-progress-visualization,
 .subtask-visualization {
-    background-color: white;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: var(--color-white);
+    font-family: var(--font-sans);
     text-align: center;
-    text-shadow: 0 0 0.2vw lightgray;
+    text-shadow: var(--text-shadow);
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
@@ -38,25 +38,25 @@
 }
 
 .delete-goal-button {
-    background-color: #ff4d4d;
+    background-color: var(--color-danger);
     border: none;
-    color: white;
+    color: var(--color-white);
     cursor: pointer;
     align-self: flex-start;
     width: 100%;
 }
 
 .delete-goal-button:hover {
-    background-color: #e60000;
+    background-color: var(--color-danger-hover);
 }
 
 .delete-task-button {
-    background-color: #ff4d4d;
+    background-color: var(--color-danger);
     border: none;
-    color: white;
+    color: var(--color-white);
     cursor: pointer;
 }
 
 .delete-task-button:hover {
-    background-color: #e60000;
+    background-color: var(--color-danger-hover);
 }

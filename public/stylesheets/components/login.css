@@ -9,12 +9,12 @@
     flex-direction: column;
 
     background-image: url(../../../assets/landing.webp);
-    background-color: #cdd8d5;
+    background-color: var(--color-primary);
     background-blend-mode:color-dodge;
 
     background-size: auto;
 
-    box-shadow: 0 0 2vw #cdd8d5;
+    box-shadow: var(--shadow-lg);
 }
 
 .login-card-container h1 {
