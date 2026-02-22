@@ -22,7 +22,7 @@
         </section>
 
         <section class="navigation-bar-right">
-            <a href="../index.html" class="settings-page">
+            <a href="../pages/settings.html" class="settings-page">
                 <h1 class="m-auto">Settings</h1>
             </a>
             <a href="../pages/profile.html" class="profile-page">
@@ -90,5 +90,9 @@
     <script src="../public/script.js"></script>
     <script src="../public/progressbar.js"></script>
     <script src="../public/scrolldown.js"></script>
+    <script type="module">
+        import ThemeManager from "../public/modules/ThemeManager.js";
+        ThemeManager.init();
+    </script>
 </body>
 </html>

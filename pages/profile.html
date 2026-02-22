@@ -22,10 +22,10 @@
         </section>
 
         <section class="navigation-bar-right">
-            <a href="../index.html" class="settings-page">
+            <a href="../pages/settings.html" class="settings-page">
                 <h1 class="m-auto">Settings</h1>
             </a>
-            <a href="" class="profile-page">
+            <a href="../pages/profile.html" class="profile-page">
                 <h1 class="m-auto">Profile</h1>
             </a>
         </section>
@@ -104,6 +104,10 @@
 
     <script type="module">
         import DataManager from "../public/modules/DataManager.js";
+        import ThemeManager from "../public/modules/ThemeManager.js";
+
+        // Apply saved theme settings
+        ThemeManager.init();
 
         const contentViewer = document.querySelector('.profile-viewer-content');
         const buttons = document.querySelectorAll('.profile-button');

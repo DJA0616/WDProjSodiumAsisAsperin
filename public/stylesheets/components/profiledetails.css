@@ -195,3 +195,284 @@
     color: var(--color-gray);
     font-family: var(--font-sans);
 }
+
+/* ==========================================================================
+   SETTINGS PAGE COMPONENTS
+   ========================================================================== */
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin-top: var(--spacing-1);
+}
+
+.settings-card {
+    background-image: var(--gradient-primary);
+    font-family: var(--font-sans);
+}
+
+.settings-card h2 {
+    margin-bottom: var(--spacing-05);
+    border-bottom: 1px solid gray;
+    padding-bottom: var(--spacing-05);
+    font-family: var(--font-sans);
+}
+
+.settings-description {
+    color: var(--color-gray);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-1);
+}
+
+/* Color picker styling */
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-05);
+    margin-bottom: var(--spacing-1);
+    background-color: var(--color-white);
+    padding: var(--spacing-05);
+    border-radius: var(--radius-05);
+}
+
+.setting-item label {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+}
+
+.color-picker-wrapper input[type="color"] {
+    width: 50px;
+    height: 35px;
+    padding: 0;
+    border: 2px solid gray;
+    border-radius: var(--radius-05);
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.color-picker-wrapper input[type="color"]:hover {
+    transform: scale(1.1);
+}
+
+.color-value {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+
+/* Slider styling */
+input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 2px solid var(--color-white);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 2px solid var(--color-white);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+}
+
+/* Preset buttons */
+.preset-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-05);
+    margin-bottom: var(--spacing-1);
+}
+
+.preset-btn {
+    padding: var(--spacing-05) var(--spacing-1);
+    border: 1px solid gray;
+    background-color: var(--color-white);
+    border-radius: var(--radius-05);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    transition: all var(--transition-fast);
+}
+
+.preset-btn:hover {
+    background-color: var(--color-light-hover);
+    transform: scale(1.02);
+}
+
+.reset-btn {
+    width: 100%;
+    padding: var(--spacing-05);
+    border: 1px solid gray;
+    background-color: var(--color-white);
+    border-radius: var(--radius-05);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: all var(--transition-fast);
+}
+
+.reset-btn:hover {
+    background-color: #ffebee;
+    border-color: #e57373;
+}
+
+/* Preview box */
+.preview-card {
+    grid-column: span 2;
+}
+
+.preview-box {
+    background-color: var(--color-primary);
+    padding: var(--spacing-1);
+    border-radius: var(--radius-1);
+    border: 1px solid gray;
+    transition: all var(--transition-normal);
+}
+
+.preview-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-05);
+}
+
+.preview-content {
+    margin-bottom: var(--spacing-1);
+    font-size: 0.9rem;
+}
+
+.preview-button {
+    padding: var(--spacing-05) var(--spacing-1);
+    border: none;
+    border-radius: var(--radius-05);
+    cursor: pointer;
+    font-family: var(--font-sans);
+}
+
+/* Checkbox styling */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-05);
+    background-color: var(--color-white);
+    border-radius: var(--radius-05);
+    margin-bottom: var(--spacing-05);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.checkbox-item:hover {
+    background-color: var(--color-light-hover);
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--color-accent);
+}
+
+.checkbox-item label {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+/* Coming soon badge */
+.coming-soon-card {
+    position: relative;
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background-image: var(--gradient-accent);
+    color: var(--color-white);
+    border-radius: var(--radius-05);
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-1);
+}
+
+.category-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-05);
+    opacity: 0.6;
+}
+
+.category-tag {
+    padding: 4px 10px;
+    background-color: var(--color-white);
+    border: 1px solid gray;
+    border-radius: var(--radius-1);
+    font-size: 0.85rem;
+}
+
+/* Action buttons */
+.action-btn {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-05);
+    margin-bottom: var(--spacing-05);
+    border: 1px solid gray;
+    background-color: var(--color-white);
+    border-radius: var(--radius-05);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: all var(--transition-fast);
+}
+
+.action-btn:hover {
+    background-color: var(--color-light-hover);
+    transform: scale(1.01);
+}
+
+.danger-btn {
+    background-color: #ffebee;
+    border-color: #e57373;
+    color: #c62828;
+}
+
+.danger-btn:hover {
+    background-color: #ffcdd2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .preview-card {
+        grid-column: span 1;
+    }
+    
+    .preset-buttons {
+        grid-template-columns: 1fr;
+    }
+}

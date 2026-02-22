@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/GoalGarden_logo.png">
+    <title>About</title>
+</head>
+
+<body>
+    <nav class="navigation-bar">
+        <section class="navigation-bar-left">
+            <a href="../index.html" class="home-page">
+                <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
+                <h1 class="m-auto">GoalGarden</h1>
+            </a>
+
+            <a href="../pages/about.html" class="about-page">
+                <h1 class="m-auto">About</h1>
+            </a>
+        </section>
+
+        <section class="navigation-bar-right">
+            <a href="../pages/settings.html" class="settings-page">
+                <h1 class="m-auto">Settings</h1>
+            </a>
+            <a href="../pages/profile.html" class="profile-page">
+                <h1 class="m-auto">Profile</h1>
+            </a>
+        </section>
+    </nav>
+
+    <section class="content-section">
+        <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1;">
+            <section class="profile-hero p-1">
+                <img src="../assets/GoalGarden_logo.png" alt="Logo" class="profile-logo" style="box-sizing: border-box; display: block; margin: 0 auto; border: 2px solid var(--color-border); width: 10vw; float:left;">
+                <h1 class="profile-header font-sans m-0 p-0 mx-auto">[DISPLAY NAME]</h1>
+                <h2 class="profile-subheader font-sans m-0 p-0 mx-auto">[USERNAME]</h2>
+            </section>
+            <section class="profile-viewer-buttons p-1">
+                <button class="profile-button" value="Theme">Theme</button>
+                <button class="profile-button" value="DataManager">Data Manager</button>
+            </section>
+            <section class="profile-viewer-content p-1">
+
+            </section>
+        </div>
+    </section>
+
+    <footer class="footer-bar">
+        <a href="index.html" style="display: flex; flex-direction: row; align-self: center; text-decoration: none;">
+            <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; align-self: center; margin-right: 0.5vw;">
+            <h1>GoalGarden</h1>
+        </a>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h1>Contact Us </h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Contact Number: </th>
+                            <th>+63 920 910 0616</th>
+                        </tr>
+                        <tr>
+                            <th>Email Address 1: </th>
+                            <th>b2029djfasis@pshs.edu.ph</th>
+                        </tr>
+                        <tr>
+                            <th>Email Address 2: </th>
+                            <th>b2029jasasperin@pshs.edu.ph</th>
+                        </tr>
+                        <tr>
+                            <th>Github Account: </th>
+                            <th>DJA0616</th>
+                        </tr>
+                        <tr>
+                            <th>Github Account: </th>
+                            <th>Juan-Asperin</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="copyright-notice">
+                <h1>Copyright Notice </h1>
+                <p>© 2026 GoalGarden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import ThemeManager from "../public/modules/ThemeManager.js";
+
+        const contentViewer = document.querySelector('.profile-viewer-content');
+        const buttons = document.querySelectorAll('.profile-button');
+
+        // Use ThemeManager's default theme
+        const defaultTheme = ThemeManager.defaultTheme;
+
+        // Wrapper functions that use ThemeManager
+        function loadSettings() {
+            return ThemeManager.loadSettings();
+        }
+
+        function saveSettings(settings) {
+            ThemeManager.saveSettings(settings);
+        }
+
+        function applyTheme(settings) {
+            ThemeManager.applyTheme(settings);
+        }
+
+        // Load data manager settings
+        function loadDataSettings() {
+            const saved = localStorage.getItem('dataManagerSettings');
+            return saved ? JSON.parse(saved) : {
+                sortTasksByCategory: false,
+                sortGoalsByCategory: false,
+                showCompletedTasks: true,
+                groupByDueDate: false
+            };
+        }
+
+        // Save data manager settings
+        function saveDataSettings(settings) {
+            localStorage.setItem('dataManagerSettings', JSON.stringify(settings));
+        }
+
+        // Render Theme section
+        function renderTheme() {
+            const settings = loadSettings();
+            
+            contentViewer.innerHTML = `
+                <h1>Theme Settings</h1>
+                <section class="settings-grid gap-1">
+                    <!-- Colors Section -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm">
+                        <h2>Colors</h2>
+                        
+                        <div class="setting-item">
+                            <label for="bg-color">Background Color</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="bg-color" value="${settings.backgroundColor}" />
+                                <span class="color-value">${settings.backgroundColor}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="text-color">Text Color</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="text-color" value="${settings.textColor}" />
+                                <span class="color-value">${settings.textColor}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="accent-color">Accent Color</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="accent-color" value="${settings.colorAccent}" />
+                                <span class="color-value">${settings.colorAccent}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="primary-color">Primary Color</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="primary-color" value="${settings.colorPrimary}" />
+                                <span class="color-value">${settings.colorPrimary}</span>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Spacing Section -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm">
+                        <h2>Spacing & Layout</h2>
+                        
+                        <div class="setting-item">
+                            <label for="spacing-slider">Base Spacing: <span id="spacing-value">${settings.spacing1}vw</span></label>
+                            <input type="range" id="spacing-slider" min="0.5" max="3" step="0.1" value="${settings.spacing1}" />
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="radius-slider">Border Radius: <span id="radius-value">${settings.radius1}vw</span></label>
+                            <input type="range" id="radius-slider" min="0" max="3" step="0.1" value="${settings.radius1}" />
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="transition-slider">Animation Speed: <span id="transition-value">${settings.transitionSpeed}s</span></label>
+                            <input type="range" id="transition-slider" min="0.1" max="1" step="0.05" value="${settings.transitionSpeed}" />
+                        </div>
+                    </section>
+                    
+                    <!-- Presets Section -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm">
+                        <h2>Theme Presets</h2>
+                        
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-preset="light">☀️ Light</button>
+                            <button class="preset-btn" data-preset="dark">🌙 Dark</button>
+                            <button class="preset-btn" data-preset="nature">🌿 Nature</button>
+                            <button class="preset-btn" data-preset="ocean">🌊 Ocean</button>
+                        </div>
+                        
+                        <button id="reset-theme" class="reset-btn">Reset to Default</button>
+                    </section>
+                    
+                    <!-- Preview Section -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm preview-card">
+                        <h2>Preview</h2>
+                        <div class="preview-box" id="preview-box">
+                            <div class="preview-header">Sample Goal Card</div>
+                            <div class="preview-content">This is how your content will look with the current theme settings.</div>
+                            <button class="preview-button">Sample Button</button>
+                        </div>
+                    </section>
+                </section>
+            `;
+
+            // Add event listeners
+            setupThemeListeners(settings);
+        }
+
+        function setupThemeListeners(settings) {
+            // Color pickers
+            document.getElementById('bg-color').addEventListener('input', (e) => {
+                settings.backgroundColor = e.target.value;
+                e.target.nextElementSibling.textContent = e.target.value;
+                saveSettings(settings);
+                updatePreview(settings);
+            });
+
+            document.getElementById('text-color').addEventListener('input', (e) => {
+                settings.textColor = e.target.value;
+                e.target.nextElementSibling.textContent = e.target.value;
+                saveSettings(settings);
+                updatePreview(settings);
+            });
+
+            document.getElementById('accent-color').addEventListener('input', (e) => {
+                settings.colorAccent = e.target.value;
+                e.target.nextElementSibling.textContent = e.target.value;
+                saveSettings(settings);
+                updatePreview(settings);
+            });
+
+            document.getElementById('primary-color').addEventListener('input', (e) => {
+                settings.colorPrimary = e.target.value;
+                e.target.nextElementSibling.textContent = e.target.value;
+                saveSettings(settings);
+                updatePreview(settings);
+            });
+
+            // Sliders
+            document.getElementById('spacing-slider').addEventListener('input', (e) => {
+                settings.spacing1 = parseFloat(e.target.value);
+                document.getElementById('spacing-value').textContent = settings.spacing1 + 'vw';
+                saveSettings(settings);
+            });
+
+            document.getElementById('radius-slider').addEventListener('input', (e) => {
+                settings.radius1 = parseFloat(e.target.value);
+                document.getElementById('radius-value').textContent = settings.radius1 + 'vw';
+                saveSettings(settings);
+                updatePreview(settings);
+            });
+
+            document.getElementById('transition-slider').addEventListener('input', (e) => {
+                settings.transitionSpeed = parseFloat(e.target.value);
+                document.getElementById('transition-value').textContent = settings.transitionSpeed + 's';
+                saveSettings(settings);
+            });
+
+            // Presets
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const preset = btn.dataset.preset;
+                    applyPreset(preset, settings);
+                });
+            });
+
+            // Reset button
+            document.getElementById('reset-theme').addEventListener('click', () => {
+                Object.assign(settings, defaultTheme);
+                saveSettings(settings);
+                renderTheme();
+            });
+
+            // Initial preview
+            updatePreview(settings);
+        }
+
+        function applyPreset(preset, settings) {
+            const presets = {
+                light: {
+                    backgroundColor: '#ffffff',
+                    textColor: '#333333',
+                    colorAccent: '#5ac700',
+                    colorPrimary: '#cdd8d5'
+                },
+                dark: {
+                    backgroundColor: '#1a1a2e',
+                    textColor: '#eaeaea',
+                    colorAccent: '#00d9ff',
+                    colorPrimary: '#16213e'
+                },
+                nature: {
+                    backgroundColor: '#f0f7e6',
+                    textColor: '#2d5a27',
+                    colorAccent: '#4caf50',
+                    colorPrimary: '#a5d6a7'
+                },
+                ocean: {
+                    backgroundColor: '#e3f2fd',
+                    textColor: '#0d47a1',
+                    colorAccent: '#03a9f4',
+                    colorPrimary: '#81d4fa'
+                }
+            };
+
+            Object.assign(settings, presets[preset]);
+            saveSettings(settings);
+            renderTheme();
+        }
+
+        function updatePreview(settings) {
+            const preview = document.getElementById('preview-box');
+            if (preview) {
+                preview.style.backgroundColor = settings.colorPrimary;
+                preview.style.color = settings.textColor;
+                preview.style.borderRadius = settings.radius1 + 'vw';
+                
+                const previewBtn = preview.querySelector('.preview-button');
+                if (previewBtn) {
+                    previewBtn.style.backgroundColor = settings.colorAccent;
+                    previewBtn.style.color = settings.backgroundColor;
+                }
+            }
+        }
+
+        // Render Data Manager section
+        function renderDataManager() {
+            const settings = loadDataSettings();
+            
+            contentViewer.innerHTML = `
+                <h1>Data Manager</h1>
+                <section class="settings-grid gap-1">
+                    <!-- Sorting Options -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm">
+                        <h2>Sorting Options</h2>
+                        <p class="settings-description">Configure how your tasks and goals are organized.</p>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sort-tasks-category" ${settings.sortTasksByCategory ? 'checked' : ''} />
+                            <label for="sort-tasks-category">Sort tasks by category</label>
+                        </div>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sort-goals-category" ${settings.sortGoalsByCategory ? 'checked' : ''} />
+                            <label for="sort-goals-category">Sort goals by category</label>
+                        </div>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="group-due-date" ${settings.groupByDueDate ? 'checked' : ''} />
+                            <label for="group-due-date">Group tasks by due date</label>
+                        </div>
+                    </section>
+                    
+                    <!-- Display Options -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm">
+                        <h2>Display Options</h2>
+                        <p class="settings-description">Control what data is shown on the home page.</p>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="show-completed" ${settings.showCompletedTasks ? 'checked' : ''} />
+                            <label for="show-completed">Show completed tasks</label>
+                        </div>
+                    </section>
+                    
+                    <!-- Categories (Coming Soon) -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm coming-soon-card">
+                        <h2>Goal Categories</h2>
+                        <p class="settings-description">Organize goals into custom categories for better management.</p>
+                        <div class="coming-soon-badge">Coming Soon</div>
+                        <div class="category-preview">
+                            <span class="category-tag">🎯 Personal</span>
+                            <span class="category-tag">💼 Work</span>
+                            <span class="category-tag">📚 Learning</span>
+                            <span class="category-tag">❤️ Health</span>
+                        </div>
+                    </section>
+                    
+                    <!-- Data Actions -->
+                    <section class="settings-card border rounded-1 p-1 shadow-sm">
+                        <h2>Data Actions</h2>
+                        <p class="settings-description">Manage your stored data.</p>
+                        
+                        <button id="export-data" class="action-btn">📤 Export Data</button>
+                        <button id="import-data" class="action-btn">📥 Import Data</button>
+                        <button id="clear-data" class="action-btn danger-btn">🗑️ Clear All Data</button>
+                    </section>
+                </section>
+            `;
+
+            // Add event listeners
+            setupDataManagerListeners(settings);
+        }
+
+        function setupDataManagerListeners(settings) {
+            document.getElementById('sort-tasks-category').addEventListener('change', (e) => {
+                settings.sortTasksByCategory = e.target.checked;
+                saveDataSettings(settings);
+            });
+
+            document.getElementById('sort-goals-category').addEventListener('change', (e) => {
+                settings.sortGoalsByCategory = e.target.checked;
+                saveDataSettings(settings);
+            });
+
+            document.getElementById('group-due-date').addEventListener('change', (e) => {
+                settings.groupByDueDate = e.target.checked;
+                saveDataSettings(settings);
+            });
+
+            document.getElementById('show-completed').addEventListener('change', (e) => {
+                settings.showCompletedTasks = e.target.checked;
+                saveDataSettings(settings);
+            });
+
+            document.getElementById('export-data').addEventListener('click', () => {
+                const data = {
+                    goals: JSON.parse(localStorage.getItem('allGoals') || '[]'),
+                    tasks: JSON.parse(localStorage.getItem('allTasks') || '[]'),
+                    categories: JSON.parse(localStorage.getItem('allCategories') || '[]'),
+                    settings: loadSettings(),
+                    dataSettings: loadDataSettings()
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'goalgarden-backup.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            document.getElementById('import-data').addEventListener('click', () => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            if (data.goals) localStorage.setItem('allGoals', JSON.stringify(data.goals));
+                            if (data.tasks) localStorage.setItem('allTasks', JSON.stringify(data.tasks));
+                            if (data.categories) localStorage.setItem('allCategories', JSON.stringify(data.categories));
+                            if (data.settings) saveSettings(data.settings);
+                            if (data.dataSettings) saveDataSettings(data.dataSettings);
+                            alert('Data imported successfully!');
+                            renderDataManager();
+                        } catch (err) {
+                            alert('Error importing data: Invalid file format');
+                        }
+                    };
+                    reader.readAsText(file);
+                };
+                input.click();
+            });
+
+            document.getElementById('clear-data').addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
+                    localStorage.removeItem('allGoals');
+                    localStorage.removeItem('allTasks');
+                    localStorage.removeItem('allCategories');
+                    alert('All data has been cleared.');
+                }
+            });
+        }
+
+        // Button click handlers
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const value = button.value;
+                switch(value) {
+                    case 'Theme':
+                        renderTheme();
+                        break;
+                    case 'DataManager':
+                        renderDataManager();
+                        break;
+                    default:
+                        contentViewer.innerHTML = `<h1>${value}</h1>`;
+                }
+            });
+        });
+
+        // Initialize with Theme and apply saved settings
+        document.addEventListener('DOMContentLoaded', () => {
+            buttons[0].classList.add('active');
+            applyTheme(loadSettings());
+            renderTheme();
+        });
+    </script>
+</body>
+</html>

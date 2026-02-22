@@ -57,6 +57,10 @@
         import DomManager from "./public/modules/DomManager.js";
         import HomePageRenderer from "./public/modules/HomePageRenderer.js";
         import EventHandler from "./public/modules/EventHandler.js";
+        import ThemeManager from "./public/modules/ThemeManager.js";
+
+        // Apply saved theme settings
+        ThemeManager.init();
 
         // DataManager is instantiated (manages state)
         const dataManager = new DataManager();
