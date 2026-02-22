@@ -168,6 +168,14 @@
                                 <span class="color-value">${settings.colorPrimary}</span>
                             </div>
                         </div>
+                        
+                        <div class="setting-item">
+                            <label for="surface-color">Surface Color (Cards)</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="surface-color" value="${settings.colorSurface || '#ffffff'}" />
+                                <span class="color-value">${settings.colorSurface || '#ffffff'}</span>
+                            </div>
+                        </div>
                     </section>
                     
                     <!-- Spacing Section -->
@@ -250,6 +258,13 @@
                 updatePreview(settings);
             });
 
+            document.getElementById('surface-color').addEventListener('input', (e) => {
+                settings.colorSurface = e.target.value;
+                e.target.nextElementSibling.textContent = e.target.value;
+                saveSettings(settings);
+                updatePreview(settings);
+            });
+
             // Sliders
             document.getElementById('spacing-slider').addEventListener('input', (e) => {
                 settings.spacing1 = parseFloat(e.target.value);
@@ -295,25 +310,33 @@
                     backgroundColor: '#ffffff',
                     textColor: '#333333',
                     colorAccent: '#5ac700',
-                    colorPrimary: '#cdd8d5'
+                    colorPrimary: '#cdd8d5',
+                    colorSurface: '#ffffff',
+                    colorGray: '#999999'
                 },
                 dark: {
                     backgroundColor: '#1a1a2e',
-                    textColor: '#eaeaea',
+                    textColor: '#f0f0f0',
                     colorAccent: '#00d9ff',
-                    colorPrimary: '#16213e'
+                    colorPrimary: '#2d3a5a',
+                    colorSurface: '#252540',
+                    colorGray: '#a0a0b0'
                 },
                 nature: {
                     backgroundColor: '#f0f7e6',
                     textColor: '#2d5a27',
                     colorAccent: '#4caf50',
-                    colorPrimary: '#a5d6a7'
+                    colorPrimary: '#a5d6a7',
+                    colorSurface: '#ffffff',
+                    colorGray: '#6b8e6b'
                 },
                 ocean: {
                     backgroundColor: '#e3f2fd',
                     textColor: '#0d47a1',
                     colorAccent: '#03a9f4',
-                    colorPrimary: '#81d4fa'
+                    colorPrimary: '#81d4fa',
+                    colorSurface: '#ffffff',
+                    colorGray: '#5c7c9c'
                 }
             };
 
@@ -329,10 +352,26 @@
                 preview.style.color = settings.textColor;
                 preview.style.borderRadius = settings.radius1 + 'vw';
                 
+                const previewHeader = preview.querySelector('.preview-header');
+                if (previewHeader) {
+                    previewHeader.style.backgroundColor = settings.colorSurface || '#ffffff';
+                    previewHeader.style.color = settings.textColor;
+                    previewHeader.style.padding = '0.5rem';
+                    previewHeader.style.borderRadius = (settings.radius1 * 0.5) + 'vw';
+                }
+                
+                const previewContent = preview.querySelector('.preview-content');
+                if (previewContent) {
+                    previewContent.style.backgroundColor = settings.colorSurface || '#ffffff';
+                    previewContent.style.color = settings.textColor;
+                    previewContent.style.padding = '0.5rem';
+                    previewContent.style.borderRadius = (settings.radius1 * 0.5) + 'vw';
+                }
+                
                 const previewBtn = preview.querySelector('.preview-button');
                 if (previewBtn) {
                     previewBtn.style.backgroundColor = settings.colorAccent;
-                    previewBtn.style.color = settings.backgroundColor;
+                    previewBtn.style.color = settings.colorSurface || '#ffffff';
                 }
             }
         }
