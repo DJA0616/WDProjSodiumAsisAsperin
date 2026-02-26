@@ -4,7 +4,7 @@
    ========================================================================== */
 
 .profile-viewer-content {
-    flex-grow: 1;
+    flex-grow: 0;
     padding: var(--spacing-1);
     font-family: var(--font-sans);
 }

@@ -32,7 +32,7 @@
     </nav>
 
     <section class="content-section">
-        <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1;">
+        <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1; display: flex; flex-direction: column;">
             <section class="profile-hero p-1">
                 <img src="../assets/GoalGarden_logo.png" alt="Logo" class="profile-logo" style="box-sizing: border-box; display: block; margin: 0 auto; border: 2px solid var(--color-border); width: 10vw; float:left;">
                 <h1 class="profile-header font-sans m-0 p-0 mx-auto">[DISPLAY NAME]</h1>
@@ -44,6 +44,9 @@
                 <button class="profile-button" value="Archive">Archive</button>
             </section>
             <section class="profile-viewer-content p-1">
+            </section>
+            <section class="p-1">
+                <button class="profile-button" onclick="window.location.href='../index.html'">Switch Account</button>
             </section>
         </div>
     </section>
@@ -110,7 +113,7 @@
         ThemeManager.init();
 
         const contentViewer = document.querySelector('.profile-viewer-content');
-        const buttons = document.querySelectorAll('.profile-button');
+        const buttons = document.querySelectorAll('.profile-viewer-buttons .profile-button');
         const dataManager = new DataManager();
 
         // Helper function to get current user
