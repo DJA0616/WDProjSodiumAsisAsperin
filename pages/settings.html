@@ -551,6 +551,13 @@
 
         // Initialize with Theme and apply saved settings
         document.addEventListener('DOMContentLoaded', () => {
+            // Set display name from current user
+            const displayName = getCurrentUser();
+            const profileHeader = document.querySelector('.profile-header');
+            const profileSubheader = document.querySelector('.profile-subheader');
+            profileHeader.textContent = displayName;
+            profileSubheader.textContent = `@${displayName.toLowerCase()}`;
+
             buttons[0].classList.add('active');
             applyTheme(loadSettings());
             renderTheme();
