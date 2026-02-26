@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/GoalGarden_logo.png">
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/GoalGarden_logo.png">
     <title>GoalGarden</title>
 </head>
 
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="index.html" class="home-page">
-                <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
+            <a href="../pages/home.html" class="home-page">
+                <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
                 <h1 class="m-auto">GoalGarden</h1>
             </a>
 
-            <a href="pages/about.html" class="about-page">
+            <a href="../pages/about.html" class="about-page">
                 <h1 class="m-auto">About</h1>
             </a>
         </section>
 
         <section class="navigation-bar-right">
-            <a href="pages/settings.html" class="settings-page">
+            <a href="../pages/settings.html" class="settings-page">
                 <h1 class="m-auto">Settings</h1>
             </a>
-            <a href="pages/profile.html" class="profile-page">
+            <a href="../pages/profile.html" class="profile-page">
                 <h1 class="m-auto">Profile</h1>
             </a>
         </section>
@@ -33,7 +33,7 @@
 
     <section class="content-section">
         <section class="greeting-section">
-            <img src="assets/GoalGarden_logo.png" alt="Logo" class="greeting-logo" style="box-sizing: border-box; display: block; margin: 0 auto; object-fit: contain; border: 2px solid var(--color-border);">
+            <img src="../assets/GoalGarden_logo.png" alt="Logo" class="greeting-logo" style="box-sizing: border-box; display: block; margin: 0 auto; object-fit: contain; border: 2px solid var(--color-border);">
 
             <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
             <h1 class="greeting-name font-sans m-0 p-0 mx-auto bg-gradient-text">User</h1>
@@ -63,7 +63,7 @@
                 </section>
 
                 <section class="goal-card-progress-visualization">
-                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                    <img src="../assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
                 </section>
             </section>
         </template>
@@ -81,7 +81,7 @@
                 </section>
 
                 <section class="goal-card-progress-visualization">
-                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                    <img src="../assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
                 </section>
             </section>    
         </template>
@@ -119,8 +119,8 @@
     </template>
 
     <footer class="footer-bar">
-        <a href="index.html" style="display: flex; flex-direction: row; align-self: center; text-decoration: none;">
-            <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; align-self: center; margin-right: 0.5vw;">
+        <a href="../index.html" style="display: flex; flex-direction: row; align-self: center; text-decoration: none;">
+            <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; align-self: center; margin-right: 0.5vw;">
             <h1>GoalGarden</h1>
         </a>
         <div class="footer-content">
@@ -159,12 +159,12 @@
     </footer>
 
     <script type="module">
-        import DataManager from "./public/modules/DataManager.js";
-        import DataFilter from "./public/modules/DataFilter.js";
-        import DomManager from "./public/modules/homePage/DomManager.js";
-        import HomePageRenderer from "./public/modules/homePage/HomePageRenderer.js";
-        import EventHandler from "./public/modules/homePage/EventHandler.js";
-        import ThemeManager from "./public/modules/ThemeManager.js";
+        import DataManager from "../public/modules/DataManager.js";
+        import DataFilter from "../public/modules/DataFilter.js";
+        import DomManager from "../public/modules/homePage/DomManager.js";
+        import HomePageRenderer from "../public/modules/homePage/HomePageRenderer.js";
+        import EventHandler from "../public/modules/homePage/EventHandler.js";
+        import ThemeManager from "../public/modules/ThemeManager.js"
 
         // Apply saved theme settings
         ThemeManager.init();
@@ -185,6 +185,13 @@
         });
     </script>
 
-    <script src="public/oldJSfiles/scrolldown.js"></script>
+    <script>
+        if(!sessionStorage.getItem("currentUser")) {
+            // If no user is logged in, redirect to login page
+            window.location.href = "../index.html";
+        }
+    </script>
+
+    <script src="../public/oldJSfiles/scrolldown.js"></script>
 </body>
 </html>
