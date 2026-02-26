@@ -11,13 +11,21 @@ class ThemeManager {
         transitionSpeed: 0.3
     };
 
+    static getCurrentUser() {
+        return sessionStorage.getItem('currentUser') || 'default';
+    }
+
+    static getStorageKey(keyName) {
+        return `${keyName}-${ThemeManager.getCurrentUser()}`;
+    }
+
     static loadSettings() {
-        const saved = localStorage.getItem('themeSettings');
+        const saved = localStorage.getItem(ThemeManager.getStorageKey('themeSettings'));
         return saved ? JSON.parse(saved) : { ...ThemeManager.defaultTheme };
     }
 
     static saveSettings(settings) {
-        localStorage.setItem('themeSettings', JSON.stringify(settings));
+        localStorage.setItem(ThemeManager.getStorageKey('themeSettings'), JSON.stringify(settings));
         ThemeManager.applyTheme(settings);
     }
 

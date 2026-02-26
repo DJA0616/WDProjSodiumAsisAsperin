@@ -94,6 +94,16 @@
         const contentViewer = document.querySelector('.profile-viewer-content');
         const buttons = document.querySelectorAll('.profile-button');
 
+        // Helper function to get current user
+        function getCurrentUser() {
+            return sessionStorage.getItem('currentUser') || 'default';
+        }
+
+        // Helper function to get user-specific storage key
+        function getStorageKey(keyName) {
+            return `${keyName}-${getCurrentUser()}`;
+        }
+
         // Use ThemeManager's default theme
         const defaultTheme = ThemeManager.defaultTheme;
 
@@ -112,7 +122,7 @@
 
         // Load data manager settings
         function loadDataSettings() {
-            const saved = localStorage.getItem('dataManagerSettings');
+            const saved = localStorage.getItem(getStorageKey('dataManagerSettings'));
             return saved ? JSON.parse(saved) : {
                 sortTasksByCategory: false,
                 sortGoalsByCategory: false,
@@ -123,7 +133,7 @@
 
         // Save data manager settings
         function saveDataSettings(settings) {
-            localStorage.setItem('dataManagerSettings', JSON.stringify(settings));
+            localStorage.setItem(getStorageKey('dataManagerSettings'), JSON.stringify(settings));
         }
 
         // Render Theme section
@@ -467,9 +477,9 @@
 
             document.getElementById('export-data').addEventListener('click', () => {
                 const data = {
-                    goals: JSON.parse(localStorage.getItem('allGoals') || '[]'),
-                    tasks: JSON.parse(localStorage.getItem('allTasks') || '[]'),
-                    categories: JSON.parse(localStorage.getItem('allCategories') || '[]'),
+                    goals: JSON.parse(localStorage.getItem(getStorageKey('allGoals')) || '[]'),
+                    tasks: JSON.parse(localStorage.getItem(getStorageKey('allTasks')) || '[]'),
+                    categories: JSON.parse(localStorage.getItem(getStorageKey('allCategories')) || '[]'),
                     settings: loadSettings(),
                     dataSettings: loadDataSettings()
                 };
@@ -493,9 +503,9 @@
                     reader.onload = (event) => {
                         try {
                             const data = JSON.parse(event.target.result);
-                            if (data.goals) localStorage.setItem('allGoals', JSON.stringify(data.goals));
-                            if (data.tasks) localStorage.setItem('allTasks', JSON.stringify(data.tasks));
-                            if (data.categories) localStorage.setItem('allCategories', JSON.stringify(data.categories));
+                            if (data.goals) localStorage.setItem(getStorageKey('allGoals'), JSON.stringify(data.goals));
+                            if (data.tasks) localStorage.setItem(getStorageKey('allTasks'), JSON.stringify(data.tasks));
+                            if (data.categories) localStorage.setItem(getStorageKey('allCategories'), JSON.stringify(data.categories));
                             if (data.settings) saveSettings(data.settings);
                             if (data.dataSettings) saveDataSettings(data.dataSettings);
                             alert('Data imported successfully!');
@@ -511,9 +521,9 @@
 
             document.getElementById('clear-data').addEventListener('click', () => {
                 if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
-                    localStorage.removeItem('allGoals');
-                    localStorage.removeItem('allTasks');
-                    localStorage.removeItem('allCategories');
+                    localStorage.removeItem(getStorageKey('allGoals'));
+                    localStorage.removeItem(getStorageKey('allTasks'));
+                    localStorage.removeItem(getStorageKey('allCategories'));
                     alert('All data has been cleared.');
                 }
             });

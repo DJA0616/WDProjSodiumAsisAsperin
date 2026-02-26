@@ -113,13 +113,23 @@
         const buttons = document.querySelectorAll('.profile-button');
         const dataManager = new DataManager();
 
+        // Helper function to get current user
+        function getCurrentUser() {
+            return sessionStorage.getItem('currentUser') || 'default';
+        }
+
+        // Helper function to get user-specific storage key
+        function getStorageKey(keyName) {
+            return `${keyName}-${getCurrentUser()}`;
+        }
+
         // Load about me from localStorage
         function getAboutMe() {
-            return localStorage.getItem('profileAboutMe') || 'Tell us about yourself...';
+            return localStorage.getItem(getStorageKey('profileAboutMe')) || 'Tell us about yourself...';
         }
 
         function saveAboutMe(content) {
-            localStorage.setItem('profileAboutMe', content);
+            localStorage.setItem(getStorageKey('profileAboutMe'), content);
         }
 
         // Render Overview section

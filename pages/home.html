@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/GoalGarden_logo.png">
+    <title>GoalGarden</title>
+</head>
+
+<body>
+    <nav class="navigation-bar">
+        <section class="navigation-bar-left">
+            <a href="index.html" class="home-page">
+                <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
+                <h1 class="m-auto">GoalGarden</h1>
+            </a>
+
+            <a href="pages/about.html" class="about-page">
+                <h1 class="m-auto">About</h1>
+            </a>
+        </section>
+
+        <section class="navigation-bar-right">
+            <a href="pages/settings.html" class="settings-page">
+                <h1 class="m-auto">Settings</h1>
+            </a>
+            <a href="pages/profile.html" class="profile-page">
+                <h1 class="m-auto">Profile</h1>
+            </a>
+        </section>
+    </nav>
+
+    <section class="content-section">
+        <section class="greeting-section">
+            <img src="assets/GoalGarden_logo.png" alt="Logo" class="greeting-logo" style="box-sizing: border-box; display: block; margin: 0 auto; object-fit: contain; border: 2px solid var(--color-border);">
+
+            <h1 class="greeting-header font-sans m-0 p-0 mx-auto">Welcome Back, </h1>
+            <h1 class="greeting-name font-sans m-0 p-0 mx-auto bg-gradient-text">User</h1>
+
+            <section class="progress-display border m-1 shadow-sm" id="progress-display" onclick="scrollToSection('goal-card-display')">
+                <h1 class="progress-counter typewriter-animation" id="progress-counter"></h1>
+                <section class="progress-bar" id="progress-bar">
+                </section>
+            </section>
+        </section>
+
+        <!-- Goal Card Display -->
+        <section class="goal-card-display my-1 p-1 gap-1" style="background-color: var(--color-white)" id="goal-card-display">
+
+        </section>
+
+        <!-- Goal Card Template -->
+        <template id="goal-card-template">
+            <section class="goal-card">
+                <section class="goal-card-left">
+                    <section class="goal-name-description">
+
+                    </section>
+                    <section class="goal-task-list">
+                        
+                    </section>
+                </section>
+
+                <section class="goal-card-progress-visualization">
+                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                </section>
+            </section>
+        </template>
+
+        <!-- New Goal Card Button -->
+        <template id="new-goal-card-template">
+            <section class="new-goal-card">
+                <div class="new-goal-plus">+</div>
+                <section class="new-goal-card-left">
+                    <section id="new-goal-name-description" class="goal-name-description goal-name-editable" contenteditable="true">
+                    </section>
+                    <section class="goal-task-list">
+                        
+                    </section>
+                </section>
+
+                <section class="goal-card-progress-visualization">
+                    <img src="assets/plants/stage-1.png" alt="Plant" class="plant-image" data-plant-stage="1">
+                </section>
+            </section>    
+        </template>
+    </section>
+
+    <!-- Goal Card Modal -->
+    <section id="goal-modal" class="modal p-3">
+        <div class="modal-content p-1 border shadow-sm rounded-1">
+            <section class="modal-body gap-1 align-stretch">
+                <section class="modal-left gap-1 m-0">
+                    <section class="modal-goal-name border rounded-1 p-1 shadow-sm" contenteditable="true" data-goal-id=""></section>
+                    <section class="modal-goal-details border rounded-1 p-1 shadow-sm" contenteditable="true"></section>
+                    <button id="delete-goal-button" class="delete-goal-button rounded-1 p-1 text-lg font-sans">Delete Goal</button>
+                </section>
+                <section class="subtask-display border rounded-1 p-1 shadow-sm">
+
+                </section>
+                <section class="modal-progress-visualization  border rounded-1 p-1 shadow-sm">
+                    <img src="" alt="Plant" class="modal-plant-image">
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <template id="subtask-template">
+        <section class="subtask-item border rounded-1 p-1 gap-1 shadow-sm">
+            <section class="subtask-name"></section>
+            <section class="subtask-date"></section>
+            <input type="checkbox" class="subtask-checkbox">
+        </section>
+    </template>
+
+    <template id="new-subtask-template">
+        <button class="new-subtask-button">+ Add Subtask</button>
+    </template>
+
+    <footer class="footer-bar">
+        <a href="index.html" style="display: flex; flex-direction: row; align-self: center; text-decoration: none;">
+            <img src="assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; align-self: center; margin-right: 0.5vw;">
+            <h1>GoalGarden</h1>
+        </a>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h1>Contact Us </h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Contact Number: </th>
+                            <th>+63 920 910 0616</th>
+                        </tr>
+                        <tr>
+                            <th>Email Address 1: </th>
+                            <th>b2029djfasis@pshs.edu.ph</th>
+                        </tr>
+                        <tr>
+                            <th>Email Address 2: </th>
+                            <th>b2029jasasperin@pshs.edu.ph</th>
+                        </tr>
+                        <tr>
+                            <th>Github Account: </th>
+                            <th>DJA0616</th>
+                        </tr>
+                        <tr>
+                            <th>Github Account: </th>
+                            <th>Juan-Asperin</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="copyright-notice">
+                <h1>Copyright Notice </h1>
+                <p>© 2026 GoalGarden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import DataManager from "./public/modules/DataManager.js";
+        import DataFilter from "./public/modules/DataFilter.js";
+        import DomManager from "./public/modules/homePage/DomManager.js";
+        import HomePageRenderer from "./public/modules/homePage/HomePageRenderer.js";
+        import EventHandler from "./public/modules/homePage/EventHandler.js";
+        import ThemeManager from "./public/modules/ThemeManager.js";
+
+        // Apply saved theme settings
+        ThemeManager.init();
+
+        // DataManager is instantiated (manages state)
+        const dataManager = new DataManager();
+        
+        // HomePageRenderer only needs DataManager
+        const homePageRenderer = new HomePageRenderer(dataManager);
+
+        // Event Handler
+        const eventHandler = new EventHandler(dataManager, homePageRenderer);
+
+        // dataManager.clearAllData(); // For testing purposes only
+
+        document.addEventListener("DOMContentLoaded", () => {
+            homePageRenderer.renderGoals();
+        });
+    </script>
+
+    <script src="public/oldJSfiles/scrolldown.js"></script>
+</body>
+</html>
