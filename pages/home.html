@@ -180,7 +180,15 @@
 
         // dataManager.clearAllData(); // For testing purposes only
 
+        function getCurrentUser() {
+            return sessionStorage.getItem('currentUser') || 'default';
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
+            const displayName = getCurrentUser();
+            const profileHeader = document.querySelector('.greeting-name');
+            profileHeader.textContent = displayName;
+
             homePageRenderer.renderGoals();
         });
     </script>
