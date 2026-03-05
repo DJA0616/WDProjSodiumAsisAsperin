@@ -104,7 +104,8 @@
         if(!localStorage.getItem(KEY)) {
             let loginData = {
                 usernames: [username],
-                passwords: [password]
+                passwords: [password],
+                displayNames: [username]
             };
             localStorage.setItem(KEY, JSON.stringify(loginData));
             sessionStorage.setItem('currentUser', username);
@@ -125,8 +126,13 @@
                 }
             }
 
+            //if no usernames even exist, register the new user
+
+            console.log("Registering new user:", { username, password });
             loginData.usernames.push(username);
             loginData.passwords.push(password);
+            loginData.displayNames.push(username);
+
             localStorage.setItem(KEY, JSON.stringify(loginData));
             sessionStorage.setItem('currentUser', username);
             alert("Registration successful!");

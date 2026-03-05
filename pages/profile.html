@@ -35,7 +35,7 @@
         <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1; display: flex; flex-direction: column;">
             <section class="profile-hero p-1">
                 <img src="../assets/GoalGarden_logo.png" alt="Logo" class="profile-logo" style="box-sizing: border-box; display: block; margin: 0 auto; border: 2px solid var(--color-border); width: 10vw; float:left;">
-                <h1 class="profile-header font-sans m-0 p-0 mx-auto">[DISPLAY NAME]</h1>
+                <div class="profile-header font-sans m-0 p-0 mx-auto" contenteditable="true">[DISPLAY NAME]</div>
                 <h2 class="profile-subheader font-sans m-0 p-0 mx-auto">[USERNAME]</h2>
             </section>
             <section class="profile-viewer-buttons p-1">
@@ -116,9 +116,17 @@
         const buttons = document.querySelectorAll('.profile-viewer-buttons .profile-button');
         const dataManager = new DataManager();
 
+        const profileHeader = document.querySelector('.profile-header');
+        const profileSubheader = document.querySelector('.profile-subheader');
+
         // Helper function to get current user
         function getCurrentUser() {
             return sessionStorage.getItem('currentUser') || 'default';
+        }
+
+        function getCurrentUserDisplayName() {
+            let loginData = JSON.parse(localStorage.getItem(`loginData`));
+            return loginData.displayNames[loginData.usernames.indexOf(getCurrentUser())] || 'Lorem ipsum';
         }
 
         // Helper function to get user-specific storage key
@@ -133,6 +141,15 @@
 
         function saveAboutMe(content) {
             localStorage.setItem(getStorageKey('profileAboutMe'), content);
+        }
+
+        function saveDisplayName(content){
+            let loginData = JSON.parse(localStorage.getItem(`loginData`));
+            const userIndex = loginData.usernames.indexOf(getCurrentUser());
+            if(userIndex !== -1) {
+                loginData.displayNames[userIndex] = content;
+                localStorage.setItem(`loginData`, JSON.stringify(loginData));
+            }
         }
 
         // Render Overview section
@@ -280,14 +297,20 @@
             });
         });
 
+        // Display name interaction handler
+        profileHeader.addEventListener('click', ()=> {
+            const newDisplayName = profileHeader.textContent.trim();
+            if(newDisplayName.length > 0) {
+                saveDisplayName(newDisplayName);
+            }
+        });
+
         // Initialize with Overview
         document.addEventListener('DOMContentLoaded', () => {
             // Set display name from current user
-            const displayName = getCurrentUser();
-            const profileHeader = document.querySelector('.profile-header');
-            const profileSubheader = document.querySelector('.profile-subheader');
+            const displayName = getCurrentUserDisplayName();
             profileHeader.textContent = displayName;
-            profileSubheader.textContent = `@${displayName.toLowerCase()}`;
+            profileSubheader.textContent = `@${getCurrentUser().toLowerCase()}`;
 
             buttons[0].classList.add('active');
             renderOverview();
