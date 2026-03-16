@@ -35,7 +35,7 @@
         <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1; display: flex; flex-direction: column;">
             <section class="profile-hero p-1">
                 <img src="../assets/GoalGarden_logo.png" alt="Logo" class="profile-logo" style="box-sizing: border-box; display: block; margin: 0 auto; border: 2px solid var(--color-border); width: 10vw; float:left;">
-                <div class="profile-header font-sans m-0 p-0 mx-auto" contenteditable="true">[DISPLAY NAME]</div>
+                <div class="profile-header font-sans m-0 p-0 mx-auto" style="outline: none; text-decoration: none;" spellcheck="false" contenteditable="true">[DISPLAY NAME]</div>
                 <h2 class="profile-subheader font-sans m-0 p-0 mx-auto">[USERNAME]</h2>
             </section>
             <section class="profile-viewer-buttons p-1">
@@ -298,7 +298,19 @@
         });
 
         // Display name interaction handler
-        profileHeader.addEventListener('click', ()=> {
+        profileHeader.addEventListener('click', () => {
+            const newDisplayName = profileHeader.textContent.trim();
+            if(newDisplayName.length > 0) {
+                saveDisplayName(newDisplayName);
+            }
+        });
+
+        profileHeader.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter') {
+                e.preventDefault(); // Prevent new line
+                profileHeader.blur(); // Trigger blur event to save display name
+            }
+
             const newDisplayName = profileHeader.textContent.trim();
             if(newDisplayName.length > 0) {
                 saveDisplayName(newDisplayName);

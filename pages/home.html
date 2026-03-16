@@ -184,8 +184,14 @@
             return sessionStorage.getItem('currentUser') || 'default';
         }
 
+        function getCurrentUserDisplayName() {
+            let loginData = JSON.parse(localStorage.getItem(`loginData`));
+            return loginData.displayNames[loginData.usernames.indexOf(getCurrentUser())] || 'Lorem ipsum';
+        }
+
+
         document.addEventListener("DOMContentLoaded", () => {
-            const displayName = getCurrentUser();
+            const displayName = getCurrentUserDisplayName();
             const profileHeader = document.querySelector('.greeting-name');
             profileHeader.textContent = displayName;
 

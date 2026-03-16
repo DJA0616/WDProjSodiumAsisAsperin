@@ -99,6 +99,11 @@
             return sessionStorage.getItem('currentUser') || 'default';
         }
 
+        function getCurrentUserDisplayName() {
+            let loginData = JSON.parse(localStorage.getItem(`loginData`));
+            return loginData.displayNames[loginData.usernames.indexOf(getCurrentUser())] || 'Lorem ipsum';
+        }
+
         // Helper function to get user-specific storage key
         function getStorageKey(keyName) {
             return `${keyName}-${getCurrentUser()}`;
@@ -552,7 +557,7 @@
         // Initialize with Theme and apply saved settings
         document.addEventListener('DOMContentLoaded', () => {
             // Set display name from current user
-            const displayName = getCurrentUser();
+            const displayName = getCurrentUserDisplayName();
             const profileHeader = document.querySelector('.profile-header');
             const profileSubheader = document.querySelector('.profile-subheader');
             profileHeader.textContent = displayName;
