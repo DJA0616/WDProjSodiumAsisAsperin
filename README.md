@@ -9,6 +9,15 @@ Goal Garden
 ## 2-Sentence Description
 Goal Garden is a website that lets you track your goals through visualizations using plants. The website also provides a platform for setting and organizing goals in a manner that makes them more achievable or tangible.
 
+## This project is for...
+This project is for students, entrepreneurs, or just anyone who would desire to be more productive. Students, entrepreneurs, and several people alike have several personal goals to achieve. Students may have certain extracurriculars or grades that they need to work on to achieve. Entrepreneurs may have certain outputs they want to meet within their business. These are all personally set goals that could definitely use organization and some visual representation.
+
+### They will love this project because...
+- The project contains visual representations of goals, keeping their goals close to them through allowing them to see their own personal progress over time.
+- Provides an interface for organizing goals and the subtasks under each of them.
+- Provides a calendar for organizing daily, actionable tasks.
+- Provides larger tracking in the statistics tab of a profile to see the broader view across all goals and categories.
+
 ## Features
 - Goal Centric Display: Interactive addition and display of goals, along with their respective sub-tasks.
 - Calendar View of Tasks: Tasks can be viewed under the calendar view. New tasks with no specific goal can be set within the calendar view. The calendar view also allows for a more dynamic way of arranging and planning tasks.
