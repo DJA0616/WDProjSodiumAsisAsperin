@@ -1,8 +1,15 @@
 # Goal Garden
 > Progress brought to life 
 
-## 3rd Qtr Update
 
+
+# Final Project Submission
+### This project will not contain...
+* Cloud syncing for accounts. Every account made is stored locally on the user's browser only.
+* Complex data tables, visualizations, or linking between databases.
+* Animations for plant visualizations
+
+# 3rd Qtr Update
 ## Final Title
 Goal Garden
 
@@ -58,3 +65,6 @@ There are multiple parts of the page that will require JavaScript. First is the 
 
 ### Wireframe
 [Canva Link](https://www.canva.com/design/DAG3KHiH9LM/R0gjlAUo4Clk18q5jV2GOQ/edit?utm_content=DAG3KHiH9LM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+---
+Submited by Daniel Asis and Juan Asperin on 18 March 2026 to Sir Roy Canseco in partial fulfillment of the requirements of CS3 of DOST-PSHS-MC.
