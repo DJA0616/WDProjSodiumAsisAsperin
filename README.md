@@ -1,15 +1,6 @@
 # Goal Garden
 > Progress brought to life 
 
-
-
-# Final Project Submission
-### This project will not contain...
-* Cloud syncing for accounts. Every account made is stored locally on the user's browser only.
-* Complex data tables, visualizations, or linking between databases.
-* Animations for plant visualizations
-
-# 3rd Qtr Update
 ## Final Title
 Goal Garden
 
@@ -24,6 +15,11 @@ This project is for students, entrepreneurs, or just anyone who would desire to 
 - Provides an interface for organizing goals and the subtasks under each of them.
 - Provides a calendar for organizing daily, actionable tasks.
 - Provides larger tracking in the statistics tab of a profile to see the broader view across all goals and categories.
+
+### This project will not contain...
+* Cloud syncing for accounts. Every account made is stored locally on the user's browser only.
+* Complex data tables, visualizations, or linking between databases.
+* Animations for plant visualizations
 
 ## Features
 - Goal Centric Display: Interactive addition and display of goals, along with their respective sub-tasks.
