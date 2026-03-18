@@ -11,7 +11,7 @@
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="../index.html" class="home-page">
+            <a href="../pages/home.html" class="home-page">
                 <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
                 <h1 class="m-auto">GoalGarden</h1>
             </a>
@@ -32,10 +32,10 @@
     </nav>
 
     <section class="content-section">
-        <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1;">
+        <div class="rounded-1" style="background-color: var(--background-color); flex-grow: 1; display: flex; flex-direction: column;">
             <section class="profile-hero p-1">
                 <img src="../assets/GoalGarden_logo.png" alt="Logo" class="profile-logo" style="box-sizing: border-box; display: block; margin: 0 auto; border: 2px solid var(--color-border); width: 10vw; float:left;">
-                <h1 class="profile-header font-sans m-0 p-0 mx-auto">[DISPLAY NAME]</h1>
+                <div class="profile-header font-sans m-0 p-0 mx-auto" style="outline: none; text-decoration: none;" spellcheck="false" contenteditable="true">[DISPLAY NAME]</div>
                 <h2 class="profile-subheader font-sans m-0 p-0 mx-auto">[USERNAME]</h2>
             </section>
             <section class="profile-viewer-buttons p-1">
@@ -45,11 +45,14 @@
             </section>
             <section class="profile-viewer-content p-1">
             </section>
+            <section class="p-1">
+                <button class="profile-button" onclick="window.location.href='../index.html'">Switch Account</button>
+            </section>
         </div>
     </section>
 
     <footer class="footer-bar">
-        <a href="index.html" style="display: flex; flex-direction: row; align-self: center; text-decoration: none;">
+        <a href="../index.html" style="display: flex; flex-direction: row; align-self: center; text-decoration: none;">
             <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; align-self: center; margin-right: 0.5vw;">
             <h1>GoalGarden</h1>
         </a>
@@ -110,16 +113,43 @@
         ThemeManager.init();
 
         const contentViewer = document.querySelector('.profile-viewer-content');
-        const buttons = document.querySelectorAll('.profile-button');
+        const buttons = document.querySelectorAll('.profile-viewer-buttons .profile-button');
         const dataManager = new DataManager();
+
+        const profileHeader = document.querySelector('.profile-header');
+        const profileSubheader = document.querySelector('.profile-subheader');
+
+        // Helper function to get current user
+        function getCurrentUser() {
+            return sessionStorage.getItem('currentUser') || 'default';
+        }
+
+        function getCurrentUserDisplayName() {
+            let loginData = JSON.parse(localStorage.getItem(`loginData`));
+            return loginData.displayNames[loginData.usernames.indexOf(getCurrentUser())] || 'Lorem ipsum';
+        }
+
+        // Helper function to get user-specific storage key
+        function getStorageKey(keyName) {
+            return `${keyName}-${getCurrentUser()}`;
+        }
 
         // Load about me from localStorage
         function getAboutMe() {
-            return localStorage.getItem('profileAboutMe') || 'Tell us about yourself...';
+            return localStorage.getItem(getStorageKey('profileAboutMe')) || 'Tell us about yourself...';
         }
 
         function saveAboutMe(content) {
-            localStorage.setItem('profileAboutMe', content);
+            localStorage.setItem(getStorageKey('profileAboutMe'), content);
+        }
+
+        function saveDisplayName(content){
+            let loginData = JSON.parse(localStorage.getItem(`loginData`));
+            const userIndex = loginData.usernames.indexOf(getCurrentUser());
+            if(userIndex !== -1) {
+                loginData.displayNames[userIndex] = content;
+                localStorage.setItem(`loginData`, JSON.stringify(loginData));
+            }
         }
 
         // Render Overview section
@@ -267,11 +297,43 @@
             });
         });
 
+        // Display name interaction handler
+        profileHeader.addEventListener('click', () => {
+            const newDisplayName = profileHeader.textContent.trim();
+            if(newDisplayName.length > 0) {
+                saveDisplayName(newDisplayName);
+            }
+        });
+
+        profileHeader.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter') {
+                e.preventDefault(); // Prevent new line
+                profileHeader.blur(); // Trigger blur event to save display name
+            }
+
+            const newDisplayName = profileHeader.textContent.trim();
+            if(newDisplayName.length > 0) {
+                saveDisplayName(newDisplayName);
+            }
+        });
+
         // Initialize with Overview
         document.addEventListener('DOMContentLoaded', () => {
+            // Set display name from current user
+            const displayName = getCurrentUserDisplayName();
+            profileHeader.textContent = displayName;
+            profileSubheader.textContent = `@${getCurrentUser().toLowerCase()}`;
+
             buttons[0].classList.add('active');
             renderOverview();
         });
+    </script>
+
+    <script>
+        if(!sessionStorage.getItem("currentUser")) {
+            // If no user is logged in, redirect to login page
+            window.location.href = "../index.html";
+        }
     </script>
 </body>
 </html>

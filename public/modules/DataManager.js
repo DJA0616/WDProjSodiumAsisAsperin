@@ -5,17 +5,26 @@ import Task from "./dataClasses/Task.js";
 class DataManager {
     // Data Manager basic handles
     constructor() {
+        this.currentUser = this.getCurrentUser();
         this.allCategories = this.loadFromStorage("allCategories");
         this.allGoals = this.loadFromStorage("allGoals");
         this.allTasks = this.loadFromStorage("allTasks");
     }
 
+    getCurrentUser() {
+        return sessionStorage.getItem('currentUser') || 'default';
+    }
+
+    getStorageKey(arrayName) {
+        return `${arrayName}-${this.currentUser}`;
+    }
+
     saveToStorage(arrayName) {
-        localStorage.setItem(arrayName, JSON.stringify(this[arrayName]));
+        localStorage.setItem(this.getStorageKey(arrayName), JSON.stringify(this[arrayName]));
     }
 
     loadFromStorage(arrayName) {
-        return JSON.parse(localStorage.getItem(arrayName)) || [];
+        return JSON.parse(localStorage.getItem(this.getStorageKey(arrayName))) || [];
     }
 
     clearAllData() {

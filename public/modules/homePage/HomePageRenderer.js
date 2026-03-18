@@ -48,7 +48,7 @@ class HomePageRenderer {
             const stage = Math.min(4, Math.max(1, Math.ceil(progress / 25)));
             const img = progressViz.querySelector('.plant-image');
             if (img) {
-                img.src = `assets/plants/stage-${stage}.png`;
+                img.src = `../../../assets/plants/stage-${stage}.png`;
                 img.dataset.plantStage = stage;
             }
             progressViz.style.setProperty('--progress', `${progress}%`);
