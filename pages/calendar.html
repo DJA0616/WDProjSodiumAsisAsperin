@@ -45,36 +45,86 @@
 
         </section>
         <section class="calendar-section flex-grow-1 rounded-2" style="background-color: white;">
-            <section class="date-row border">
+            <section id="date-row" class="date-row">
+
+            </section>
+            <section id="calendar-goal-display" class="calendar-goal-display">
 
             </section>
         </section>
     </section>
 
     <script type="module">
-        import DataManager from "./public/modules/DataManager.js";
-        import DataFilter from "./public/modules/DataFilter.js";
-        import DomManager from "./public/modules/DomManager.js";
-        import HomePageRenderer from "./public/modules/HomePageRenderer.js";
-        import EventHandler from "./public/modules/EventHandler.js";
-        import ThemeManager from "./public/modules/ThemeManager.js";
+        import DataManager from "../public/modules/DataManager.js";
+        import DataFilter from "../public/modules/DataFilter.js";
+        import DomManager from "../public/modules/homePage/DomManager.js";
+        import ThemeManager from "../public/modules/ThemeManager.js";
 
         // Apply saved theme settings
         ThemeManager.init();
 
         // DataManager is instantiated (manages state)
         const dataManager = new DataManager();
-        
-        // HomePageRenderer only needs DataManager
-        const homePageRenderer = new HomePageRenderer(dataManager);
-
-        // Event Handler
-        const eventHandler = new EventHandler(dataManager, homePageRenderer);
 
         // dataManager.clearAllData(); // For testing purposes only
 
+        function renderDateRow(){ // Renders the date row at the top of the calendar section
+            const dateRow = document.getElementById("date-row");
+            const currentDate = new Date();
+
+            // Render 7 days: 2 previous, current, and 4 upcoming
+
+            for(let i = -2; i <= 4; i++){
+                const date = new Date(currentDate);
+                date.setDate(currentDate.getDate() + i);
+
+                const dateElement = document.createElement("div");
+                dateElement.classList.add("date-element");
+                if(i === 0){
+                    dateElement.classList.add("current-date");
+                }
+                dateElement.textContent = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+                dateRow.appendChild(dateElement);
+            }
+        }
+
+        function renderCalendarGoalDisplayDivs(){ // Renders the divs under each date element of the date row
+            const calendarGoalDisplay = document.getElementById("calendar-goal-display");
+            const currentDate = new Date();
+
+            // Render 7 days: 2 previous, current, and 4 upcoming
+
+            for(let i = -2; i <= 4; i++){
+                const date = new Date(currentDate);
+                date.setDate(currentDate.getDate() + i);
+
+                const dayElement = document.createElement("div");
+                dayElement.classList.add("calendar-day-element");
+                if(i === 0){
+                    dayElement.classList.add("current-date");
+                }
+
+                calendarGoalDisplay.appendChild(dayElement);
+            }
+        }
+
+        function renderSidebar(){ // Renders the sidebar with goal categories and filters (not fully implemented yet)
+            const sidebar = document.querySelector(".sidebar-section");
+
+            const categories = dataManager.getGoalCategories();
+
+            categories.forEach(category => {
+                const categoryElement = document.createElement("div");
+                categoryElement.classList.add("sidebar-category");
+                categoryElement.classList.add("border");
+                categoryElement.textContent = category; 
+                sidebar.appendChild(categoryElement);
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
-            homePageRenderer.renderGoals();
+            renderDateRow();
+            renderCalendarGoalDisplayDivs();
         });
     </script>
 </body>
