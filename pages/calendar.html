@@ -20,7 +20,7 @@
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="../index.html" class="home-page">
+            <a href="../pages/home.html" class="home-page">
                 <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
                 <h1 class="m-auto">GoalGarden</h1>
             </a>
@@ -31,10 +31,13 @@
         </section>
 
         <section class="navigation-bar-right">
-            <a href="../index.html" class="settings-page">
+            <a href="../pages/calendar.html" class="settings-page">
+                <h1 class="m-auto">Calendar</h1>
+            </a>
+            <a href="../pages/settings.html" class="settings-page">
                 <h1 class="m-auto">Settings</h1>
             </a>
-            <a href="../index.html" class="profile-page">
+            <a href="../pages/profile.html" class="profile-page">
                 <h1 class="m-auto">Profile</h1>
             </a>
         </section>
@@ -63,10 +66,7 @@
         // Apply saved theme settings
         ThemeManager.init();
 
-        // DataManager is instantiated (manages state)
         const dataManager = new DataManager();
-
-        // dataManager.clearAllData(); // For testing purposes only
 
         function renderDateRow(){ // Renders the date row at the top of the calendar section
             const dateRow = document.getElementById("date-row");
@@ -111,6 +111,7 @@
         function renderSidebar(){ // Renders the sidebar with goal categories and filters (not fully implemented yet)
             const sidebar = document.querySelector(".sidebar-section");
 
+            /*
             const categories = dataManager.getGoalCategories();
 
             categories.forEach(category => {
@@ -120,11 +121,37 @@
                 categoryElement.textContent = category; 
                 sidebar.appendChild(categoryElement);
             });
+            */
+
+            const tasks = dataManager.getTasks();
+            console.log(tasks);
+
+            tasks.forEach(task => {
+                const taskElement = document.createElement("div");
+                taskElement.textContent = task.name;
+                
+                const currentDate = new Date();
+
+                for(let i = -2; i <= 4; i++){
+                    const date = new Date(currentDate);
+                    date.setDate(currentDate.getDate() + i);
+
+                    if(task.dueDate && date.toDateString() === new Date(task.dueDate).toDateString()){
+                        const dayElements = document.querySelectorAll(".calendar-day-element");
+                        const dayElement = dayElements[i + 2]; // i + 2 because i starts at -2
+                        dayElement.appendChild(taskElement.cloneNode(true));
+                    } else if(!task.dueDate) {
+                        sidebar.appendChild(taskElement.cloneNode(true));
+                        return;
+                    }
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             renderDateRow();
             renderCalendarGoalDisplayDivs();
+            renderSidebar();
         });
     </script>
 </body>

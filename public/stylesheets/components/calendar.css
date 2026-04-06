@@ -41,3 +41,7 @@
     line-height: 50px;
     font-size: 20px;
 }
+
+.sidebar-section{
+    padding: var(--spacing-medium);
+}
