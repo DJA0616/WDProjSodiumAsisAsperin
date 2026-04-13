@@ -108,7 +108,7 @@
             }
         }
 
-        function renderSidebar(){ // Renders the sidebar with goal categories and filters (not fully implemented yet)
+        function renderSidebar(){ // Renders the sidebar with task elements
             const sidebar = document.querySelector(".sidebar-section");
 
             /*
@@ -124,11 +124,22 @@
             */
 
             const tasks = dataManager.getTasks();
-            console.log(tasks);
+
+            function createTaskElement(task){
+                const element = document.createElement('div');
+                element.classList.add("task-element");
+                element.classList.add("border");
+                element.classList.add("shadow-sm");
+                element.classList.add("draggable");
+                element.textContent = task.name;
+                element.setAttribute("data-task-id", task.id); // Set a data attribute for the task ID
+                element.setAttribute("draggable", "true"); // Make the element draggable
+
+                return element;
+            }
 
             tasks.forEach(task => {
-                const taskElement = document.createElement("div");
-                taskElement.textContent = task.name;
+                const taskElement = createTaskElement(task);
                 
                 const currentDate = new Date();
 
@@ -146,12 +157,61 @@
                     }
                 }
             });
+
+            function dragHandler(element) {
+                let isDragging = false;
+                let offsetX, offsetY;
+
+                element.setAttribute("draggable", "true"); // Ensure the element is draggable
+
+                element.addEventListener("dragstart", (e) => {
+                    e.dataTransfer.setData("text/plain", element.dataset.taskId); // Store the task ID
+                    element.classList.add("dragging");
+                });
+
+                element.addEventListener("dragend", () => {
+                    element.classList.remove("dragging");
+                });
+
+                // Handle dropping into calendar day elements
+                const dayElements = document.querySelectorAll(".calendar-day-element");
+                dayElements.forEach(dayElement => {
+                    dayElement.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        dayElement.classList.add("drag-over");
+                    });
+
+                    dayElement.addEventListener("dragleave", () => {
+                        dayElement.classList.remove("drag-over");
+                    });
+
+                    dayElement.addEventListener("drop", (e) => {
+                        e.preventDefault();
+                        dayElement.classList.remove("drag-over");
+
+                        const taskId = e.dataTransfer.getData("text/plain"); // Retrieve the task ID
+                        const draggedElement = document.querySelector(`[data-task-id="${taskId}"]`);
+                        dayElement.appendChild(draggedElement);
+
+                        const currentDate = new Date();
+                        const dayIndex = Array.from(dayElements).indexOf(dayElement);
+                        const newDueDate = new Date(currentDate);
+                        newDueDate.setDate(currentDate.getDate() + (dayIndex - 2)); // Adjust for day index
+                        dataManager.updateTaskDueDate(taskId, newDueDate);
+                    });
+                });
+            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             renderDateRow();
             renderCalendarGoalDisplayDivs();
             renderSidebar();
+
+            document.querySelectorAll(".draggable").forEach(element => {
+                dragHandler(element);
+                
+            });
         });
     </script>
 </body>
