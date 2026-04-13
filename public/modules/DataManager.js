@@ -92,6 +92,15 @@ class DataManager {
         const completedCount = goalTasks.filter(t => t.isCompleted).length;
         return goalTasks.length > 0 ? Math.round((completedCount / goalTasks.length) * 100) : 0;
     }
+
+    updateTaskDueDate(taskId, newDueDate) {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        const task = tasks.find((t) => t.id === taskId);
+        if (task) {
+            task.dueDate = newDueDate.toISOString();
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+    }
 }
 
 export default DataManager;
