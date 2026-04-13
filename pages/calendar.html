@@ -133,7 +133,6 @@
                 element.classList.add("draggable");
                 element.textContent = task.name;
                 element.setAttribute("data-task-id", task.id); // Set a data attribute for the task ID
-                element.setAttribute("draggable", "true"); // Make the element draggable
 
                 return element;
             }
@@ -210,7 +209,6 @@
 
             document.querySelectorAll(".draggable").forEach(element => {
                 dragHandler(element);
-                
             });
         });
     </script>
