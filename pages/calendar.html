@@ -156,25 +156,55 @@
                     }
                 }
             });
+        }
 
-            function dragHandler(element) {
-                let isDragging = false;
-                let offsetX, offsetY;
+        function dragHandler(element) {
+                element.setAttribute("draggable", "true");
 
-                element.setAttribute("draggable", "true"); // Ensure the element is draggable
+                // Create a clone that follows the mouse visually
+                let clone = null;
 
                 element.addEventListener("dragstart", (e) => {
-                    e.dataTransfer.setData("text/plain", element.dataset.taskId); // Store the task ID
-                    element.classList.add("dragging");
+                    e.dataTransfer.setData("text/plain", element.dataset.taskId);
+
+                    // Create a floating clone to follow the mouse
+                    clone = element.cloneNode(true);
+                    clone.style.position = "fixed";
+                    clone.style.pointerEvents = "none"; // Prevent the clone from interfering with drag events
+                    clone.style.width = element.getBoundingClientRect().width + "px";
+                    clone.style.opacity = "0.8";
+                    clone.style.zIndex = "1000";
+                    clone.style.left = e.clientX + "px";
+                    clone.style.top = e.clientY + "px";
+                    clone.classList.add("dragging-clone");
+                    document.body.appendChild(clone);
+
+                    // Hide the original element
+                    setTimeout(() => element.style.opacity = "0.4", 0);
+
+                    // Use a blank drag image to hide the default ghost
+                    const blankImage = new Image();
+                    e.dataTransfer.setDragImage(blankImage, 0, 0);
+                });
+
+                document.addEventListener("dragover", (e) => {
+                    if (clone) {
+                        clone.style.left = e.clientX + "px";
+                        clone.style.top = e.clientY + "px";
+                    }
                 });
 
                 element.addEventListener("dragend", () => {
-                    element.classList.remove("dragging");
+                    element.style.opacity = "1";
+                    if (clone) {
+                        clone.remove();
+                        clone = null;
+                    }
                 });
 
                 // Handle dropping into calendar day elements
                 const dayElements = document.querySelectorAll(".calendar-day-element");
-                dayElements.forEach(dayElement => {
+                dayElements.forEach((dayElement, index) => {
                     dayElement.addEventListener("dragover", (e) => {
                         e.preventDefault();
                         dayElement.classList.add("drag-over");
@@ -188,19 +218,29 @@
                         e.preventDefault();
                         dayElement.classList.remove("drag-over");
 
-                        const taskId = e.dataTransfer.getData("text/plain"); // Retrieve the task ID
+                        const taskId = e.dataTransfer.getData("text/plain");
                         const draggedElement = document.querySelector(`[data-task-id="${taskId}"]`);
-                        dayElement.appendChild(draggedElement);
+                        if (draggedElement) {
+                            dayElement.appendChild(draggedElement);
+                        }
 
+                        // Calculate the new due date based on the day index
                         const currentDate = new Date();
-                        const dayIndex = Array.from(dayElements).indexOf(dayElement);
                         const newDueDate = new Date(currentDate);
-                        newDueDate.setDate(currentDate.getDate() + (dayIndex - 2)); // Adjust for day index
+                        newDueDate.setDate(currentDate.getDate() + (index - 2));
+
+                        // Update localStorage
+                        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+                        const task = tasks.find((t) => t.id === taskId);
+                        if (task) {
+                            task.dueDate = newDueDate.toISOString();
+                            localStorage.setItem("tasks", JSON.stringify(tasks));
+                        }
+
                         dataManager.updateTaskDueDate(taskId, newDueDate);
                     });
                 });
             }
-        }
 
         document.addEventListener("DOMContentLoaded", () => {
             renderDateRow();
