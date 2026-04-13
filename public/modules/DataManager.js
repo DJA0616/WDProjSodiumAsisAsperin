@@ -94,11 +94,16 @@ class DataManager {
     }
 
     updateTaskDueDate(taskId, newDueDate) {
-        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        const task = tasks.find((t) => t.id === taskId);
+        // Convert taskId to match whatever type is stored
+        const tasks = this.allTasks;
+        const task = tasks.find(t => String(t.id) === String(taskId));
+        
         if (task) {
             task.dueDate = newDueDate.toISOString();
-            localStorage.setItem("tasks", JSON.stringify(tasks));
+            this.saveToStorage("allTasks"); // Save directly using the correct key
+            console.log("Saved to storage:", this.getStorageKey("allTasks"), task); // Debug log
+        } else {
+            console.log("Task not found. TaskId:", taskId, "All tasks:", tasks); // Debug log
         }
     }
 }
