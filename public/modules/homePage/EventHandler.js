@@ -88,6 +88,11 @@ class EventHandler {
                 return;
             }
 
+            // Prevent modal from opening when category dropdown is clicked
+            if (e.target.classList.contains('goal-category-select')) {
+                return;
+            }
+
             if (element && element.classList.contains('goal-card')) {
                 const goalId = element.id.replace('goal-', '');
                 const goal = this.dataManager.getGoals().find(g => g.id === goalId);

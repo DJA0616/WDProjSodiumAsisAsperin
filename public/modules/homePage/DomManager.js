@@ -32,6 +32,11 @@ class DomManager {
         card.id = `goal-${goal.id}`;
 
         const left = DomManager.createElement('section', 'goal-card-left');
+        
+        const goalCategory = DomManager.createElement('select', 'goal-category-select', '', { 'name': "categories", 'id': "categories", 'data-goal-id': goal.id });
+        goalCategory.appendChild(DomManager.createElement('option', '', 'No Category', { 'value': '' }));
+
+        left.appendChild(goalCategory);
         left.appendChild(DomManager.createElement(`section`, 'goal-name-description', goal.name));
         left.appendChild(DomManager.createElement(`section`, 'goal-task-list', '', { 'data-goal-id': `${goal.id}-task-list` }));
         card.appendChild(left);
