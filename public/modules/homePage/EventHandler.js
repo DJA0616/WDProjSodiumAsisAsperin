@@ -14,10 +14,10 @@ class EventHandler {
         this.setupAddGoalListeners();
         this.setupGoalCardListeners();
         this.setupModalListeners();
+        this.setupGoalModalListeners();
         this.setupTaskListeners();
         this.setupModalTaskListeners();
         this.setupProgressBarListeners();
-        this.setupThemeListeners();
     }
 
     setupAddGoalListeners() {
@@ -324,6 +324,37 @@ class EventHandler {
         });
     }
 
+    setupGoalModalListeners() {
+        const goalModal = DomManager.getElement('#goal-modal');
+
+        goalModal.addEventListener('click', (e) => {
+            // Handle task checkbox toggle
+            const checkbox = e.target.closest('.task-checkbox');
+            if (checkbox) {
+                const taskId = checkbox.getAttribute('data-task-id');
+                const task = this.dataManager.getTasks().find(t => String(t.id) === String(taskId));
+                if (task) {
+                    this.dataManager.updateElement("allTasks", task.id, { isCompleted: !task.isCompleted });
+                    this.dataManager.saveToStorage("allTasks");
+
+                    // Recalculate goal progress
+                    const goalId = DomManager.getElement('.modal-goal-name').getAttribute('data-goal-id');
+                    const goal = this.dataManager.getGoals().find(g => String(g.id) === String(goalId));
+                    if (goal) {
+                        goal.progress = this.dataManager.calculateGoalProgress(goal.id);
+                        this.dataManager.updateElement("allGoals", goal.id, { progress: goal.progress });
+                        this.dataManager.saveToStorage("allGoals");
+
+                        // Update both the modal progress bar and the goal card progress bar
+                        DomManager.updateGoalModalProgressBarDisplay(goal.progress);
+                        this.renderer.renderProgressVisualization(goal);
+                        DomManager.updateProgressBarDisplay(this.dataManager.getTasks());
+                    }
+                }
+            }
+        });
+    }
+
     setupProgressBarListeners() {
         const progressDisplay = DomManager.getElement("#progress-display");
         const progressBar = DomManager.getElement("#progress-bar");
@@ -362,10 +393,6 @@ class EventHandler {
             await DomManager.typewriter(progressCounter, String(progress) + "%", 50, animation);
             if(!animation.cancelled) currentAnimation = null;
         });
-    }
-
-    setupThemeListeners() {
-        // Theme switching logic can be added here
     }
 }
 

@@ -113,11 +113,20 @@ class DomManager {
         const goalModalName = DomManager.getElement('.modal-goal-name');
         const goalModalDetails = DomManager.getElement('.modal-goal-details');
         const goalModalPlantImage = DomManager.getElement('.modal-plant-image');
+        const goalModalProgressCounter = DomManager.getElement('#goal-modal-progress-counter');
 
         goalModalName.textContent = goal.name;
         goalModalName.setAttribute('data-goal-id', goal.id);
         goalModalDetails.textContent = goal.details;
-        goalModalPlantImage.src = `../assets/plants/stage-1.png`; // Placeholder image source
+
+        const stage = Math.min(4, Math.max(1, Math.ceil((goal.progress || 0) / 25)));
+        goalModalPlantImage.src = `../assets/plants/stage-${stage}.png`;
+
+        if (goalModalProgressCounter) {
+            goalModalProgressCounter.textContent = `${goal.progress || 0}%`;
+        }
+
+        DomManager.updateGoalModalProgressBarDisplay(goal.progress || 0);
 
         goalModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -196,6 +205,21 @@ class DomManager {
         }
 
         return todayProgress;
+    }
+
+    static updateGoalModalProgressBarDisplay(progress) {
+        const progressDisplay = DomManager.getElement("#goal-modal-progress-display");
+        if (progressDisplay) {
+            const width = progressDisplay.clientWidth;
+            const progressBar = DomManager.getElement("#goal-modal-progress-bar");
+            const progressCounter = DomManager.getElement("#goal-modal-progress-counter");
+            if (progressBar) {
+                progressBar.style.width = String(width * progress / 100) + "px";
+            }
+            if (progressCounter) {
+                progressCounter.textContent = `${progress}%`;
+            }
+        }
     }
 }
 
