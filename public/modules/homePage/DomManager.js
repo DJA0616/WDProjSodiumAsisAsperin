@@ -92,7 +92,7 @@ class DomManager {
 
         const progress = DomManager.createElement('section', 'goal-card-progress-visualization');
         progress.appendChild(DomManager.createElement('img', 'plant-image', '', {
-            'src': 'assets/plants/stage-1.png',
+            'src': '../assets/plants/stage-1.png',
             'alt': 'Plant',
             'data-plant-stage': '1'
         }));
@@ -117,7 +117,7 @@ class DomManager {
         goalModalName.textContent = goal.name;
         goalModalName.setAttribute('data-goal-id', goal.id);
         goalModalDetails.textContent = goal.details;
-        goalModalPlantImage.src = `assets/plants/stage-1.png`; // Placeholder image source
+        goalModalPlantImage.src = `../assets/plants/stage-1.png`; // Placeholder image source
 
         goalModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
