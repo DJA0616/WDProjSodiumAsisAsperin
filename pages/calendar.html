@@ -20,7 +20,7 @@
 <body>
     <nav class="navigation-bar">
         <section class="navigation-bar-left">
-            <a href="../index.html" class="home-page">
+            <a href="../pages/home.html" class="home-page">
                 <img src="../assets/GoalGarden_logo.png" alt="Logo" style="height:2.5vw; margin: auto;">
                 <h1 class="m-auto">GoalGarden</h1>
             </a>
@@ -31,10 +31,13 @@
         </section>
 
         <section class="navigation-bar-right">
-            <a href="../index.html" class="settings-page">
+            <a href="../pages/calendar.html" class="settings-page">
+                <h1 class="m-auto">Calendar</h1>
+            </a>
+            <a href="../pages/settings.html" class="settings-page">
                 <h1 class="m-auto">Settings</h1>
             </a>
-            <a href="../index.html" class="profile-page">
+            <a href="../pages/profile.html" class="profile-page">
                 <h1 class="m-auto">Profile</h1>
             </a>
         </section>
@@ -45,36 +48,202 @@
 
         </section>
         <section class="calendar-section flex-grow-1 rounded-2" style="background-color: white;">
-            <section class="date-row border">
+            <section id="date-row" class="date-row">
+
+            </section>
+            <section id="calendar-goal-display" class="calendar-goal-display">
 
             </section>
         </section>
     </section>
 
     <script type="module">
-        import DataManager from "./public/modules/DataManager.js";
-        import DataFilter from "./public/modules/DataFilter.js";
-        import DomManager from "./public/modules/DomManager.js";
-        import HomePageRenderer from "./public/modules/HomePageRenderer.js";
-        import EventHandler from "./public/modules/EventHandler.js";
-        import ThemeManager from "./public/modules/ThemeManager.js";
+        import DataManager from "../public/modules/DataManager.js";
+        import DataFilter from "../public/modules/DataFilter.js";
+        import DomManager from "../public/modules/homePage/DomManager.js";
+        import ThemeManager from "../public/modules/ThemeManager.js";
 
         // Apply saved theme settings
         ThemeManager.init();
 
-        // DataManager is instantiated (manages state)
         const dataManager = new DataManager();
-        
-        // HomePageRenderer only needs DataManager
-        const homePageRenderer = new HomePageRenderer(dataManager);
 
-        // Event Handler
-        const eventHandler = new EventHandler(dataManager, homePageRenderer);
+        function renderDateRow(){ // Renders the date row at the top of the calendar section
+            const dateRow = document.getElementById("date-row");
+            const currentDate = new Date();
 
-        // dataManager.clearAllData(); // For testing purposes only
+            // Render 7 days: 2 previous, current, and 4 upcoming
+
+            for(let i = -2; i <= 4; i++){
+                const date = new Date(currentDate);
+                date.setDate(currentDate.getDate() + i);
+
+                const dateElement = document.createElement("div");
+                dateElement.classList.add("date-element");
+                if(i === 0){
+                    dateElement.classList.add("current-date");
+                }
+                dateElement.textContent = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+                dateRow.appendChild(dateElement);
+            }
+        }
+
+        function renderCalendarGoalDisplayDivs(){ // Renders the divs under each date element of the date row
+            const calendarGoalDisplay = document.getElementById("calendar-goal-display");
+            const currentDate = new Date();
+
+            // Render 7 days: 2 previous, current, and 4 upcoming
+
+            for(let i = -2; i <= 4; i++){
+                const date = new Date(currentDate);
+                date.setDate(currentDate.getDate() + i);
+
+                const dayElement = document.createElement("div");
+                dayElement.classList.add("calendar-day-element");
+                if(i === 0){
+                    dayElement.classList.add("current-date");
+                }
+
+                calendarGoalDisplay.appendChild(dayElement);
+            }
+        }
+
+        function renderSidebar(){ // Renders the sidebar with task elements
+            const sidebar = document.querySelector(".sidebar-section");
+
+            /*
+            const categories = dataManager.getGoalCategories();
+
+            categories.forEach(category => {
+                const categoryElement = document.createElement("div");
+                categoryElement.classList.add("sidebar-category");
+                categoryElement.classList.add("border");
+                categoryElement.textContent = category; 
+                sidebar.appendChild(categoryElement);
+            });
+            */
+
+            const tasks = dataManager.getTasks();
+
+            function createTaskElement(task){
+                const element = document.createElement('div');
+                element.classList.add("task-element");
+                element.classList.add("border");
+                element.classList.add("shadow-sm");
+                element.classList.add("draggable");
+                element.textContent = task.name;
+                element.setAttribute("data-task-id", task.id); // Set a data attribute for the task ID
+
+                return element;
+            }
+
+            tasks.forEach(task => {
+                const taskElement = createTaskElement(task);
+                
+                const currentDate = new Date();
+
+                for(let i = -2; i <= 4; i++){
+                    const date = new Date(currentDate);
+                    date.setDate(currentDate.getDate() + i);
+
+                    if(task.dueDate && date.toDateString() === new Date(task.dueDate).toDateString()){
+                        const dayElements = document.querySelectorAll(".calendar-day-element");
+                        const dayElement = dayElements[i + 2]; // i + 2 because i starts at -2
+                        dayElement.appendChild(taskElement.cloneNode(true));
+                    } else if(!task.dueDate) {
+                        sidebar.appendChild(taskElement.cloneNode(true));
+                        return;
+                    }
+                }
+            });
+        }
+
+        function dragHandler(element) {
+                element.setAttribute("draggable", "true");
+
+                // Create a clone that follows the mouse visually
+                let clone = null;
+
+                element.addEventListener("dragstart", (e) => {
+                    e.dataTransfer.setData("text/plain", element.dataset.taskId);
+
+                    // Create a floating clone to follow the mouse
+                    clone = element.cloneNode(true);
+                    clone.style.position = "fixed";
+                    clone.style.pointerEvents = "none"; // Prevent the clone from interfering with drag events
+                    clone.style.width = element.getBoundingClientRect().width + "px";
+                    clone.style.opacity = "0.8";
+                    clone.style.zIndex = "1000";
+                    clone.style.left = e.clientX + "px";
+                    clone.style.top = e.clientY + "px";
+                    clone.classList.add("dragging-clone");
+                    document.body.appendChild(clone);
+
+                    // Hide the original element
+                    setTimeout(() => element.style.opacity = "0.4", 0);
+
+                    // Use a blank drag image to hide the default ghost
+                    const blankImage = new Image();
+                    e.dataTransfer.setDragImage(blankImage, 0, 0);
+                });
+
+                document.addEventListener("dragover", (e) => {
+                    if (clone) {
+                        clone.style.left = e.clientX + "px";
+                        clone.style.top = e.clientY + "px";
+                    }
+                });
+
+                element.addEventListener("dragend", () => {
+                    element.style.opacity = "1";
+                    if (clone) {
+                        clone.remove();
+                        clone = null;
+                    }
+                });
+
+                // Handle dropping into calendar day elements
+                const dayElements = document.querySelectorAll(".calendar-day-element");
+                dayElements.forEach((dayElement, index) => {
+                    dayElement.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        dayElement.classList.add("drag-over");
+                    });
+
+                    dayElement.addEventListener("dragleave", () => {
+                        dayElement.classList.remove("drag-over");
+                    });
+
+                    dayElement.addEventListener("drop", (e) => {
+                        e.preventDefault();
+                        dayElement.classList.remove("drag-over");
+
+                        const taskId = e.dataTransfer.getData("text/plain");
+                        const draggedElement = document.querySelector(`[data-task-id="${taskId}"]`);
+                        if (draggedElement) {
+                            dayElement.appendChild(draggedElement);
+                        }
+
+                        // Calculate the new due date based on the day index
+                        const currentDate = new Date();
+                        const newDueDate = new Date(currentDate);
+                        newDueDate.setDate(currentDate.getDate() + (index - 2));
+
+                        // Use dataManager to update (handles correct localStorage key)
+                        dataManager.updateTaskDueDate(taskId, newDueDate);
+                        console.log("Updated task:", taskId, "New due date:", newDueDate);
+                    });
+                });
+            }
 
         document.addEventListener("DOMContentLoaded", () => {
-            homePageRenderer.renderGoals();
+            renderDateRow();
+            renderCalendarGoalDisplayDivs();
+            renderSidebar();
+
+            document.querySelectorAll(".draggable").forEach(element => {
+                dragHandler(element);
+            });
         });
     </script>
 </body>
