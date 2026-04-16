@@ -12,7 +12,7 @@ class EventHandler {
 
     setupListeners() {
         this.setupAddGoalListeners();
-        this.setupAddTaskListeners();
+        this.setupGoalCardListeners();
         this.setupModalListeners();
         this.setupTaskListeners();
         this.setupModalTaskListeners();
@@ -46,7 +46,7 @@ class EventHandler {
         });
     }
 
-    setupAddTaskListeners() {
+    setupGoalCardListeners() {
         this.goalDisplay.addEventListener('click', (e) => {
             let el = e.target;
             if (el.nodeType === 3) el = el.parentElement;
@@ -88,11 +88,6 @@ class EventHandler {
                 return;
             }
 
-            element = e.target;
-            while (element && !element.classList.contains('goal-card')) {
-                element = element.parentElement;
-            }
-
             if (element && element.classList.contains('goal-card')) {
                 const goalId = element.id.replace('goal-', '');
                 const goal = this.dataManager.getGoals().find(g => g.id === goalId);
@@ -123,6 +118,7 @@ class EventHandler {
             }
         });
 
+        // Change Name or Details of goal in modal
         modal.addEventListener('input', (e) => {
             let el = e.target;
             if (el.nodeType === 3) el = el.parentElement;
