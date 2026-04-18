@@ -43,7 +43,7 @@ class DomManager {
 
         const progress = DomManager.createElement('section', 'goal-card-progress-visualization');
         progress.appendChild(DomManager.createElement('img', 'plant-image', '', {
-            'src': 'assets/plants/stage-1.png',
+            'src': '../assets/plants/stage-1.png',
             'alt': 'Plant',
             'data-plant-stage': '1'
         }));
@@ -73,9 +73,10 @@ class DomManager {
         }));
 
         if (editable) {
+            const dateValue = task.dueDate ? task.dueDate.slice(0, 10) : '';
             item.appendChild(DomManager.createElement('input', 'subtask-date', '', {
                 'type': 'date',
-                'value': task.dueDate,
+                'value': dateValue,
                 'data-task-id': task.id
             }))
             item.appendChild(DomManager.createElement('button', 'delete-task-button rounded-05', 'Delete', {
@@ -122,7 +123,7 @@ class DomManager {
 
         goalModalName.textContent = goal.name;
         goalModalName.setAttribute('data-goal-id', goal.id);
-        goalModalDetails.textContent = goal.details;
+        goalModalDetails.textContent = goal.description;
 
         const stage = Math.min(4, Math.max(1, Math.ceil((goal.progress || 0) / 25)));
         goalModalPlantImage.src = `../assets/plants/stage-${stage}.png`;

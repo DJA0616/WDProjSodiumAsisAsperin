@@ -44,11 +44,11 @@ class HomePageRenderer {
             progressViz = DomManager.getElement(`#goal-${goal.id} .goal-card-progress-visualization`);
         }
         if (progressViz) {
-            const progress = goal.progress;
+            const progress = goal.progress || 0;
             const stage = Math.min(4, Math.max(1, Math.ceil(progress / 25)));
-            const img = progressViz.querySelector('.plant-image');
+            const img = progressViz.querySelector('.plant-image, .modal-plant-image');
             if (img) {
-                img.src = `../../../assets/plants/stage-${stage}.png`;
+                img.src = `../assets/plants/stage-${stage}.png`;
                 img.dataset.plantStage = stage;
             }
             progressViz.style.setProperty('--progress', `${progress}%`);

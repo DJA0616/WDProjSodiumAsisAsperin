@@ -132,7 +132,7 @@ class EventHandler {
                 const goalId = DomManager.getElement('.modal-goal-name').getAttribute('data-goal-id');
                 const goal = this.dataManager.getGoals().find(g => g.id === goalId);
                 if (goal) {
-                    goal.details = el.textContent;
+                    goal.description = el.textContent;
                     this.dataManager.saveToStorage("allGoals");
                 }
             }

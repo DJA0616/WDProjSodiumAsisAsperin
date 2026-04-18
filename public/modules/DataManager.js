@@ -99,11 +99,8 @@ class DataManager {
         const task = tasks.find(t => String(t.id) === String(taskId));
         
         if (task) {
-            task.dueDate = newDueDate.toISOString();
-            this.saveToStorage("allTasks"); // Save directly using the correct key
-            console.log("Saved to storage:", this.getStorageKey("allTasks"), task); // Debug log
-        } else {
-            console.log("Task not found. TaskId:", taskId, "All tasks:", tasks); // Debug log
+            task.dueDate = newDueDate.toLocaleDateString('en-CA');
+            this.saveToStorage("allTasks");
         }
     }
 }
